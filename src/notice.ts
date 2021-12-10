@@ -82,7 +82,7 @@ export interface Notice {
 }
 
 export async function import_sources() {
-    const file = await readFile('notice_sources.json')
+    const file = await readFile('config/notice_sources.json')
     const raw_sources: SourceRaw[] = JSON.parse(file.toString()).sources
     const sources = raw_sources.map(r => new Source(r))
     if (sources.length > 0) {

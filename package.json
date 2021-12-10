@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha",
-    "update-data": "tsc && node update_notices.js"
+    "update-data": "tsc && node src/update_notices.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",
