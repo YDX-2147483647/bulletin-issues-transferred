@@ -4,13 +4,18 @@
   "description": "试试用Node.js做简单的爬虫。",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "fetch-notice": "tsc && node notice.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",
   "type": "module",
   "dependencies": {
     "jsdom": "^19.0.0",
-    "node-fetch": "^3.1.0"
+    "node-fetch": "^3.1.0",
+    "typescript": "^4.5.3"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^16.2.13",
+    "@types/node": "^16.11.12"
   }
 }

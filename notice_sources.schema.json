@@ -1,0 +1,85 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "notice_sources.schema.json-v0.1",
+    "title": "通知来源",
+    "description": "通知公告页面中通知的标题、日期的选择器等。",
+    "type": "object",
+    "properties": {
+        "last_updated": {
+            "description": "最后更新日期",
+            "type": "string",
+            "format": "date"
+        },
+        "sources": {
+            "description": "通知来源",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "来源的简称\n会直接显示给同学，尽量简短，尤其不要包含“通知”几个字。",
+                        "type": "string",
+                        "examples": [
+                            "睿信"
+                        ]
+                    },
+                    "full_name": {
+                        "description": "来源的全名",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "通知页面",
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "guide": {
+                        "description": "导航指引\n如果同学不记得链接，怎样一步一步导航到通知页面。",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "examples": [
+                            [
+                                "教务处",
+                                "通知公告",
+                                "更多"
+                            ]
+                        ]
+                    },
+                    "selectors": {
+                        "description": "用于抓取通知的CSS选择器",
+                        "type": "object",
+                        "items": true,
+                        "properties": {
+                            "rows": {
+                                "description": "每项通知\n可能是<li>。",
+                                "type": "string",
+                                "examples": [
+                                    ".subRight li"
+                                ]
+                            },
+                            "link": {
+                                "description": "这一项的标题及链接\n一般是<a>。",
+                                "type": "string",
+                                "default": "a"
+                            },
+                            "date": {
+                                "description": "这一项的发布日期",
+                                "type": "string",
+                                "default": "span"
+                            }
+                        },
+                        "required": [
+                            "rows"
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "url",
+                    "selectors"
+                ]
+            }
+        }
+    }
+}
