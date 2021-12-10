@@ -4,7 +4,7 @@
   "description": "试试用Node.js做简单的爬虫。",
   "main": "index.js",
   "scripts": {
-    "fetch-notice": "tsc && node notice.js"
+    "test": "tsc && node test.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",
