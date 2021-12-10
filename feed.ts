@@ -15,7 +15,7 @@ function to_feed_item(notice: Notice) {
     return {
         item: [
             { title: notice.title },
-            { pubDate: notice.date.toUTCString() },
+            { pubDate: notice.date ? notice.date.toUTCString() : null },
             {
                 guid: [
                     { _attr: { isPermaLink: true } },

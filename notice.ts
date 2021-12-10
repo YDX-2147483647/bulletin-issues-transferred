@@ -1,6 +1,7 @@
 import fetch from "node-fetch"
 import { JSDOM } from 'jsdom'
 import { readFile } from 'fs/promises'
+import chalk from "chalk"
 import { parse_date } from './lib/my_date.js'
 
 
@@ -43,37 +44,53 @@ export class Source {
         this.selectors = { rows, link, date }
     }
 
+    _row_to_notice(row: Element) {
+        const link: HTMLAnchorElement = row.querySelector(this.selectors.link)
+        const date = this.selectors.date ? row.querySelector(this.selectors.date) : null
+
+        return {
+            link: (new URL(link.href, this.url)).href,
+            title: link.textContent,
+            date: date ? parse_date(date.textContent) : null,
+            source: this
+        } as Notice
+    }
+
     async fetch_notice() {
         const html = await (await fetch(this.url)).text()
         const dom = new JSDOM(html)
 
         const rows = dom.window.document.querySelectorAll(this.selectors.rows)
 
-        return Array.from(rows).map(row => {
-            const link: HTMLAnchorElement = row.querySelector(this.selectors.link)
-            const date = row.querySelector(this.selectors.date)
+        const notices = Array.from(rows).map(row => this._row_to_notice(row))
 
-            return {
-                link: (new URL(link.href, this.url)).href,
-                title: link.textContent,
-                date: parse_date(date.textContent),
-                source: this
-            } as Notice
-        })
+        if (notices.length > 0) {
+            console.log(chalk.green(`已从“${this.name}”获取到${notices.length}项通知。`))
+        } else {
+            console.log(chalk.yellow(`未从“${this.name}”获取到任何通知。`))
+        }
+
+        return notices
     }
 }
 
 export interface Notice {
     link: string,
     title: string,
-    date: Date,
+    date: Date | null,
     source?: Source
 }
 
 export async function import_sources() {
     const file = await readFile('notice_sources.json')
     const raw_sources: SourceRaw[] = JSON.parse(file.toString()).sources
-    return raw_sources.map(r => new Source(r))
+    const sources = raw_sources.map(r => new Source(r))
+    if (sources.length > 0) {
+        console.log(chalk.green(`已发现${sources.length}个通知来源。`))
+    } else {
+        console.log(chalk.red('未找到任何通知来源。'))
+    }
+    return sources
 }
 
 

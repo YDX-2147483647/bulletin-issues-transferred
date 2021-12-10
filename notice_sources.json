@@ -57,6 +57,20 @@
             "selectors": {
                 "rows": ".pagearticleList li"
             }
+        },
+        {
+            "name": "党政部",
+            "full_name": "党委或行政办公室",
+            "url": "https://dzb.bit.edu.cn/bftz/index.htm",
+            "guide": [
+                "党政部",
+                "校内通知"
+            ],
+            "selectors": {
+                "rows": ".subList03 li",
+                "link": "a.title",
+                "date": null
+            }
         }
     ]
 }
