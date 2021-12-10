@@ -13,6 +13,7 @@ interface SourceRaw {
     selectors: {
         rows: string,
         link?: string,
+        title?: string,
         date?: string
     }
 }
@@ -24,6 +25,7 @@ export class Source {
     selectors: {
         rows: string,
         link: string,
+        title: string,
         date: string
     }
 
@@ -34,6 +36,7 @@ export class Source {
         selectors: {
             rows,
             link = 'a',
+            title = '',
             date = 'span'
         }
     }: SourceRaw) {
@@ -41,16 +44,17 @@ export class Source {
         this.full_name = full_name || name
         this.guide = guide
         this.url = url
-        this.selectors = { rows, link, date }
+        this.selectors = { rows, link, date, title: title || link }
     }
 
     _row_to_notice(row: Element) {
         const link: HTMLAnchorElement = row.querySelector(this.selectors.link)
+        const title = row.querySelector(this.selectors.title)
         const date = this.selectors.date ? row.querySelector(this.selectors.date) : null
 
         return {
             link: (new URL(link.href, this.url)).href,
-            title: link.textContent,
+            title: title.textContent,
             date: date ? parse_date(date.textContent) : null,
             source: this
         } as Notice

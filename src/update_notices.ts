@@ -16,4 +16,4 @@ await writeFile('data/notices.json', json)
 console.log(chalk.green('已保存 notices.json。'))
 
 await writeFile('data/feed.rss', build_feed(notices))
-console.log(chalk.green('已保存feed.rss'))
+console.log(chalk.green('已保存 feed.rss'))

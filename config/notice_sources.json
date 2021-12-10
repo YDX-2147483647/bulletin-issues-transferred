@@ -71,6 +71,22 @@
                 "link": "a.title",
                 "date": null
             }
+        },
+        {
+            "name": "学工部",
+            "full_name": "学生工作部、武装部或心理健康教育与咨询中心",
+            "url": "https://century.bit.edu.cn/tz/index.htm",
+            "guide": [
+                "学工部",
+                "通知公告",
+                "更多"
+            ],
+            "selectors": {
+                "rows": ".subNewsList li",
+                "link": "a",
+                "title": "h3",
+                "date": "span"
+            }
         }
     ]
 }
