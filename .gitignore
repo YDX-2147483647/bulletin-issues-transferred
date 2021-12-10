@@ -2,6 +2,8 @@
 
 # TypeScript
 *.js
+!lib/my_date.js
+!test/test-my_date.js
 
 # https://github.com/github/gitignore/blob/main/Node.gitignore
 

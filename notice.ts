@@ -1,6 +1,7 @@
 import fetch from "node-fetch"
 import { JSDOM } from 'jsdom'
 import { readFile } from 'fs/promises'
+import { parse_date } from './lib/my_date.js'
 
 
 interface SourceRaw {
@@ -55,7 +56,7 @@ export class Source {
             return {
                 link: (new URL(link.href, this.url)).href,
                 title: link.textContent,
-                date: new Date(date.textContent),
+                date: parse_date(date.textContent),
                 source: this
             } as Notice
         })

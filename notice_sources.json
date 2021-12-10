@@ -32,6 +32,31 @@
             "selectors": {
                 "rows": ".title_rtcon li"
             }
+        },
+        {
+            "name": "教务处",
+            "guide": [
+                "教务处",
+                "通知公告",
+                "更多"
+            ],
+            "selectors": {
+                "rows": ".crules li"
+            },
+            "url": "https://jwc.bit.edu.cn/tzgg/index.htm"
+        },
+        {
+            "name": "教学中心",
+            "full_name": "教学运行与考务中心",
+            "guide": [
+                "教学中心",
+                "通知公告",
+                "更多"
+            ],
+            "url": "https://jxzx.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".pagearticleList li"
+            }
         }
     ]
 }
