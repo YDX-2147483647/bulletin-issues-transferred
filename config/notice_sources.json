@@ -87,6 +87,20 @@
                 "title": "h3",
                 "date": "span"
             }
+        },
+        {
+            "name": "数学实验",
+            "full_name": "数学实验中心",
+            "guide": [
+                "数学实验中心",
+                "顶栏",
+                "新闻公告"
+            ],
+            "url": "http://mec.bit.edu.cn/infos/index.html",
+            "selectors": {
+                "rows": ".info_list_new li",
+                "date": "span.date"
+            }
         }
     ]
 }
