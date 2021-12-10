@@ -5,6 +5,7 @@ import { readFile } from 'fs/promises'
 
 interface SourceRaw {
     name: string,
+    full_name?: string,
     guide?: string[],
     url: string,
     selectors: {
@@ -15,8 +16,9 @@ interface SourceRaw {
 }
 export class Source {
     name: string
-    guide?: string[]
+    full_name: string
     url: string
+    guide?: string[]
     selectors: {
         rows: string,
         link: string,
@@ -24,6 +26,7 @@ export class Source {
     }
 
     constructor({ name,
+        full_name = '',
         guide = [],
         url,
         selectors: {
@@ -33,6 +36,7 @@ export class Source {
         }
     }: SourceRaw) {
         this.name = name
+        this.full_name = full_name || name
         this.guide = guide
         this.url = url
         this.selectors = { rows, link, date }
