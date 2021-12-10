@@ -1,8 +1,7 @@
 /data
 
 # TypeScript
-notice.js
-test.js
+*.js
 
 # https://github.com/github/gitignore/blob/main/Node.gitignore
 

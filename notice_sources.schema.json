@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "notice_sources.schema.json-v0.1",
+    "$id": "notice_sources.schema.json-v0.1.1",
     "title": "通知来源",
     "description": "通知公告页面中通知的标题、日期的选择器等。",
     "type": "object",
@@ -17,7 +17,7 @@
                 "type": "object",
                 "properties": {
                     "name": {
-                        "description": "来源的简称\n会直接显示给同学，尽量简短，尤其不要包含“通知”几个字。",
+                        "description": "来源的简称\n唯一。会直接显示给同学，尽量简短，尤其不要包含“通知”几个字。",
                         "type": "string",
                         "examples": [
                             "睿信"

@@ -2,7 +2,8 @@
     "compilerOptions": {
         "module": "ESNext",
         "moduleResolution": "Node",
-        "target": "ESNext"
+        "target": "ESNext",
+        "allowSyntheticDefaultImports": true
     },
     "exclude": [
         "node_modules"
