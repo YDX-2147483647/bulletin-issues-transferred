@@ -4,7 +4,7 @@ import { build_feed } from "./feed.js"
 import chalk from "chalk"
 
 const notices = (await fetch_all_sources({ verbose: true }))
-    .sort((a, b) => b.date.getTime() - a.date.getTime())
+    .sort((a, b) => b.date?.getTime() - a.date?.getTime())
 
 const json = JSON.stringify(notices, (key, value) => {
     if (key === 'source') {

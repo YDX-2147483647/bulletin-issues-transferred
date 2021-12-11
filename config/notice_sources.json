@@ -4,6 +4,7 @@
     "sources": [
         {
             "name": "睿信",
+            "full_name": "睿信书院",
             "guide": [
                 "主站",
                 "顶栏",
@@ -14,9 +15,139 @@
             ],
             "url": "https://www.bit.edu.cn/rcpy_sjb/blsy87/rxsygb/tzggsy2/index.htm",
             "selectors": {
-                "rows": ".subRight li",
-                "link": "a",
-                "date": "span"
+                "rows": ".subRight li"
+            }
+        },
+        {
+            "name": "求是",
+            "full_name": "求是书院",
+            "guide": [
+                "主站",
+                "顶栏",
+                "人才培养",
+                "北理书院",
+                "求是书院",
+                "通知公告"
+            ],
+            "url": "https://www.bit.edu.cn/rcpy_sjb/blsy87/qssygb/tzggsy3/index.htm",
+            "selectors": {
+                "rows": ".subRight li"
+            }
+        },
+        {
+            "name": "精工",
+            "full_name": "精工书院",
+            "guide": [
+                "主站",
+                "顶栏",
+                "人才培养",
+                "北理书院",
+                "精工书院",
+                "通知公告"
+            ],
+            "url": "https://www.bit.edu.cn/rcpy_sjb/blsy87/jgsygb/tzggsy/index.htm",
+            "selectors": {
+                "rows": "ul.li_list li"
+            }
+        },
+        {
+            "name": "明德",
+            "full_name": "明德书院",
+            "guide": [
+                "主站",
+                "顶栏",
+                "人才培养",
+                "北理书院",
+                "明德书院",
+                "通知公告",
+                "更多"
+            ],
+            "url": "https://mingde.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".gp-subRight li"
+            }
+        },
+        {
+            "name": "经管",
+            "full_name": "经管书院",
+            "guide": [
+                "主站",
+                "顶栏",
+                "人才培养",
+                "北理书院",
+                "经管书院",
+                "通知公告",
+                "查看更多"
+            ],
+            "url": "https://sme.bit.edu.cn/gbxwzx/tzgg/index.htm",
+            "selectors": {
+                "rows": ".newsList02 li"
+            }
+        },
+        {
+            "name": "知艺",
+            "full_name": "知艺书院/设计与艺术学院",
+            "guide": [
+                "主站",
+                "顶栏",
+                "人才培养",
+                "北理书院",
+                "知艺书院",
+                "通知"
+            ],
+            "url": "https://design.bit.edu.cn/zs/tz2/index.htm",
+            "selectors": {
+                "rows": ".articleList01 li"
+            }
+        },
+        {
+            "name": "特立",
+            "full_name": "特立书院/徐特立学院/未来精工技术学院",
+            "guide": [
+                "主站",
+                "顶栏",
+                "人才培养",
+                "北理书院",
+                "特立书院",
+                "通知公告",
+                "MORE+"
+            ],
+            "url": "https://xuteli.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".articleList li"
+            }
+        },
+        {
+            "name": "北京书院",
+            "guide": [
+                "主站",
+                "顶栏",
+                "人才培养",
+                "北理书院",
+                "北京书院",
+                "通知公告",
+                "MORE+"
+            ],
+            "url": "https://bj.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".articleList li"
+            }
+        },
+        {
+            "name": "留学生",
+            "full_name": "留学生中心/Office of International Students",
+            "guide": [
+                "主站",
+                "顶栏",
+                "人才培养",
+                "北理书院",
+                "令闻书院",
+                "Events & Notices"
+            ],
+            "url": "https://isc.bit.edu.cn/eventsnotices/index.htm",
+            "selectors": {
+                "rows": ".nl li",
+                "date": null
             }
         },
         {
