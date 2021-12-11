@@ -7,8 +7,8 @@
     "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha test/test-*",
     "build": "tsc",
     "fetch-data": "node test/fetch_data.js",
-    "update-data": "node src/update_notices.js",
-    "temp": "node src/special"
+    "update-data": "node dist/update_notices.js",
+    "temp": "node dist/special"
   },
   "author": "Y.D.X.",
   "license": "MIT",

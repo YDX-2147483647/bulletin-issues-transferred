@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import { describe, it } from "mocha"
-import { parse_date } from "../src/lib/my_date.js"
+import { parse_date } from "../lib/my_date.js"
 
 /**
  * 

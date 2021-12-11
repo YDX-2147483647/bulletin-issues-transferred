@@ -4,6 +4,10 @@ BulletinIT旨在汇总BIT各种~~乱七八糟~~网站的通知。
 
 ## 已知的问题
 
+### 有些通知是重复的
+
+比如“向学生送温暖”在“[学生事务](https://student.bit.edu.cn/tzgg/17ca66b568d84e6b9af9d8fb49aeeaa9.htm)”与“[通用](https://www.bit.edu.cn/tzgg17/wthd132/dbdb1970242341e098f2b16118a00a49.htm)”都有。
+
 ### 不支持动态加载的通知
 
 - [党政部](https://dzb.bit.edu.cn/bftz/index.htm)的通知是靠脚本加载的。代码直接写在HTML里，类似下面这样。（API提供的信息并未都显示出来，比如通知类型）
