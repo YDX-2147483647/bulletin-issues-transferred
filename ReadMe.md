@@ -1,6 +1,6 @@
-# BIT Notice
+# Bulletin Issues Transferred
 
-汇总我校各种乱七八糟网站的通知。
+BulletinIT旨在汇总BIT各种~~乱七八糟~~网站的通知。
 
 ## 已知的问题
 

@@ -5,9 +5,9 @@ const some_mysterious_website = ''
 
 const config = {
     link: `${some_mysterious_website}/`,
-    description: 'Highly Accessible Origin for Breaking Informative Things',
+    description: 'Bulletin Issues Transferred',
     rss_file: `${some_mysterious_website}/feed.rss`,
-    title: 'HaoBit'
+    title: 'BulletinIT'
 }
 
 
@@ -16,6 +16,7 @@ function to_feed_item(notice: Notice) {
         item: [
             { title: notice.title },
             { pubDate: notice.date ? notice.date.toUTCString() : null },
+            { link: notice.link },
             {
                 guid: [
                     { _attr: { isPermaLink: true } },

@@ -1,12 +1,13 @@
 {
-  "name": "crawl",
+  "name": "bulletin-issues-transferred",
   "version": "1.0.0",
   "description": "试试用Node.js做简单的爬虫。",
   "main": "index.js",
   "scripts": {
     "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha",
     "build": "tsc",
-    "update-data": "node src/update_notices.js"
+    "update-data": "node src/update_notices.js",
+    "temp": "node src/special"
   },
   "author": "Y.D.X.",
   "license": "MIT",
