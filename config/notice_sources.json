@@ -151,6 +151,22 @@
             }
         },
         {
+            "name": "马克思",
+            "full_name": "马克思主义学院",
+            "url": "https://marx.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".articleList2 li"
+            }
+        },
+        {
+            "name": "研究生",
+            "full_name": "研究生院",
+            "url": "https://grd.bit.edu.cn/tzgg1/index.htm",
+            "selectors": {
+                "rows": ".wenjianxiazai li"
+            }
+        },
+        {
             "name": "通用",
             "full_name": "主站最新通知",
             "guide": [
