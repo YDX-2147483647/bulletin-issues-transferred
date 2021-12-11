@@ -24,4 +24,10 @@ describe("解析日期", () => {
     it('忽略两边的字符', () => {
         assert_date(parse_date('[2021-12-10]'), new Date(2021, 11, 10))
     })
+    it('支持用“-”或“/”分隔', () => {
+        assert_date(parse_date('1935/12/09'), new Date(1935, 11, 9))
+    })
+    it('可以带“年”“月”“日”', () => {
+        assert_date(parse_date('1921年7月23日'), new Date(1921, 6, 23))
+    })
 })

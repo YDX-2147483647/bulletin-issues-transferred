@@ -101,6 +101,75 @@
                 "rows": ".info_list_new li",
                 "date": "span.date"
             }
+        },
+        {
+            "name": "计算机",
+            "full_name": "计算机学院",
+            "url": "https://cs.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".article li"
+            }
+        },
+        {
+            "name": "学生事务",
+            "full_name": "学生事务中心",
+            "url": "https://student.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".page li"
+            }
+        },
+        {
+            "name": "创新创业",
+            "full_name": "学生创新创业实践中心",
+            "url": "https://www.bit.edu.cn/gbxxgk/gbgljg/xscxcysjzx/index.htm",
+            "selectors": {
+                "rows": ".subRight li"
+            }
+        },
+        {
+            "name": "资助公示",
+            "full_name": "学生事务中心校内公示",
+            "url": "https://student.bit.edu.cn/xngs/index.blk.htm",
+            "selectors": {
+                "rows": ".page li"
+            }
+        },
+        {
+            "name": "大创",
+            "full_name": "大学生创新创业训练计划管理系统",
+            "url": "http://cxcy.bit.edu.cn/CXCY/BIT/NoticeBulletin",
+            "selectors": {
+                "rows": "tr[id^=noticebulletin]",
+                "date": "td:last-child"
+            }
+        },
+        {
+            "name": "第二课堂",
+            "guide": [
+                "第二课堂",
+                "课程信息"
+            ],
+            "url": "http://dekt.bit.edu.cn/portal/CourseList.jsp",
+            "selectors": {
+                "rows": "tbody tr",
+                "date": "td.list_sj em"
+            }
+        },
+        {
+            "name": "光电",
+            "full_name": "光电学院",
+            "url": "https://opt.bit.edu.cn/tzgg2/tzgg/index.htm",
+            "selectors": {
+                "rows": ".pageArticle dd p"
+            }
+        },
+        {
+            "name": "网信",
+            "full_name": "网络信息技术中心",
+            "url": "https://itc.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".BTG-list13 li"
+            }
         }
     ]
 }

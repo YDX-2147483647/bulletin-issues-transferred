@@ -4,8 +4,9 @@
   "description": "试试用Node.js做简单的爬虫。",
   "main": "index.js",
   "scripts": {
-    "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha",
+    "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha test/test-*",
     "build": "tsc",
+    "fetch-data": "node test/fetch_data.js",
     "update-data": "node src/update_notices.js",
     "temp": "node src/special"
   },

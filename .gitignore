@@ -4,6 +4,7 @@
 *.js
 !lib/my_date.js
 !test/test-my_date.js
+!test/fetch_data.js
 
 # https://github.com/github/gitignore/blob/main/Node.gitignore
 
