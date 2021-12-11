@@ -66,15 +66,7 @@ export class Source {
 
         const rows = dom.window.document.querySelectorAll(this.selectors.rows)
 
-        const notices = Array.from(rows).map(row => this._row_to_notice(row))
-
-        if (notices.length > 0) {
-            console.log(chalk.green(`已从“${this.name}”获取到${notices.length}项通知。`))
-        } else {
-            console.log(chalk.yellow(`未从“${this.name}”获取到任何通知。`))
-        }
-
-        return notices
+        return Array.from(rows).map(row => this._row_to_notice(row))
     }
 }
 
@@ -89,17 +81,26 @@ export async function import_sources() {
     const file = await readFile('config/notice_sources.json')
     const raw_sources: SourceRaw[] = JSON.parse(file.toString()).sources
     const sources = raw_sources.map(r => new Source(r))
-    if (sources.length > 0) {
-        console.log(chalk.green(`已发现${sources.length}个通知来源。`))
-    } else {
-        console.log(chalk.red('未找到任何通知来源。'))
-    }
     return sources
 }
 
 
-export async function fetch_all_sources() {
+export async function fetch_all_sources({ verbose = true } = {}) {
     const sources = await import_sources()
-    const notices = await Promise.all(sources.map(s => s.fetch_notice()))
-    return notices.flat()
+    if (sources.length === 0) {
+        console.log(chalk.red('✗ 未找到任何通知来源。'))
+    } else if (verbose) {
+        console.log(chalk.green('🛈'), `发现${sources.length}个通知来源。`)
+    }
+
+    const notices_grouped = await Promise.all(sources.map(async s => {
+        const notices = await s.fetch_notice()
+        if (notices.length === 0) {
+            console.log(chalk.yellow(`⚠ 未从“${s.name}”获取到任何通知。`))
+        } else if (verbose) {
+            console.log(chalk.green('🛈'), `从“${s.name}”获取到${notices.length}项通知。`)
+        }
+        return notices
+    }))
+    return notices_grouped.flat()
 }

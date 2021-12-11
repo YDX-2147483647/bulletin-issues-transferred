@@ -1,6 +1,6 @@
 {
     "$schema": "notice_sources.schema.json",
-    "last_updated": "2021-12-10",
+    "last_updated": "2021-12-11",
     "sources": [
         {
             "name": "睿信",
