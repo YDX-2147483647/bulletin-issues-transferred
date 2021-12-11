@@ -54,7 +54,7 @@ export class Source {
 
         return {
             link: (new URL(link.href, this.url)).href,
-            title: title.textContent,
+            title: title.textContent.trim(),
             date: date ? parse_date(date.textContent) : null,
             source: this
         } as Notice
