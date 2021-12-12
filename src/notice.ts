@@ -6,20 +6,18 @@ import { parse_date } from '../lib/my_date.js'
 
 
 interface SourceRaw {
-    name: string,
-    full_name?: string,
-    guide?: string[],
-    url: string,
+    name: string, full_name?: string, alt_name?: string[],
+    url: string, guide?: string[],
     selectors: {
         rows: string,
-        link?: string,
-        title?: string,
+        link?: string, title?: string,
         date?: string
     }
 }
 export class Source {
     name: string
     full_name: string
+    alt_name: string[]
     url: string
     guide?: string[]
     selectors: {
@@ -29,19 +27,18 @@ export class Source {
         date: string
     }
 
-    constructor({ name,
-        full_name = '',
-        guide = [],
-        url,
+    constructor({
+        name, full_name = '', alt_name = [],
+        url, guide = [],
         selectors: {
             rows,
-            link = 'a',
-            title = '',
+            link = 'a', title = '',
             date = 'span'
         }
     }: SourceRaw) {
         this.name = name
         this.full_name = full_name || name
+        this.alt_name = alt_name
         this.guide = guide
         this.url = url
         this.selectors = { rows, link, date, title: title || link }

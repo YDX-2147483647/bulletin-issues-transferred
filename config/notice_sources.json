@@ -86,7 +86,10 @@
         },
         {
             "name": "知艺",
-            "full_name": "知艺书院/设计与艺术学院",
+            "full_name": "知艺书院",
+            "alt_name": [
+                "设计与艺术学院"
+            ],
             "guide": [
                 "主站",
                 "顶栏",
@@ -102,7 +105,11 @@
         },
         {
             "name": "特立",
-            "full_name": "特立书院/徐特立学院/未来精工技术学院",
+            "full_name": "特立书院",
+            "alt_name": [
+                "徐特立学院",
+                "未来精工技术学院"
+            ],
             "guide": [
                 "主站",
                 "顶栏",
@@ -135,7 +142,10 @@
         },
         {
             "name": "留学生",
-            "full_name": "留学生中心/Office of International Students",
+            "full_name": "留学生中心",
+            "alt_name": [
+                "Office of International Students"
+            ],
             "guide": [
                 "主站",
                 "顶栏",
@@ -220,7 +230,7 @@
             }
         },
         {
-            "name": "学工部",
+            "name": "学工部等",
             "full_name": "学生工作部、武装部或心理健康教育与咨询中心",
             "url": "https://century.bit.edu.cn/tz/index.htm",
             "guide": [
