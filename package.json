@@ -1,6 +1,6 @@
 {
   "name": "bulletin-issues-transferred",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "试试用Node.js做简单的爬虫。",
   "main": "index.js",
   "scripts": {
@@ -26,5 +26,17 @@
     "@types/xml": "^1.0.6",
     "chai": "^4.3.4",
     "mocha": "^9.1.3"
-  }
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YDX-2147483647/bulletin-issues-transferred.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YDX-2147483647/bulletin-issues-transferred/issues"
+  },
+  "homepage": "https://github.com/YDX-2147483647/bulletin-issues-transferred#readme"
 }
