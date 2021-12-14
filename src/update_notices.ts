@@ -19,14 +19,18 @@ async function get_notices_and_filter_out_the_recent() {
 }
 
 
-async function save_json(notices: Notice[]) {
-    const json = JSON.stringify(notices, (key, value) => {
+function to_json(notices: Notice[]) {
+    return JSON.stringify(notices, (key, value) => {
         if (key === 'source') {
             return value.name
         } else {
             return value
         }
     }, 2)
+}
+
+async function save_json(notices: Notice[]) {
+    const json = to_json(notices)
     await writeFile('data/notices.json', json)
     console.log(chalk.green('✓'), '已保存到 data/notices.json。')
 }
@@ -53,7 +57,7 @@ if (new_notices.length === 0) {
     console.log('未发现新通知。')
 } else {
     console.log(`发现${new_notices.length}项新通知。`)
-    console.log(new_notices)
+    console.log(to_json(new_notices))
 
     save_json(notices)
     save_rss(notices)
