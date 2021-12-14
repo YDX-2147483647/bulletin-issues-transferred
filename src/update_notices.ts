@@ -29,6 +29,16 @@ function to_json(notices: Notice[]) {
     }, 2)
 }
 
+function to_human_readable(notices: Notice[]) {
+    return notices.map((notice, index) => [
+        chalk.underline(String(index + 1).padStart(2, ' ')) +
+        `  ${notice.source.name}｜${notice.title}`,
+        `    ${notice.link}`,
+        `    ${notice.date.toLocaleString()}`
+    ].join('\n')).join('\n\n')
+}
+
+
 async function save_json(notices: Notice[]) {
     const json = to_json(notices)
     await writeFile('data/notices.json', json)
@@ -40,6 +50,7 @@ async function save_rss(notices: Notice[]) {
     console.log(chalk.green('✓'), '已保存到 data/feed.rss')
 }
 
+
 async function read_existed_links() {
     const json: Notice[] = JSON.parse((await readFile('data/notices.json')).toString())
     return json.map(n => n.link)
@@ -50,14 +61,19 @@ async function diff(notices: Notice[]) {
     return notices.filter(n => !existed_links.includes(n.link))
 }
 
+
+
 const notices = await get_notices_and_filter_out_the_recent()
 const new_notices = await diff(notices)
 
 if (new_notices.length === 0) {
     console.log('未发现新通知。')
+    console.log('以下是最新的5项通知。')
+    console.log(to_human_readable(notices.slice(0, 5)))
+
 } else {
     console.log(`发现${new_notices.length}项新通知。`)
-    console.log(to_json(new_notices))
+    console.log(to_human_readable(new_notices))
 
     save_json(notices)
     save_rss(notices)

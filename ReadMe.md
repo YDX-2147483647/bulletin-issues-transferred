@@ -2,6 +2,12 @@
 
 BulletinIT旨在汇总BIT各种~~乱七八糟~~网站的通知。
 
+日常使用：
+
+```powershell
+npm run update-data
+```
+
 ## 已知的问题
 
 ### 有些通知的标题不全
