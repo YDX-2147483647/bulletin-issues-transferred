@@ -1,7 +1,7 @@
 {
   "name": "bulletin-issues-transferred",
-  "version": "1.0.3",
-  "description": "试试用Node.js做简单的爬虫。",
+  "version": "1.1.0",
+  "description": "汇总BIT各种网站的通知。",
   "main": "index.js",
   "scripts": {
     "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha test/test-*",

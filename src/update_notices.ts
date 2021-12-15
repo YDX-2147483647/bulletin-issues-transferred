@@ -1,8 +1,22 @@
-import { fetch_all_sources, Notice } from './notice.js'
+import { fetch_all_sources, Notice, import_sources, notices_json_reviver, notices_json_replacer, notices_to_human_readable } from './notice.js'
 import { writeFile, readFile } from "fs/promises"
 import { build_feed } from "./feed.js"
 import chalk from "chalk"
 
+
+
+/**
+ * 用于`Array.prototype.sort()`，会将日期未知的压到最后。
+ */
+function sort_by_date(a: Notice, b: Notice) {
+    if (a.date === null) {
+        return 1
+    }
+    if (b.date === null) {
+        return -1
+    }
+    return b.date.getTime() - a.date.getTime()
+}
 
 
 async function get_notices_and_filter_out_the_recent() {
@@ -11,7 +25,7 @@ async function get_notices_and_filter_out_the_recent() {
 
     const notices = (await fetch_all_sources({ verbose: true }))
         .filter(n => n.date === null || n.date.getTime() >= ninety_days_ago.getTime())
-        .sort((a, b) => b.date?.getTime() - a.date?.getTime())
+        .sort(sort_by_date)
 
     console.log(`共筛选出${notices.length}条90天内的通知。`)
 
@@ -19,28 +33,8 @@ async function get_notices_and_filter_out_the_recent() {
 }
 
 
-function to_json(notices: Notice[]) {
-    return JSON.stringify(notices, (key, value) => {
-        if (key === 'source') {
-            return value.name
-        } else {
-            return value
-        }
-    }, 2)
-}
-
-function to_human_readable(notices: Notice[]) {
-    return notices.map((notice, index) => [
-        chalk.underline(String(index + 1).padStart(2, ' ')) +
-        `  ${notice.source.name}｜${notice.title}`,
-        `    ${notice.link}`,
-        `    ${notice.date ? notice.date.toLocaleString() : '（未知日期）'}`
-    ].join('\n')).join('\n\n')
-}
-
-
 async function save_json(notices: Notice[]) {
-    const json = to_json(notices)
+    const json = JSON.stringify(notices, notices_json_replacer, 2)
     await writeFile('data/notices.json', json)
     console.log(chalk.green('✓'), '已保存到 data/notices.json。')
 }
@@ -52,8 +46,15 @@ async function save_rss(notices: Notice[]) {
 
 
 async function read_existed_links() {
-    const json: Notice[] = JSON.parse((await readFile('data/notices.json')).toString())
-    return json.map(n => n.link)
+    const notices: Notice[] = JSON.parse((await readFile('data/notices.json')).toString())
+    return notices.map(n => n.link)
+}
+
+async function read_existed_notices() {
+    const sources = await import_sources()
+    
+    const json = (await readFile('data/notices.json')).toString()
+    return JSON.parse(json, notices_json_reviver(sources)) as Notice[]
 }
 
 async function diff(notices: Notice[]) {
@@ -68,12 +69,19 @@ const new_notices = await diff(notices)
 
 if (new_notices.length === 0) {
     console.log('未发现新通知。')
-    console.log('以下是最新的5项通知。')
-    console.log(to_human_readable(notices.slice(0, 5)))
+
+    console.log(notices_to_human_readable(
+        (await read_existed_notices()).slice(0, 5)
+    ))
+    console.log('以上是最新的5项通知。')
 
 } else {
     console.log(`发现${new_notices.length}项新通知。`)
-    console.log(to_human_readable(new_notices))
+
+    new_notices.forEach(n => { n.date = new Date() })
+    notices.sort(sort_by_date)
+
+    console.log(notices_to_human_readable(new_notices))
 
     save_json(notices)
     save_rss(notices)
