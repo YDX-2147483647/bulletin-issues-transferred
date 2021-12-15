@@ -34,7 +34,7 @@ function to_human_readable(notices: Notice[]) {
         chalk.underline(String(index + 1).padStart(2, ' ')) +
         `  ${notice.source.name}｜${notice.title}`,
         `    ${notice.link}`,
-        `    ${notice.date.toLocaleString()}`
+        `    ${notice.date ? notice.date.toLocaleString() : '（未知日期）'}`
     ].join('\n')).join('\n\n')
 }
 
