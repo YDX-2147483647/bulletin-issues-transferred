@@ -20,7 +20,7 @@ export class Source {
     full_name: string
     alt_name: string[]
     url: string
-    guide?: string[]
+    guide: string[]
     selectors: {
         rows: string,
         link: string,
@@ -50,12 +50,12 @@ export class Source {
         const title = row.querySelector(this.selectors.title)
         const date = this.selectors.date ? row.querySelector(this.selectors.date) : null
 
-        return {
+        return new Notice({
             link: (new URL(link.href, this.url)).href,
             title: title.textContent.trim(),
             date: date ? parse_date(date.textContent) : null,
             source: this
-        } as Notice
+        })
     }
 
     async fetch_notice() {
@@ -69,11 +69,64 @@ export class Source {
 }
 
 
-export interface Notice {
+export interface NoticeRaw {
     link: string,
     title: string,
     date: Date | null,
-    source?: Source
+    source?: string
+}
+
+export interface NoticeInterface {
+    link: string,
+    title: string,
+    date: Date | null,
+    source: Source | string
+}
+
+export class Notice implements NoticeInterface {
+    link: string
+    title: string
+    date: Date | null
+    source: Source | string
+
+    constructor({ link, title, date, source }: NoticeRaw | NoticeInterface,
+        { sources_set }: { sources_set?: Source[] } = {}) {
+        this.link = link
+        this.title = title
+        this.date = date
+
+        if (sources_set && typeof source === 'string') {
+            this.source = sources_set.find(s => s.name === source)
+            if (!this.source) {
+                console.log(chalk.yellow(`⚠ 未知的来源：${source}。将保留原状。`))
+            }
+        }
+        this.source ||= source
+    }
+
+    get source_name() {
+        return this.source instanceof Source ? this.source.name : this.source
+    }
+
+    to_human_readable_rows() {
+        return [
+            `${this.source_name}｜${this.title}`,
+            this.link,
+            this.date ? this.date.toLocaleString() : '（未知日期）'
+        ]
+    }
+
+    to_raw() {
+        return {
+            link: this.link,
+            title: this.title,
+            date: this.date,
+            source: this.source_name
+        } as NoticeRaw
+    }
+    valueOf() {
+        return this.to_raw()
+    }
 }
 
 

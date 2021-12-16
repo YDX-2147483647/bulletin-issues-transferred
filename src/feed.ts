@@ -1,4 +1,4 @@
-import { Notice } from "./notice.js"
+import { Notice, Source } from "./notice.js"
 import xml from 'xml'
 
 const some_mysterious_website = ''
@@ -12,6 +12,15 @@ const config = {
 
 
 function to_feed_item(notice: Notice) {
+    let description: string
+    if (notice.source instanceof Source) {
+        description = `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source_name}</a>。`
+    } else if (notice.source) {
+        description = `来自${notice.source_name}。`
+    } else {
+        description = '未知来源。'
+    }
+
     return {
         item: [
             { title: notice.title },
@@ -23,14 +32,7 @@ function to_feed_item(notice: Notice) {
                     notice.link
                 ]
             },
-            {
-                description: {
-                    _cdata:
-                        notice.source
-                            ? `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source.name}</a>。`
-                            : '未知来源。'
-                }
-            }
+            { description: { _cdata: description } }
         ]
     }
 }
