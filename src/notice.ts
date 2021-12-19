@@ -128,21 +128,3 @@ export class Notice implements NoticeInterface {
         return this.to_raw()
     }
 }
-
-
-export async function fetch_all_sources(sources: Source[], { verbose = true } = {}) {
-    if (verbose) {
-        console.log(chalk.green('🛈'), `发现${sources.length}个通知来源。`)
-    }
-
-    const notices_grouped = await Promise.all(sources.map(async s => {
-        const notices = await s.fetch_notice()
-        if (notices.length === 0) {
-            console.log(chalk.yellow(`⚠ 未从“${s.name}”获取到任何通知。将忽略。`))
-        } else if (verbose) {
-            console.log(chalk.green('🛈'), `从“${s.name}”获取到${notices.length}项通知。`)
-        }
-        return notices
-    }))
-    return notices_grouped.flat()
-}
