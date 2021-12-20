@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 
-import { Source, NoticeRaw, NoticeInterface, Notice } from "./notice.js"
+import { SourceInterface, NoticeRaw, NoticeInterface } from "./notice.js"
 import { read_json } from './notices_saver.js'
 
 
@@ -25,7 +25,7 @@ export function sort_by_date(a: NoticeRaw | NoticeInterface, b: NoticeRaw | Noti
  * @param option verbose：是否输出信息。days_ago：筛选多少天内的通知，0表示不筛选。sort：是否按日期降序排列。
  * @returns 
  */
-export async function fetch_all_sources(sources: Source[],
+export async function fetch_all_sources(sources: SourceInterface[],
     { verbose = true, days_ago = 0, sort = true } = {}) {
     if (verbose) {
         console.log(chalk.green('🛈'), `发现${sources.length}个通知来源。`)
@@ -61,12 +61,12 @@ export async function fetch_all_sources(sources: Source[],
 }
 
 
-export async function diff(notices: Notice[]) {
+export async function diff(notices: NoticeInterface[]) {
     const existed_links = (await read_json({ ignore_source: true })).map(n => n.link)
     return notices.filter(n => !existed_links.includes(n.link))
 }
 
-export function print_notices(notices: Notice[], { max = 5, remark_if_overflow = true } = {}) {
+export function print_notices(notices: NoticeInterface[], { max = 5, remark_if_overflow = true } = {}) {
     console.log(
         notices.slice(0, max)
             .map((notice, index) => {

@@ -1,13 +1,13 @@
 import { readFile, writeFile } from 'fs/promises'
 import chalk from "chalk"
 
-import { SourceRaw, SourceBySelectors, Notice, NoticeRaw } from "./notice.js"
+import { SourceBySelectorsRaw, SourceBySelectors, Notice, NoticeInterface, NoticeRaw } from "./notice.js"
 import { build_feed } from "./feed.js"
 
 
 async function _import_sources_by_selectors() {
     const file = await readFile('config/notice_sources.json')
-    const raw_sources: SourceRaw[] = JSON.parse(file.toString()).sources
+    const raw_sources: SourceBySelectorsRaw[] = JSON.parse(file.toString()).sources
     const sources = raw_sources.map(r => new SourceBySelectors(r))
     return sources
 }
@@ -50,10 +50,10 @@ export async function read_json({ ignore_source = false } = {}) {
         const json: NoticeRaw[] = JSON.parse(json_str, json_date_reviver)
 
         if (ignore_source) {
-            return json.map(n => new Notice(n)) as Notice[]
+            return json.map(n => new Notice(n))
         } else {
             const sources_set = await import_sources_by_selectors()
-            return json.map(n => new Notice(n, { sources_set })) as Notice[]
+            return json.map(n => new Notice(n, { sources_set }))
         }
 
 
@@ -67,13 +67,13 @@ export async function read_json({ ignore_source = false } = {}) {
     }
 }
 
-export async function write_json(notices: Notice[]) {
+export async function write_json(notices: NoticeInterface[]) {
     const json = JSON.stringify(notices.map(n => n.to_raw()), null, 2)
     await writeFile('data/notices.json', json)
     console.log(chalk.green('✓'), '已保存到 data/notices.json。')
 }
 
-export async function write_rss(notices: Notice[]) {
+export async function write_rss(notices: NoticeInterface[]) {
     await writeFile('data/feed.rss', build_feed(notices))
     console.log(chalk.green('✓'), '已保存到 data/feed.rss')
 }

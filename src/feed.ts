@@ -1,4 +1,4 @@
-import { Notice } from "./notice.js"
+import { NoticeInterface } from "./notice.js"
 import xml from 'xml'
 
 const some_mysterious_website = ''
@@ -11,9 +11,9 @@ const config = {
 }
 
 
-function to_feed_item(notice: Notice) {
+function to_feed_item(notice: NoticeInterface) {
     let description: string
-    if (typeof notice.source !== 'string') {
+    if (notice.source.url) {
         description = `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source_name}</a>。`
     } else if (notice.source) {
         description = `来自${notice.source_name}。`
@@ -37,7 +37,7 @@ function to_feed_item(notice: Notice) {
     }
 }
 
-export function build_feed(notices: Notice[]) {
+export function build_feed(notices: NoticeInterface[]) {
     const feed_obj = {
         rss: [
             {

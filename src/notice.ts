@@ -6,17 +6,7 @@ import { parse_date } from '../lib/my_date.js'
 
 
 
-export interface SourceRaw {
-    name: string, full_name?: string, alt_name?: string[],
-    url: string, guide?: string[],
-    selectors: {
-        rows: string,
-        link?: string, title?: string,
-        date?: string
-    }
-}
-
-export interface Source {
+export interface SourceInterface {
     name: string
     full_name: string
     alt_name: string[]
@@ -26,15 +16,48 @@ export interface Source {
     fetch_notice(): Promise<Notice[]>
 }
 
-/**
- * 静态网页、使用CSS选择器的源
- */
-export class SourceBySelectors implements Source {
+export interface SourceRaw {
+    name: string, full_name?: string, alt_name?: string[],
+    url: string, guide?: string[],
+}
+
+export class Source implements SourceInterface {
     name: string
     full_name: string
     alt_name: string[]
     url: string
     guide: string[]
+
+    constructor({
+        name, full_name = '', alt_name = [],
+        url, guide = [],
+    }: SourceRaw) {
+        this.name = name
+        this.full_name = full_name || name
+        this.alt_name = alt_name
+        this.url = url
+        this.guide = guide
+    }
+
+    async fetch_notice() {
+        console.error(chalk.red('✗ 这个源不支持获取通知。'))
+        return []
+    }
+}
+
+
+export interface SourceBySelectorsRaw extends SourceRaw {
+    selectors: {
+        rows: string,
+        link?: string, title?: string,
+        date?: string
+    }
+}
+
+/**
+ * 静态网页、使用CSS选择器的源
+ */
+export class SourceBySelectors extends Source {
     selectors: {
         rows: string,
         link: string,
@@ -42,20 +65,15 @@ export class SourceBySelectors implements Source {
         date: string
     }
 
-    constructor({
-        name, full_name = '', alt_name = [],
-        url, guide = [],
-        selectors: {
+    constructor(options: SourceBySelectorsRaw) {
+        super(options)
+
+        const {
             rows,
             link = 'a', title = '',
             date = 'span'
-        }
-    }: SourceRaw) {
-        this.name = name
-        this.full_name = full_name || name
-        this.alt_name = alt_name
-        this.guide = guide
-        this.url = url
+        } = options.selectors
+
         this.selectors = { rows, link, date, title: title || link }
     }
 
@@ -83,43 +101,58 @@ export class SourceBySelectors implements Source {
 }
 
 
-export interface NoticeRaw {
-    link: string,
-    title: string,
-    date: Date | null,
-    source?: string
-}
 
 export interface NoticeInterface {
-    link: string,
-    title: string,
-    date: Date | null,
-    source: Source | string
+    link: string
+    title: string
+    date: Date | null
+    source: SourceInterface
+    source_name: string
+
+    /** 转换成容易存储的`NoticeRaw`（其`source`为`string`） */
+    to_raw(): NoticeRaw
+    /** 等同于`to_raw()` */
+    valueOf(): NoticeRaw
+    to_human_readable_rows(): string[]
+}
+
+export interface NoticeRaw {
+    link: string
+    title: string
+    date: Date | null
+    source?: SourceInterface | string
 }
 
 export class Notice implements NoticeInterface {
     link: string
     title: string
     date: Date | null
-    source: Source | string
+    source: Source
 
-    constructor({ link, title, date, source }: NoticeRaw | NoticeInterface,
-        { sources_set }: { sources_set?: Source[] } = {}) {
+    constructor({ link, title, date, source }: NoticeRaw,
+        { sources_set }: { sources_set?: SourceInterface[] } = {}) {
         this.link = link
         this.title = title
         this.date = date
 
-        if (sources_set && typeof source === 'string') {
-            this.source = sources_set.find(s => s.name === source)
+        if (source instanceof Source) {
+            this.source = source
+        } else if (typeof source === 'string') {
+            if (sources_set) {
+                this.source = sources_set.find(s => s.name === source)
+                if (!this.source) {
+                    console.log(chalk.yellow(`⚠ 未知的来源：${source}。将忽略。`))
+                }
+            }
             if (!this.source) {
-                console.log(chalk.yellow(`⚠ 未知的来源：${source}。将保留原状。`))
+                this.source = new Source({ name: source, url: '' })
             }
         }
-        this.source ||= source
+        console.assert(this.source, chalk.red(`✗ 未能识别来源${source}。将忽略，但可能引起其它错误。`))
     }
 
     get source_name() {
-        return typeof this.source !== 'string' ? this.source.name : this.source
+        return this.source.name
     }
 
     to_human_readable_rows() {
