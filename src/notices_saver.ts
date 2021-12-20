@@ -1,36 +1,10 @@
 import { readFile, writeFile } from 'fs/promises'
 import chalk from "chalk"
 
-import { SourceBySelectorsRaw, SourceBySelectors, Notice, NoticeInterface, NoticeRaw } from "./notice.js"
+import { NoticeInterface, NoticeRaw, Notice } from "./notice.js"
+import { import_sources } from './sources_importer.js'
 import { build_feed } from "./feed.js"
 
-
-async function _import_sources_by_selectors() {
-    const file = await readFile('config/notice_sources.json')
-    const raw_sources: SourceBySelectorsRaw[] = JSON.parse(file.toString()).sources
-    const sources = raw_sources.map(r => new SourceBySelectors(r))
-    return sources
-}
-
-let _sources_by_selectors_cache: SourceBySelectors[] = []
-export async function import_sources_by_selectors({ force = false } = {}) {
-    if (force || _sources_by_selectors_cache.length == 0) {
-        try {
-            _sources_by_selectors_cache = await _import_sources_by_selectors()
-        } catch (error) {
-            if (error.code === 'ENOENT') {
-                console.error(chalk.red('✗ 未找到任何通知来源。您可能需要新建 config/notice_sources.json。'))
-            }
-            throw error
-        }
-    }
-
-    if (_sources_by_selectors_cache.length === 0) {
-        console.log(chalk.red('✗ 未找到任何通知来源。config/notice_sources.json 可能是空的。'))
-    }
-
-    return _sources_by_selectors_cache
-}
 
 
 /**
@@ -52,7 +26,7 @@ export async function read_json({ ignore_source = false } = {}) {
         if (ignore_source) {
             return json.map(n => new Notice(n))
         } else {
-            const sources_set = await import_sources_by_selectors()
+            const sources_set = await import_sources()
             return json.map(n => new Notice(n, { sources_set }))
         }
 

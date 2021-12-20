@@ -14,6 +14,7 @@
                 "通知公告"
             ],
             "url": "https://www.bit.edu.cn/rcpy_sjb/blsy87/rxsygb/tzggsy2/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".subRight li"
             }
@@ -30,6 +31,7 @@
                 "通知公告"
             ],
             "url": "https://www.bit.edu.cn/rcpy_sjb/blsy87/qssygb/tzggsy3/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".subRight li"
             }
@@ -46,6 +48,7 @@
                 "通知公告"
             ],
             "url": "https://www.bit.edu.cn/rcpy_sjb/blsy87/jgsygb/tzggsy/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": "ul.li_list li"
             }
@@ -63,6 +66,7 @@
                 "更多"
             ],
             "url": "https://mingde.bit.edu.cn/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".gp-subRight li"
             }
@@ -80,6 +84,7 @@
                 "查看更多"
             ],
             "url": "https://sme.bit.edu.cn/gbxwzx/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".newsList02 li"
             }
@@ -99,6 +104,7 @@
                 "通知"
             ],
             "url": "https://design.bit.edu.cn/zs/tz2/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".articleList01 li"
             }
@@ -120,6 +126,7 @@
                 "MORE+"
             ],
             "url": "https://xuteli.bit.edu.cn/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".articleList li"
             }
@@ -136,6 +143,7 @@
                 "MORE+"
             ],
             "url": "https://bj.bit.edu.cn/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".articleList li"
             }
@@ -155,6 +163,7 @@
                 "Events & Notices"
             ],
             "url": "https://isc.bit.edu.cn/eventsnotices/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".nl li",
                 "date": null
@@ -164,6 +173,7 @@
             "name": "马克思",
             "full_name": "马克思主义学院",
             "url": "https://marx.bit.edu.cn/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".articleList2 li"
             }
@@ -172,6 +182,7 @@
             "name": "研究生",
             "full_name": "研究生院",
             "url": "https://grd.bit.edu.cn/tzgg1/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".wenjianxiazai li"
             }
@@ -186,6 +197,7 @@
                 "最新通知"
             ],
             "url": "https://www.bit.edu.cn/tzgg17/zxtz/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".title_rtcon li"
             }
@@ -197,10 +209,11 @@
                 "通知公告",
                 "更多"
             ],
+            "url": "https://jwc.bit.edu.cn/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".crules li"
-            },
-            "url": "https://jwc.bit.edu.cn/tzgg/index.htm"
+            }
         },
         {
             "name": "教学中心",
@@ -211,6 +224,7 @@
                 "更多"
             ],
             "url": "https://jxzx.bit.edu.cn/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".pagearticleList li"
             }
@@ -223,6 +237,7 @@
                 "党政部",
                 "校内通知"
             ],
+            "fetch_by": "special",
             "selectors": {
                 "rows": ".subList03 li",
                 "link": "a.title",
@@ -238,6 +253,7 @@
                 "通知公告",
                 "更多"
             ],
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".subNewsList li",
                 "link": "a",
@@ -254,6 +270,7 @@
                 "新闻公告"
             ],
             "url": "http://mec.bit.edu.cn/infos/index.html",
+            "fetch_by": "special",
             "selectors": {
                 "rows": ".info_list_new li",
                 "date": "span.date"
@@ -263,6 +280,7 @@
             "name": "计算机",
             "full_name": "计算机学院",
             "url": "https://cs.bit.edu.cn/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".article li"
             }
@@ -271,6 +289,7 @@
             "name": "学生事务",
             "full_name": "学生事务中心",
             "url": "https://student.bit.edu.cn/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".page li"
             }
@@ -279,6 +298,7 @@
             "name": "创新创业",
             "full_name": "学生创新创业实践中心",
             "url": "https://www.bit.edu.cn/gbxxgk/gbgljg/xscxcysjzx/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".subRight li"
             }
@@ -287,6 +307,7 @@
             "name": "资助公示",
             "full_name": "学生事务中心校内公示",
             "url": "https://student.bit.edu.cn/xngs/index.blk.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".page li"
             }
@@ -295,6 +316,7 @@
             "name": "大创",
             "full_name": "大学生创新创业训练计划管理系统",
             "url": "http://cxcy.bit.edu.cn/CXCY/BIT/NoticeBulletin",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": "tr[id^=noticebulletin]",
                 "date": "td:last-child"
@@ -307,6 +329,7 @@
                 "课程信息"
             ],
             "url": "http://dekt.bit.edu.cn/portal/CourseList.jsp",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": "tbody tr",
                 "date": "td.list_sj em"
@@ -316,6 +339,7 @@
             "name": "光电",
             "full_name": "光电学院",
             "url": "https://opt.bit.edu.cn/tzgg2/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".pageArticle dd p"
             }
@@ -324,6 +348,7 @@
             "name": "网信",
             "full_name": "网络信息技术中心",
             "url": "https://itc.bit.edu.cn/tzgg/index.htm",
+            "fetch_by": "selectors",
             "selectors": {
                 "rows": ".BTG-list13 li"
             }

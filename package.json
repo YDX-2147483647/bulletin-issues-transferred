@@ -1,14 +1,13 @@
 {
   "name": "bulletin-issues-transferred",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "汇总BIT各种网站的通知。",
   "main": "index.js",
   "scripts": {
     "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha test/test-*",
     "build": "tsc",
     "fetch-data": "node test/fetch_data.js",
-    "update-data": "node dist/update_notices.js",
-    "temp": "node dist/special"
+    "update-data": "node dist/update_notices.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",

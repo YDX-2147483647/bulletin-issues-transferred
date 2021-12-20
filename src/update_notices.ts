@@ -1,9 +1,10 @@
 import { sort_by_date, diff, print_notices, fetch_all_sources } from "./notices_util.js"
-import { import_sources_by_selectors, read_json, write_json, write_rss } from './notices_saver.js'
+import { read_json, write_json, write_rss } from './notices_saver.js'
+import { import_sources } from "./sources_importer.js"
 
 
 
-const notices = await fetch_all_sources(await import_sources_by_selectors(),
+const notices = await fetch_all_sources(await import_sources(),
     { verbose: true, days_ago: 90, sort: true })
 const new_notices = await diff(notices)
 

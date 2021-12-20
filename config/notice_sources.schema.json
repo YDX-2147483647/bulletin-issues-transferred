@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "notice_sources.schema.json-v0.1.4",
+    "$id": "notice_sources.schema.json-v0.2.0",
     "title": "通知来源",
     "description": "通知公告页面中通知的标题、日期的选择器等。",
     "type": "object",
@@ -31,7 +31,7 @@
                         "description": "来源的别名\n可用于搜索等。",
                         "type": "array",
                         "items": {
-                            "type":"string"
+                            "type": "string"
                         }
                     },
                     "url": {
@@ -53,8 +53,16 @@
                             ]
                         ]
                     },
+                    "fetch_by": {
+                        "description": "抓取通知的方法",
+                        "type": "string",
+                        "enum": [
+                            "selectors",
+                            "special"
+                        ]
+                    },
                     "selectors": {
-                        "description": "用于抓取通知的CSS选择器",
+                        "description": "用于抓取通知的CSS选择器\n只有`fetch_by`是`selectors`时需要。",
                         "type": "object",
                         "items": true,
                         "properties": {
@@ -70,10 +78,12 @@
                                 "type": "string",
                                 "default": "a"
                             },
-                            "title":{
+                            "title": {
                                 "description": "这一项的标题\n一般不需要。如果链接和标题不是同一元素，可用`link`定位链接，用`title`定位标题。",
-                                "type":"string",
-                                "examples": ["h3"]
+                                "type": "string",
+                                "examples": [
+                                    "h3"
+                                ]
                             },
                             "date": {
                                 "description": "这一项的发布日期",
@@ -92,7 +102,7 @@
                 "required": [
                     "name",
                     "url",
-                    "selectors"
+                    "fetch_by"
                 ]
             }
         }

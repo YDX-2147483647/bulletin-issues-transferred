@@ -41,7 +41,7 @@ export class Source implements SourceInterface {
 
     async fetch_notice() {
         console.error(chalk.red('✗ 这个源不支持获取通知。'))
-        return []
+        return [] as Notice[]
     }
 }
 
