@@ -52,7 +52,11 @@ npm run doc
 
 ## 如何贡献？
 
+请注意，这个项目报了2021-2022学年的校创（服务器钱就来源于此；不过审核结果还没出），大家在这个仓库的贡献可能会被答辩老师算在我们头上。
+
 ### 添加别的通知来源
+
+注：如果你不知道怎么提拉取请求（pull request），不妨直接新建[议题（issue）](https://github.com/YDX-2147483647/bulletin-issues-transferred/issues/new/choose)。
 
 -   写明名称、网址、同学该如何找到它等等。
 
