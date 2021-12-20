@@ -15,7 +15,21 @@ export interface SourceRaw {
         date?: string
     }
 }
-export class Source {
+
+export interface Source {
+    name: string
+    full_name: string
+    alt_name: string[]
+    url: string
+    guide: string[]
+
+    fetch_notice(): Promise<Notice[]>
+}
+
+/**
+ * 静态网页、使用CSS选择器的源
+ */
+export class SourceBySelectors implements Source {
     name: string
     full_name: string
     alt_name: string[]
@@ -105,7 +119,7 @@ export class Notice implements NoticeInterface {
     }
 
     get source_name() {
-        return this.source instanceof Source ? this.source.name : this.source
+        return typeof this.source !== 'string' ? this.source.name : this.source
     }
 
     to_human_readable_rows() {

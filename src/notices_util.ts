@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 
 import { Source, NoticeRaw, NoticeInterface, Notice } from "./notice.js"
-import { import_sources, read_json } from './notices_saver.js'
+import { read_json } from './notices_saver.js'
 
 
 

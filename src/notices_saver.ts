@@ -1,22 +1,22 @@
 import { readFile, writeFile } from 'fs/promises'
 import chalk from "chalk"
 
-import { SourceRaw, Source, Notice, NoticeRaw } from "./notice.js"
+import { SourceRaw, SourceBySelectors, Notice, NoticeRaw } from "./notice.js"
 import { build_feed } from "./feed.js"
 
 
-async function _import_sources() {
+async function _import_sources_by_selectors() {
     const file = await readFile('config/notice_sources.json')
     const raw_sources: SourceRaw[] = JSON.parse(file.toString()).sources
-    const sources = raw_sources.map(r => new Source(r))
+    const sources = raw_sources.map(r => new SourceBySelectors(r))
     return sources
 }
 
-let _sources_cache: Source[] = []
-export async function import_sources({ force = false } = {}) {
-    if (force || _sources_cache.length == 0) {
+let _sources_by_selectors_cache: SourceBySelectors[] = []
+export async function import_sources_by_selectors({ force = false } = {}) {
+    if (force || _sources_by_selectors_cache.length == 0) {
         try {
-            _sources_cache = await _import_sources()
+            _sources_by_selectors_cache = await _import_sources_by_selectors()
         } catch (error) {
             if (error.code === 'ENOENT') {
                 console.error(chalk.red('✗ 未找到任何通知来源。您可能需要新建 config/notice_sources.json。'))
@@ -25,11 +25,11 @@ export async function import_sources({ force = false } = {}) {
         }
     }
 
-    if (_sources_cache.length === 0) {
+    if (_sources_by_selectors_cache.length === 0) {
         console.log(chalk.red('✗ 未找到任何通知来源。config/notice_sources.json 可能是空的。'))
     }
 
-    return _sources_cache
+    return _sources_by_selectors_cache
 }
 
 
@@ -52,7 +52,7 @@ export async function read_json({ ignore_source = false } = {}) {
         if (ignore_source) {
             return json.map(n => new Notice(n)) as Notice[]
         } else {
-            const sources_set = await import_sources()
+            const sources_set = await import_sources_by_selectors()
             return json.map(n => new Notice(n, { sources_set })) as Notice[]
         }
 

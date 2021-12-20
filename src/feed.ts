@@ -1,4 +1,4 @@
-import { Notice, Source } from "./notice.js"
+import { Notice } from "./notice.js"
 import xml from 'xml'
 
 const some_mysterious_website = ''
@@ -13,7 +13,7 @@ const config = {
 
 function to_feed_item(notice: Notice) {
     let description: string
-    if (notice.source instanceof Source) {
+    if (typeof notice.source !== 'string') {
         description = `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source_name}</a>。`
     } else if (notice.source) {
         description = `来自${notice.source_name}。`
