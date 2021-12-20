@@ -1,3 +1,8 @@
+/**
+ * 简易RSS
+ * （源代码中有`config`）
+ * @module
+ */
 import { NoticeInterface } from "./notice.js"
 import xml from 'xml'
 
@@ -37,6 +42,9 @@ function to_feed_item(notice: NoticeInterface) {
     }
 }
 
+/**
+ * 将一系列通知转换为RSS
+ */
 export function build_feed(notices: NoticeInterface[]) {
     const feed_obj = {
         rss: [

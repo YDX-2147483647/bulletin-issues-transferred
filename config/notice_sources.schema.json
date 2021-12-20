@@ -54,7 +54,7 @@
                         ]
                     },
                     "fetch_by": {
-                        "description": "抓取通知的方法",
+                        "description": "抓取通知的方法\n若为`special`，需在`sources_special.ts`中具体说明方法。",
                         "type": "string",
                         "enum": [
                             "selectors",

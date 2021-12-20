@@ -1,3 +1,7 @@
+/**
+ * 描述通知及其来源
+ * @module
+ */
 import fetch from "node-fetch"
 import { JSDOM } from 'jsdom'
 import chalk from "chalk"
@@ -6,6 +10,10 @@ import { parse_date } from '../lib/my_date.js'
 
 
 
+/**
+ * 通知来源（接口）
+ * @see `notice_sources.schema.json`
+ */
 export interface SourceInterface {
     name: string
     full_name: string
@@ -13,14 +21,24 @@ export interface SourceInterface {
     url: string
     guide: string[]
 
+    /**
+     * 抓取通知
+     */
     fetch_notice(): Promise<Notice[]>
 }
 
+/**
+ * 通知来源（简易格式），可用作构造{@link Source}的参数
+ * @see `notice_sources.schema.json`
+ */
 export interface SourceRaw {
     name: string, full_name?: string, alt_name?: string[],
     url: string, guide?: string[],
 }
 
+/**
+ * 通知来源
+ */
 export class Source implements SourceInterface {
     name: string
     full_name: string
@@ -55,7 +73,9 @@ export interface SourceBySelectorsRaw extends SourceRaw {
 }
 
 /**
- * 静态网页、使用CSS选择器的源
+ * 基于选择器的通知来源
+ * 
+ * 先获取静态网页，然后用CSS选择器从中提取信息。
  */
 export class SourceBySelectors extends Source {
     selectors: {
@@ -65,14 +85,14 @@ export class SourceBySelectors extends Source {
         date: string
     }
 
-    constructor(options: SourceBySelectorsRaw) {
-        super(options)
+    constructor(raw: SourceBySelectorsRaw) {
+        super(raw)
 
         const {
             rows,
             link = 'a', title = '',
             date = 'span'
-        } = options.selectors
+        } = raw.selectors
 
         this.selectors = { rows, link, date, title: title || link }
     }
@@ -102,6 +122,9 @@ export class SourceBySelectors extends Source {
 
 
 
+/**
+ * 通知（接口）
+ */
 export interface NoticeInterface {
     link: string
     title: string
@@ -113,9 +136,20 @@ export interface NoticeInterface {
     to_raw(): NoticeRaw
     /** 等同于`to_raw()` */
     valueOf(): NoticeRaw
+
+    /**
+     * 转换为对人友好的格式
+     * 
+     * 第一行是来源和标题，第二行是链接，第三行是日期。
+     */
     to_human_readable_rows(): string[]
 }
 
+/**
+ * 通知（简易格式），可用作构造{@link Notice}的参数
+ * 
+ * `source`既允许{@link Source}，也允许`string`。
+ */
 export interface NoticeRaw {
     link: string
     title: string
@@ -123,6 +157,9 @@ export interface NoticeRaw {
     source?: SourceInterface | string
 }
 
+/**
+ * 通知
+ */
 export class Notice implements NoticeInterface {
     link: string
     title: string

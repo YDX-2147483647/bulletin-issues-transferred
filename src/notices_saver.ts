@@ -1,3 +1,7 @@
+/**
+ * 读取、写入通知（或者说从文件恢复、保存至文件）
+ * @module
+ */
 import { readFile, writeFile } from 'fs/promises'
 import chalk from "chalk"
 
@@ -18,6 +22,11 @@ function json_date_reviver(key: string, value: any) {
 }
 
 
+/**
+ * 从`data/notices.json`读取已有通知
+ * @param options 选项
+ *   - ignore_source: 是否忽略来源。因为存储来源时只记`name`，读取时可能需要还原为{@link Source}。
+ */
 export async function read_json({ ignore_source = false } = {}) {
     try {
         const json_str = (await readFile('data/notices.json')).toString()
@@ -41,12 +50,20 @@ export async function read_json({ ignore_source = false } = {}) {
     }
 }
 
+/**
+ * 将通知写入`data/notices.json`（不是追加）
+ * @param notices 
+ */
 export async function write_json(notices: NoticeInterface[]) {
     const json = JSON.stringify(notices.map(n => n.to_raw()), null, 2)
     await writeFile('data/notices.json', json)
     console.log(chalk.green('✓'), '已保存到 data/notices.json。')
 }
 
+/**
+ * 用通知生成RSS，然后写入`data/feed.rss`
+ * @param notices 
+ */
 export async function write_rss(notices: NoticeInterface[]) {
     await writeFile('data/feed.rss', build_feed(notices))
     console.log(chalk.green('✓'), '已保存到 data/feed.rss')

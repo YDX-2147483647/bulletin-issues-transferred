@@ -6,6 +6,7 @@
   "scripts": {
     "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha test/test-*",
     "build": "tsc",
+    "doc": "typedoc",
     "fetch-data": "node test/fetch_data.js",
     "update-data": "node dist/update_notices.js"
   },
@@ -24,7 +25,8 @@
     "@types/node": "^16.11.12",
     "@types/xml": "^1.0.6",
     "chai": "^4.3.4",
-    "mocha": "^9.1.3"
+    "mocha": "^9.1.3",
+    "typedoc": "^0.22.10"
   },
   "directories": {
     "lib": "lib",

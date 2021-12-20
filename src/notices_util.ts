@@ -1,3 +1,7 @@
+/**
+ * 通知的一些常用操作
+ * @module
+ */
 import chalk from 'chalk'
 
 import { SourceInterface, NoticeRaw, NoticeInterface } from "./notice.js"
@@ -6,7 +10,13 @@ import { read_json } from './notices_saver.js'
 
 
 /**
+ * 按日期降序排列
  * 用于`Array.prototype.sort()`，会将日期未知的压到最后。
+ * @example
+ * ```
+ * const notices = [notice_1, notice_2, ...]
+ * notices.sort(sort_by_date)
+ * ```
  */
 export function sort_by_date(a: NoticeRaw | NoticeInterface, b: NoticeRaw | NoticeInterface) {
     if (a.date === null) {
@@ -20,10 +30,12 @@ export function sort_by_date(a: NoticeRaw | NoticeInterface, b: NoticeRaw | Noti
 
 
 /**
- * 
+ * 从一系列来源获取通知
  * @param sources 
- * @param option verbose：是否输出信息。days_ago：筛选多少天内的通知，0表示不筛选。sort：是否按日期降序排列。
- * @returns 
+ * @param options 选项
+ *   - verbose: 是否输出信息。
+ *   - days_ago: 筛选多少天内的通知，0表示不筛选。
+ *   - sort: 是否按日期降序排列。
  */
 export async function fetch_all_sources(sources: SourceInterface[],
     { verbose = true, days_ago = 0, sort = true } = {}) {
@@ -61,11 +73,21 @@ export async function fetch_all_sources(sources: SourceInterface[],
 }
 
 
+/**
+ * 筛选出`data/notices.json`中没有的通知
+ */
 export async function diff(notices: NoticeInterface[]) {
     const existed_links = (await read_json({ ignore_source: true })).map(n => n.link)
     return notices.filter(n => !existed_links.includes(n.link))
 }
 
+/**
+ * 打印一系列通知
+ * @param notices 
+ * @param options 选项
+ *   - max: 打印出来的通知的最大数量。
+ *   - remark_if_overflow: 通知太多而未全部打印时是否提示。
+ */
 export function print_notices(notices: NoticeInterface[], { max = 5, remark_if_overflow = true } = {}) {
     console.log(
         notices.slice(0, max)

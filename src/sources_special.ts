@@ -1,3 +1,7 @@
+/**
+ * 处理特殊的通知来源
+ * @module
+ */
 import chalk from "chalk"
 import fetch from "node-fetch"
 
@@ -46,6 +50,11 @@ const specials = new Map([
 
 
 
+/**
+ * 将特殊通知来源转换为{@link Source}
+ * 
+ * “特殊”指`config/notice_sources.json`中记录的`fetch_by`为`special`。
+ */
 export function parse_special_source(source: SourceStorageFormat) {
     const real_source = new Source(source)
 
