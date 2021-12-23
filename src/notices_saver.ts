@@ -16,7 +16,7 @@ import { build_feed } from "./feed.js"
  */
 function json_date_reviver(key: string, value: any) {
     if (key === 'date') {
-        return new Date(value)
+        return value === 'null' ? null : new Date(value)
     }
     return value
 }

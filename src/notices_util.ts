@@ -28,6 +28,21 @@ export function sort_by_date(a: NoticeRaw | NoticeInterface, b: NoticeRaw | Noti
     return b.date.getTime() - a.date.getTime()
 }
 
+/**
+ * 检验日期是否是最近
+ * @param days_ago 多少天内算最近，0表示都算。
+ */
+function recent_checker(days_ago: number) {
+    if (days_ago === 0) {
+        return (date: Date | null) => true
+    }
+
+    const today = new Date()
+    const ago = new Date(today.getFullYear(), today.getMonth(), today.getDate() - days_ago)
+    return (date: Date | null) => date === null || date.getTime() >= ago.getTime()
+}
+
+
 
 /**
  * 从一系列来源获取通知
@@ -43,6 +58,8 @@ export async function fetch_all_sources(sources: SourceInterface[],
         console.log(chalk.green('🛈'), `发现${sources.length}个通知来源。`)
     }
 
+    const is_recent = recent_checker(days_ago)
+
     const notices_grouped = await Promise.all(sources.map(async s => {
         const notices = await s.fetch_notice()
         if (notices.length === 0) {
@@ -51,13 +68,7 @@ export async function fetch_all_sources(sources: SourceInterface[],
             console.log(chalk.green('🛈'), `从“${s.name}”获取到${notices.length}项通知。`)
         }
 
-        if (days_ago) {
-            const today = new Date()
-            const ago = new Date(today.getFullYear(), today.getMonth(), today.getDate() - days_ago)
-            return notices.filter(n => n.date === null || n.date.getTime() >= ago.getTime())
-        } else {
-            return notices
-        }
+        return notices.filter(n => is_recent(n.date))
     }))
 
     const all_notices = notices_grouped.flat()
@@ -74,23 +85,54 @@ export async function fetch_all_sources(sources: SourceInterface[],
 
 
 /**
- * 筛选出`data/notices.json`中没有的通知
+ * 筛选出新通知
+ * @param original 已有通知，不会被修改
+ * @param latest 新通知
  */
-export async function diff(notices: NoticeInterface[]) {
-    const existed_links = (await read_json({ ignore_source: true })).map(n => n.link)
-    return notices.filter(n => !existed_links.includes(n.link))
+export function diff(original: NoticeInterface[], latest: NoticeInterface[]) {
+    const original_links = original.map(n => n.link)
+    return latest.filter(n => !original_links.includes(n.link))
 }
+
+/**
+ * 将新通知合并进已有通知（留同加异去旧）
+ * @param original 已有通知，不会被修改
+ * @param latest 新通知
+ * @param options 选项
+ *   - verbose: 是否输出信息。
+ *   - days_ago: 筛选多少天内的通知，0表示不筛选。
+ *   - sort: 合并后是否按日期降序排列。
+ */
+export function merge(original: NoticeInterface[], latest: NoticeInterface[],
+    { verbose = false, days_ago = 0, sort = true } = {}) {
+    const difference = diff(original, latest)
+    const all = original.concat(difference)
+
+    const is_recent = recent_checker(days_ago)
+    const recent = all.filter(n => is_recent(n.date))
+
+    if (verbose) {
+        console.log(`新增${difference.length}项，过期${all.length - recent.length}项。`)
+    }
+
+    if (sort) {
+        return recent.sort(sort_by_date)
+    } else {
+        return recent
+    }
+}
+
 
 /**
  * 打印一系列通知
  * @param notices 
  * @param options 选项
- *   - max: 打印出来的通知的最大数量。
+ *   - max: 打印出来的通知的最大数量，0 表示无限制。
  *   - remark_if_overflow: 通知太多而未全部打印时是否提示。
  */
 export function print_notices(notices: NoticeInterface[], { max = 5, remark_if_overflow = true } = {}) {
     console.log(
-        notices.slice(0, max)
+        notices.slice(0, max || undefined)
             .map((notice, index) => {
                 const rows = notice.to_human_readable_rows()
                 return [
@@ -101,7 +143,7 @@ export function print_notices(notices: NoticeInterface[], { max = 5, remark_if_o
             .join('\n\n')
     )
 
-    if (remark_if_overflow && notices.length > max) {
+    if (max !== 0 && remark_if_overflow && notices.length > max) {
         console.log('\n' + chalk.underline('……') +
             `  另外还有${notices.length - max}项通知未显示。`)
     }
