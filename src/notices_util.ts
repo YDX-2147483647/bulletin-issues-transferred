@@ -99,26 +99,24 @@ export function diff(original: NoticeInterface[], latest: NoticeInterface[]) {
  * @param original 已有通知，不会被修改
  * @param latest 新通知
  * @param options 选项
- *   - verbose: 是否输出信息。
  *   - days_ago: 筛选多少天内的通知，0表示不筛选。
  *   - sort: 合并后是否按日期降序排列。
  */
 export function merge(original: NoticeInterface[], latest: NoticeInterface[],
-    { verbose = false, days_ago = 0, sort = true } = {}) {
+    { days_ago = 0, sort = true } = {}) {
     const difference = diff(original, latest)
     const all = original.concat(difference)
 
     const is_recent = recent_checker(days_ago)
     const recent = all.filter(n => is_recent(n.date))
 
-    if (verbose) {
-        console.log(`新增${difference.length}项，过期${all.length - recent.length}项。`)
-    }
-
-    if (sort) {
-        return recent.sort(sort_by_date)
-    } else {
-        return recent
+    const final = sort ? recent.sort(sort_by_date) : recent
+    return {
+        notices: final,
+        change: {
+            add: difference.length,
+            drop: all.length - recent.length
+        }
     }
 }
 

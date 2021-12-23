@@ -30,4 +30,7 @@ describe("解析日期", () => {
     it('可以带“年”“月”“日”', () => {
         assert_date(parse_date('1921年7月23日'), new Date(1921, 6, 23))
     })
+    it('可以有小时', () => {
+        assert_date(parse_date('2021年12月27日21时'), new Date(2021, 11, 27, 21))
+    })
 })
