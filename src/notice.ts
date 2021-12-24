@@ -101,7 +101,7 @@ export class SourceBySelectors extends Source {
         this.selectors = { rows, link, date, title: title || link }
     }
 
-    _row_to_notice(row: Element) {
+    private _row_to_notice(row: Element) {
         const link: HTMLAnchorElement = row.querySelector(this.selectors.link)
         const title = row.querySelector(this.selectors.title)
         const date = this.selectors.date ? row.querySelector(this.selectors.date) : null
