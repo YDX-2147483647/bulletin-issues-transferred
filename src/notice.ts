@@ -46,6 +46,10 @@ export class Source implements SourceInterface {
     url: string
     guide: string[]
 
+    /**
+     * 
+     * @param raw 
+     */
     constructor({
         name, full_name = '', alt_name = [],
         url, guide = [],
@@ -134,7 +138,7 @@ export interface NoticeInterface {
 
     /** 转换成容易存储的`NoticeRaw`（其`source`为`string`） */
     to_raw(): NoticeRaw
-    /** 等同于`to_raw()` */
+    /** 等同于{@link to_raw} */
     valueOf(): NoticeRaw
 
     /**
@@ -166,6 +170,12 @@ export class Notice implements NoticeInterface {
     date: Date | null
     source: Source
 
+    /**
+     * 
+     * @param raw 
+     * @param options 选项
+     * @param options.sources_set 可能的通知来源（如果`raw`的`source`是`string`，会从中搜索）
+     */
     constructor({ link, title, date, source }: NoticeRaw,
         { sources_set }: { sources_set?: SourceInterface[] } = {}) {
         this.link = link
