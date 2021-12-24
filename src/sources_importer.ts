@@ -46,7 +46,7 @@ let _sources_cache: SourceInterface[] = []
 /**
  * 从`config/notice_sources.json`和{@link sources_special}导入通知来源
  * @param options 选项 
- *   - force: 是否强制刷新缓存。因为通知来源基本不变，默认会自动采用缓存。
+ * @param options.force 是否强制刷新缓存。因为通知来源基本不变，默认会自动采用缓存。
  */
 export async function import_sources({ force = false } = {}) {
     if (force || _sources_cache.length == 0) {

@@ -48,9 +48,9 @@ function recent_checker(days_ago: number) {
  * 从一系列来源获取通知
  * @param sources 
  * @param options 选项
- *   - verbose: 是否输出信息。
- *   - days_ago: 筛选多少天内的通知，0表示不筛选。
- *   - sort: 是否按日期降序排列。
+ * @param options.verbose 是否输出信息。
+ * @param options.days_ago 筛选多少天内的通知，0表示不筛选。
+ * @param options.sort 是否按日期降序排列。
  */
 export async function fetch_all_sources(sources: SourceInterface[],
     { verbose = true, days_ago = 0, sort = true } = {}) {
@@ -99,8 +99,8 @@ export function diff(original: NoticeInterface[], latest: NoticeInterface[]) {
  * @param original 已有通知，不会被修改
  * @param latest 新通知
  * @param options 选项
- *   - days_ago: 筛选多少天内的通知，0表示不筛选。
- *   - sort: 合并后是否按日期降序排列。
+ * @param options.days_ago 筛选多少天内的通知，0表示不筛选。
+ * @param options.sort 合并后是否按日期降序排列。
  */
 export function merge(original: NoticeInterface[], latest: NoticeInterface[],
     { days_ago = 0, sort = true } = {}) {
@@ -125,8 +125,8 @@ export function merge(original: NoticeInterface[], latest: NoticeInterface[],
  * 打印一系列通知
  * @param notices 
  * @param options 选项
- *   - max: 打印出来的通知的最大数量，0 表示无限制。
- *   - remark_if_overflow: 通知太多而未全部打印时是否提示。
+ * @param options.max 打印出来的通知的最大数量，0 表示无限制。
+ * @param options.remark_if_overflow 通知太多而未全部打印时是否提示。
  */
 export function print_notices(notices: NoticeInterface[], { max = 5, remark_if_overflow = true } = {}) {
     console.log(

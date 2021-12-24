@@ -25,7 +25,7 @@ function json_date_reviver(key: string, value: any) {
 /**
  * 从`data/notices.json`读取已有通知
  * @param options 选项
- *   - ignore_source: 是否忽略来源。因为存储来源时只记`name`，读取时可能需要还原为{@link Source}。
+ * @param options.ignore_source 是否忽略来源。因为存储来源时只记`name`，读取时可能需要还原为{@link Source}。
  */
 export async function read_json({ ignore_source = false } = {}) {
     try {
