@@ -3,9 +3,9 @@
  * @module
  */
 import chalk from 'chalk'
+import cliProgress from "cli-progress"
 
 import { SourceInterface, NoticeRaw, NoticeInterface } from "./notice.js"
-import { read_json } from './notices_saver.js'
 
 
 
@@ -54,8 +54,15 @@ function recent_checker(days_ago: number) {
  */
 export async function fetch_all_sources(sources: SourceInterface[],
     { verbose = true, days_ago = 0, sort = true } = {}) {
+
+    let bar: cliProgress.SingleBar
     if (verbose) {
         console.log(chalk.green('🛈'), `发现${sources.length}个通知来源。`)
+        
+        bar = new cliProgress.SingleBar({
+            format: '抓取通知 {bar} {percentage}% | {value}/{total} | 已用{duration_formatted}，预计还需{eta_formatted}'
+        }, cliProgress.Presets.shades_classic)
+        bar.start(sources.length, 0)
     }
 
     const is_recent = recent_checker(days_ago)
@@ -64,12 +71,16 @@ export async function fetch_all_sources(sources: SourceInterface[],
         const notices = await s.fetch_notice()
         if (notices.length === 0) {
             console.log(chalk.yellow(`⚠ 未从“${s.name}”获取到任何通知。将忽略。`))
-        } else if (verbose) {
-            console.log(chalk.green('🛈'), `从“${s.name}”获取到${notices.length}项通知。`)
+        }
+        if (verbose) {
+            bar.increment()
         }
 
         return notices.filter(n => is_recent(n.date))
     }))
+    if (verbose) {
+        bar.stop()
+    }
 
     const all_notices = notices_grouped.flat()
     if (verbose) {

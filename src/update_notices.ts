@@ -17,8 +17,8 @@ if (new_notices.length === 0) {
     console.log('未发现新通知。')
 
     print_notices(existed_notices,
-        { max: 5, remark_if_overflow: false })
-    console.log('以上是最新的5项通知。')
+        { max: 3, remark_if_overflow: false })
+    console.log('以上是最新的3项通知。')
 
 } else {
     console.log(`发现${new_notices.length}项新通知。`)
