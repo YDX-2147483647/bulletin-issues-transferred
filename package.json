@@ -2,7 +2,7 @@
   "name": "bulletin-issues-transferred",
   "version": "1.2.5",
   "description": "汇总BIT各种网站的通知。",
-  "main": "index.js",
+  "main": "update_notices.js",
   "scripts": {
     "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha test/test-*",
     "build": "tsc",

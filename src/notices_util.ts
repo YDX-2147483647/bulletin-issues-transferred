@@ -4,6 +4,7 @@
  */
 import chalk from 'chalk'
 import cliProgress from "cli-progress"
+import { FetchError } from 'node-fetch'
 
 import { SourceInterface, NoticeRaw, NoticeInterface } from "./notice.js"
 
@@ -58,7 +59,7 @@ export async function fetch_all_sources(sources: SourceInterface[],
     let bar: cliProgress.SingleBar
     if (verbose) {
         console.log(chalk.green('🛈'), `发现${sources.length}个通知来源。`)
-        
+
         bar = new cliProgress.SingleBar({
             format: '抓取通知 {bar} {percentage}% | {value}/{total} | 已用{duration_formatted}，预计还需{eta_formatted}'
         }, cliProgress.Presets.shades_classic)
@@ -68,15 +69,28 @@ export async function fetch_all_sources(sources: SourceInterface[],
     const is_recent = recent_checker(days_ago)
 
     const notices_grouped = await Promise.all(sources.map(async s => {
-        const notices = await s.fetch_notice()
-        if (notices.length === 0) {
-            console.log(chalk.yellow(`⚠ 未从“${s.name}”获取到任何通知。将忽略。`))
-        }
-        if (verbose) {
-            bar.increment()
-        }
+        try {
+            const notices = await s.fetch_notice()
+            if (notices.length === 0) {
+                console.log(chalk.yellow(`⚠ 未从“${s.name}”获取到任何通知。将忽略。`))
+            }
+            if (verbose) {
+                bar.increment()
+            }
 
-        return notices.filter(n => is_recent(n.date))
+            return notices.filter(n => is_recent(n.date))
+
+        } catch (error) {
+            if (error instanceof FetchError && error.errno === 'ENOTFOUND') {
+                if (verbose) {
+                    bar.increment()
+                }
+                console.error(chalk.red(`✗ 未能访问“${s.name}”（ENOTFOUND）。将忽略。`))
+                return []
+            } else {
+                throw error
+            }
+        }
     }))
     if (verbose) {
         bar.stop()
