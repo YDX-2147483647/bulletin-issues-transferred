@@ -1,5 +1,5 @@
 {
-    "$schema": "notice_sources.schema.json",
+    "$schema": "sources.schema.json",
     "last_updated": "2021-12-20",
     "sources": [
         {

@@ -5,9 +5,9 @@
 import chalk from "chalk"
 import fetch from "node-fetch"
 
-import { parse_date } from '../util/my_date.js'
-import { Notice, Source } from './notice.js'
-import { SourceStorageFormat } from "./sources_importer.js"
+import { parse_date } from '../../util/my_date.js'
+import { Notice, Source } from '../notice.js'
+import { SourceStorageFormat } from "../interfaces.js"
 
 
 const specials = new Map([
@@ -53,7 +53,7 @@ const specials = new Map([
 /**
  * 将特殊通知来源转换为{@link Source}
  * 
- * “特殊”指`config/notice_sources.json`中记录的`fetch_by`为`special`。
+ * “特殊”指`config.sources_path`中记录的`fetch_by`为`special`。
  */
 export function parse_special_source(source: SourceStorageFormat) {
     const real_source = new Source(source)

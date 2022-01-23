@@ -1,0 +1,24 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$id": "config.schema.json-v0.0.1",
+    "title": "Bulletin IT 设置",
+    "type": "object",
+    "properties": {
+        "sources_path": {
+            "description": "通知来源的文件名",
+            "type": "string",
+            "default": "config/sources.json"
+        },
+        "output": {
+            "description": "输出",
+            "type": "object",
+            "properties": {
+                "json_path": {
+                    "description": "以 JSON 格式保存通知时的文件名",
+                    "type": "string",
+                    "default": "output/notices.json"
+                }
+            }
+        }
+    }
+}

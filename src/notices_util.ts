@@ -6,7 +6,7 @@ import chalk from 'chalk'
 import cliProgress from "cli-progress"
 import { FetchError } from 'node-fetch'
 
-import { SourceInterface, NoticeRaw, NoticeInterface } from "./core/notice.js"
+import { SourceInterface, NoticeRaw, NoticeInterface } from "./core/interfaces.js"
 
 
 

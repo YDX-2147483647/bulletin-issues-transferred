@@ -1,0 +1,3 @@
+sources_path: config/notice_sources.json
+output:
+  json_path: output/notices.json

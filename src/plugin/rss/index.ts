@@ -7,7 +7,7 @@ import xml from 'xml'
 import chalk from 'chalk'
 import { writeFile } from 'fs/promises'
 
-import { NoticeInterface } from "../../core/notice.js"
+import { NoticeInterface } from "../../core/interfaces.js"
 
 const some_mysterious_website = ''
 

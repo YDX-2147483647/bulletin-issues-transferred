@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "notice_sources.schema.json-v0.2.0",
+    "$id": "sources.schema.json-v0.2.0",
     "title": "通知来源",
     "description": "通知公告页面中通知的标题、日期的选择器等。",
     "type": "object",
