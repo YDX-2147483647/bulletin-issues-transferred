@@ -5,7 +5,7 @@
 import chalk from "chalk"
 import fetch from "node-fetch"
 
-import { parse_date } from '../lib/my_date.js'
+import { parse_date } from '../util/my_date.js'
 import { Notice, Source } from './notice.js'
 import { SourceStorageFormat } from "./sources_importer.js"
 

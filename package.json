@@ -1,14 +1,13 @@
 {
   "name": "bulletin-issues-transferred",
-  "version": "1.2.5",
+  "version": "2.0.0-alpha",
   "description": "汇总BIT各种网站的通知。",
   "main": "update_notices.js",
   "scripts": {
-    "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha test/test-*",
+    "test": "mocha dist/**/*.test.js",
     "build": "tsc",
     "doc": "typedoc",
-    "fetch-data": "node test/fetch_data.js",
-    "update-data": "node dist/update_notices.js"
+    "update": "node dist/src/update_notices.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",
@@ -22,8 +21,10 @@
     "xml": "^1.0.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.0",
     "@types/cli-progress": "^3.9.2",
     "@types/jsdom": "^16.2.13",
+    "@types/mocha": "^9.1.0",
     "@types/node": "^16.11.12",
     "@types/xml": "^1.0.6",
     "chai": "^4.3.4",

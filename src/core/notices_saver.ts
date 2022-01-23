@@ -7,7 +7,6 @@ import chalk from "chalk"
 
 import { NoticeInterface, NoticeRaw, Notice } from "./notice.js"
 import { import_sources } from './sources_importer.js'
-import { build_feed } from "./feed.js"
 
 
 
@@ -58,13 +57,4 @@ export async function write_json(notices: NoticeInterface[]) {
     const json = JSON.stringify(notices.map(n => n.to_raw()), null, 2)
     await writeFile('data/notices.json', json)
     console.log(chalk.green('✓'), '已保存到 data/notices.json。')
-}
-
-/**
- * 用通知生成RSS，然后写入`data/feed.rss`
- * @param notices 
- */
-export async function write_rss(notices: NoticeInterface[]) {
-    await writeFile('data/feed.rss', build_feed(notices))
-    console.log(chalk.green('✓'), '已保存到 data/feed.rss')
 }

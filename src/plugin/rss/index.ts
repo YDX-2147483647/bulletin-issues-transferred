@@ -3,8 +3,11 @@
  * （源代码中有`config`）
  * @module
  */
-import { NoticeInterface } from "./notice.js"
 import xml from 'xml'
+import chalk from 'chalk'
+import { writeFile } from 'fs/promises'
+
+import { NoticeInterface } from "../../core/notice.js"
 
 const some_mysterious_website = ''
 
@@ -76,4 +79,13 @@ export function build_feed(notices: NoticeInterface[]) {
     }
 
     return '<?xml version="1.0" encoding="UTF-8"?>' + xml(feed_obj)
+}
+
+/**
+ * 用通知生成RSS，然后写入`data/feed.rss`
+ * @param notices 
+ */
+export async function write_rss(notices: NoticeInterface[]) {
+    await writeFile('data/feed.rss', build_feed(notices))
+    console.log(chalk.green('✓'), '已保存到 data/feed.rss')
 }

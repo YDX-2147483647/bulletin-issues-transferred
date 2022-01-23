@@ -6,7 +6,7 @@ import fetch from "node-fetch"
 import { JSDOM } from 'jsdom'
 import chalk from "chalk"
 
-import { parse_date } from '../lib/my_date.js'
+import { parse_date } from '../util/my_date.js'
 
 
 

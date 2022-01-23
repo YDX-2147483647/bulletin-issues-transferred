@@ -3,8 +3,8 @@
  * @module
  */
 import { sort_by_date, diff, print_notices, fetch_all_sources, merge } from "./notices_util.js"
-import { read_json, write_json, write_rss } from './notices_saver.js'
-import { import_sources } from "./sources_importer.js"
+import { read_json, write_json } from './core/notices_saver.js'
+import { import_sources } from "./core/sources_importer.js"
 
 
 
@@ -36,5 +36,4 @@ if (new_notices.length === 0) {
             { days_ago: 90, sort: true })
     console.log(`新增 ${change.add} 项，过期 ${change.drop} 项。`)
     write_json(saved_notices)
-    write_rss(saved_notices)
 }

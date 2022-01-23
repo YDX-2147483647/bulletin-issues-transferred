@@ -1,13 +1,8 @@
 import { assert } from "chai"
 import { describe, it } from "mocha"
-import { parse_date } from "../lib/my_date.js"
+import { parse_date } from "./my_date.js"
 
-/**
- * 
- * @param {Date} a 
- * @param {Date} b 
- */
-function assert_date(a, b) {
+function assert_date(a:Date, b:Date) {
     assert.equal(a.toString(), b.toString())
 }
 
