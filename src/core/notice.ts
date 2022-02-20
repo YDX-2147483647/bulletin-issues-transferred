@@ -150,6 +150,13 @@ export class Notice implements NoticeInterface {
         ]
     }
 
+    to_markdown(): string {
+        return [
+            `${this.source_name}：[${this.title}](${this.link})`,
+            this.date ? `（${this.date.toLocaleString()}）` : ''
+        ].join('')
+    }
+
     to_raw() {
         return {
             link: this.link,

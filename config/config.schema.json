@@ -19,6 +19,16 @@
                     "default": "output/notices.json"
                 }
             }
+        },
+        "ding": {
+            "description": "钉钉插件",
+            "type": "object",
+            "properties": {
+                "secrets_path": {
+                    "type": "string",
+                    "description": "ding.secrets.yaml 的文件名"
+                }
+            }
         }
     }
 }

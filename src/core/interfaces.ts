@@ -33,7 +33,7 @@ export interface SourceRaw {
  * 通知来源的存储格式，基本等同于JSON文件
  * @see `sources.schema.json`
  */
- export interface SourceStorageFormat extends SourceRaw {
+export interface SourceStorageFormat extends SourceRaw {
     fetch_by: string,
     selectors?: any
 }
@@ -61,6 +61,8 @@ export interface NoticeInterface {
      * 第一行是来源和标题，第二行是链接，第三行是日期。
      */
     to_human_readable_rows(): string[]
+
+    to_markdown(): string
 }
 
 /**

@@ -10,10 +10,11 @@ import { parse } from 'yaml'
 
 
 interface Config {
-    sources_path: string,
+    sources_path: string
     output: {
         json_path: string
     }
+    [propName: string]: any
 }
 
 const defaults: Config = {
