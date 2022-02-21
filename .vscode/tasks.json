@@ -8,6 +8,20 @@
 			"problemMatcher": [],
 			"label": "npm: build",
 			"detail": "tsc"
+		},
+		{
+			"type": "npm",
+			"script": "update",
+			"problemMatcher": [],
+			"label": "npm: update",
+			"detail": "node dist/update_notices.js"
+		},
+		{
+			"type": "npm",
+			"script": "doc",
+			"problemMatcher": [],
+			"label": "npm: doc",
+			"detail": "typedoc"
 		}
 	]
 }
