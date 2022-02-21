@@ -7,7 +7,7 @@ import xml from 'xml'
 import chalk from 'chalk'
 import { writeFile } from 'fs/promises'
 
-import { NoticeInterface } from "../../core/interfaces.js"
+import { Notice } from '../../core/models.js'
 
 const some_mysterious_website = ''
 
@@ -19,7 +19,11 @@ const config = {
 }
 
 
-function to_feed_item(notice: NoticeInterface) {
+/**
+ * 
+ * @param notice 需要 source，因此请提前{@link Notice.populate}
+ */
+function to_feed_item(notice: Notice) {
     let description: string
     if (notice.source.url) {
         description = `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source_name}</a>。`
@@ -47,8 +51,9 @@ function to_feed_item(notice: NoticeInterface) {
 
 /**
  * 将一系列通知转换为RSS
+ * @param notices 需要 source，因此请提前{@link Notice.populate}
  */
-export function build_feed(notices: NoticeInterface[]) {
+export function build_feed(notices: Notice[]) {
     const feed_obj = {
         rss: [
             {
@@ -83,9 +88,9 @@ export function build_feed(notices: NoticeInterface[]) {
 
 /**
  * 用通知生成RSS，然后写入`data/feed.rss`
- * @param notices 
+ * @param notices 需要 source，因此请提前{@link Notice.populate}
  */
-export async function write_rss(notices: NoticeInterface[]) {
+export async function write_rss(notices: Notice[]) {
     await writeFile('data/feed.rss', build_feed(notices))
     console.log(chalk.green('✓'), '已保存到 data/feed.rss')
 }

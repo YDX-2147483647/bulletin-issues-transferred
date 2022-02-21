@@ -4,13 +4,14 @@
  */
 import { sort_by_date, diff, print_notices, fetch_all_sources, merge } from "./notices_util.js"
 import { read_json, write_json } from './core/notices_saver.js'
-import { import_sources } from "./core/sources_importer.js"
+import import_sources from "./core/sources/index.js"
 
 
 
-const latest_notices = await fetch_all_sources(await import_sources(),
+const sources = await import_sources()
+const latest_notices = await fetch_all_sources(sources,
     { verbose: true, days_ago: 90, sort: true })
-const existed_notices = await read_json({ ignore_source: true })
+const existed_notices = await read_json()
 const new_notices = diff(existed_notices, latest_notices)
 
 if (new_notices.length === 0) {

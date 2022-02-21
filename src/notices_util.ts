@@ -6,7 +6,7 @@ import chalk from 'chalk'
 import cliProgress from "cli-progress"
 import { FetchError } from 'node-fetch'
 
-import { SourceInterface, NoticeRaw, NoticeInterface } from "./core/interfaces.js"
+import { Notice, Source } from './core/models.js'
 
 
 
@@ -19,7 +19,7 @@ import { SourceInterface, NoticeRaw, NoticeInterface } from "./core/interfaces.j
  * notices.sort(sort_by_date)
  * ```
  */
-export function sort_by_date(a: NoticeRaw | NoticeInterface, b: NoticeRaw | NoticeInterface) {
+export function sort_by_date(a:Notice, b:Notice) {
     if (a.date === null) {
         return 1
     }
@@ -52,8 +52,9 @@ function recent_checker(days_ago: number) {
  * @param options.verbose 是否输出信息。
  * @param options.days_ago 筛选多少天内的通知，0表示不筛选。
  * @param options.sort 是否按日期降序排列。
+ * @todo Hook needed
  */
-export async function fetch_all_sources(sources: SourceInterface[],
+export async function fetch_all_sources(sources: Source[],
     { verbose = true, days_ago = 0, sort = true } = {}) {
 
     let bar: cliProgress.SingleBar
@@ -114,9 +115,9 @@ export async function fetch_all_sources(sources: SourceInterface[],
  * @param original 已有通知，不会被修改
  * @param latest 新通知
  */
-export function diff(original: NoticeInterface[], latest: NoticeInterface[]) {
-    const original_links = original.map(n => n.link)
-    return latest.filter(n => !original_links.includes(n.link))
+export function diff(original: Notice[], latest: Notice[]) {
+    const original_ids = original.map(n => n.id)
+    return latest.filter(n => !original_ids.includes(n.id))
 }
 
 /**
@@ -127,7 +128,7 @@ export function diff(original: NoticeInterface[], latest: NoticeInterface[]) {
  * @param options.days_ago 筛选多少天内的通知，0表示不筛选。
  * @param options.sort 合并后是否按日期降序排列。
  */
-export function merge(original: NoticeInterface[], latest: NoticeInterface[],
+export function merge(original: Notice[], latest: Notice[],
     { days_ago = 0, sort = true } = {}) {
     const difference = diff(original, latest)
     const all = original.concat(difference)
@@ -153,7 +154,7 @@ export function merge(original: NoticeInterface[], latest: NoticeInterface[],
  * @param options.max 打印出来的通知的最大数量，0 表示无限制。
  * @param options.remark_if_overflow 通知太多而未全部打印时是否提示。
  */
-export function print_notices(notices: NoticeInterface[], { max = 5, remark_if_overflow = true } = {}) {
+export function print_notices(notices: Notice[], { max = 5, remark_if_overflow = true } = {}) {
     console.log(
         notices.slice(0, max || undefined)
             .map((notice, index) => {

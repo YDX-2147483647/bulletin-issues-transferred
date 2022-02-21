@@ -10,7 +10,7 @@ import { parse } from 'yaml'
 
 
 interface Config {
-    sources_path: string
+    sources_by_selectors: string
     output: {
         json_path: string
     }
@@ -18,7 +18,7 @@ interface Config {
 }
 
 const defaults: Config = {
-    sources_path: "config/sources.json",
+    sources_by_selectors: "config/sources_by_selectors.json",
     output: {
         json_path: "output/notices.json"
     }

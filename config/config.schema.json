@@ -1,13 +1,13 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema",
-    "$id": "config.schema.json-v0.0.1",
+    "$id": "config.schema.json-v0.2.0",
     "title": "Bulletin IT 设置",
     "type": "object",
     "properties": {
-        "sources_path": {
-            "description": "通知来源的文件名",
+        "sources_by_selectors_path": {
+            "description": "基于选择器的通知来源的文件名",
             "type": "string",
-            "default": "config/sources.json"
+            "default": "config/sources_by_selectors.json"
         },
         "output": {
             "description": "输出",

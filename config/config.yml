@@ -1,4 +1,4 @@
-sources_path: config/notice_sources.json
+sources_by_selectors_path: config/sources_by_selectors.json
 output:
   json_path: output/notices.json
 

@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "sources.schema.json-v0.2.0",
+    "$id": "sources_by_selectors.schema.json-v0.3.0",
     "title": "通知来源",
     "description": "通知公告页面中通知的标题、日期的选择器等。",
     "type": "object",
@@ -53,14 +53,6 @@
                             ]
                         ]
                     },
-                    "fetch_by": {
-                        "description": "抓取通知的方法\n若为`special`，需在`sources_special.ts`中具体说明方法。",
-                        "type": "string",
-                        "enum": [
-                            "selectors",
-                            "special"
-                        ]
-                    },
                     "selectors": {
                         "description": "用于抓取通知的CSS选择器\n只有`fetch_by`是`selectors`时需要。",
                         "type": "object",
@@ -102,7 +94,7 @@
                 "required": [
                     "name",
                     "url",
-                    "fetch_by"
+                    "selectors"
                 ]
             }
         }
