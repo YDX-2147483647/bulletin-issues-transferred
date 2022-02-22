@@ -15,3 +15,22 @@ export function parse_date(date: string) {
 
     return new Date(date)
 }
+
+/**
+ * 按日期降序排列
+ * 用于`Array.prototype.sort()`，会将日期未知的压到最后。
+ * @example
+ * ```
+ * const notices = [notice_1, notice_2, ...]
+ * notices.sort(sort_by_date)
+ * ```
+ */
+export function sort_by_date(a: { date: Date | null }, b: { date: Date | null }) {
+    if (a.date === null) {
+        return 1
+    }
+    if (b.date === null) {
+        return -1
+    }
+    return b.date.getTime() - a.date.getTime()
+}

@@ -2,7 +2,8 @@
  * 获取通知并更新文件
  * @module
  */
-import { sort_by_date, diff, print_notices, fetch_all_sources, merge } from "./notices_util.js"
+import { diff, print_notices, fetch_all_sources, merge } from "./notices_util.js"
+import { sort_by_date } from "./util/my_date.js"
 import { read_json, write_json } from './core/notices_saver.js'
 import import_sources from "./core/sources/index.js"
 

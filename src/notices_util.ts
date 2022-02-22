@@ -7,27 +7,9 @@ import cliProgress from "cli-progress"
 import { FetchError } from 'node-fetch'
 
 import { Notice, Source } from './core/models.js'
+import { sort_by_date } from './util/my_date.js'
 
 
-
-/**
- * 按日期降序排列
- * 用于`Array.prototype.sort()`，会将日期未知的压到最后。
- * @example
- * ```
- * const notices = [notice_1, notice_2, ...]
- * notices.sort(sort_by_date)
- * ```
- */
-export function sort_by_date(a: Notice, b: Notice) {
-    if (a.date === null) {
-        return 1
-    }
-    if (b.date === null) {
-        return -1
-    }
-    return b.date.getTime() - a.date.getTime()
-}
 
 /**
  * 检验日期是否是最近

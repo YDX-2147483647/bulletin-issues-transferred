@@ -4,8 +4,8 @@
   "description": "汇总BIT各种网站的通知。",
   "main": "update_notices.js",
   "scripts": {
-    "test": "mocha dist/**/*.test.js",
     "build": "tsc",
+    "test": "tsc && mocha dist/**/*.test.js",
     "doc": "typedoc",
     "update": "node dist/update_notices.js"
   },

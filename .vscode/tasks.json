@@ -22,6 +22,14 @@
 			"problemMatcher": [],
 			"label": "npm: doc",
 			"detail": "typedoc"
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: test",
+			"detail": "tsc && mocha dist/**/*.test.js"
 		}
 	]
 }
