@@ -1,3 +1,8 @@
+/**
+ * i 北理机器人
+ * @module
+ */
+
 import { readFile } from 'fs/promises'
 import { parse } from 'yaml'
 
@@ -13,4 +18,4 @@ async function load_config() {
 
 const robot = new Robot(await load_config())
 
-export default robot.markdown
+export default robot
