@@ -14,7 +14,7 @@
 			"script": "update",
 			"problemMatcher": [],
 			"label": "npm: update",
-			"detail": "node dist/update_notices.js"
+			"detail": "node dist/index.js"
 		},
 		{
 			"type": "npm",
