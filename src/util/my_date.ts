@@ -34,3 +34,19 @@ export function sort_by_date(a: { date: Date | null }, b: { date: Date | null })
     }
     return b.date.getTime() - a.date.getTime()
 }
+
+/**
+ * 检验日期是否是最近
+ * 
+ * 日期未知的也算最近。
+ * @param days_ago 多少天内算最近，0表示都算。
+ */
+export function recent_checker(days_ago: number) {
+    if (days_ago === 0) {
+        return (date: Date | null) => true
+    }
+
+    const today = new Date()
+    const ago = new Date(today.getFullYear(), today.getMonth(), today.getDate() - days_ago)
+    return (date: Date | null) => date === null || date.getTime() >= ago.getTime()
+}
