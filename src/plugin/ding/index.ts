@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises'
 import { parse } from 'yaml'
 
-import config from "../../core/config/config.js"
+import config from "../../core/config.js"
 
 import Robot from './bot.js'
 

@@ -19,7 +19,7 @@ import { Notice, Source } from './core/models.js'
  * notices.sort(sort_by_date)
  * ```
  */
-export function sort_by_date(a:Notice, b:Notice) {
+export function sort_by_date(a: Notice, b: Notice) {
     if (a.date === null) {
         return 1
     }

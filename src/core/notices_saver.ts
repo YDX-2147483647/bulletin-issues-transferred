@@ -5,7 +5,7 @@
 import { readFile, writeFile } from 'fs/promises'
 import chalk from "chalk"
 
-import config from './config/config.js'
+import config from './config.js'
 import { Notice, NoticeInterface } from "./models.js"
 
 
@@ -31,7 +31,7 @@ export async function read_json() {
         const json_str = (await readFile(config.output.json_path)).toString()
         const json: NoticeInterface[] = JSON.parse(json_str, json_date_reviver)
 
-            return json.map(n => new Notice(n))
+        return json.map(n => new Notice(n))
 
     } catch (error) {
         if (error.code === 'ENOENT') {

@@ -11,7 +11,7 @@ import fetch from "node-fetch"
 import { JSDOM } from 'jsdom'
 
 import { parse_date } from '../../util/my_date.js'
-import config from "../config/config.js"
+import config from "../config.js"
 
 import { SourceInterface, Source, Notice } from "../models.js"
 
@@ -73,6 +73,6 @@ export default async function import_sources_by_selectors(): Promise<Source[]> {
 
     const raw_sources: SourceBySelectorsInterface[] =
         JSON.parse(file.toString()).sources
-    
+
     return raw_sources.map(s => new SourceBySelectors(s))
 }

@@ -2,7 +2,7 @@ import { assert } from "chai"
 import { describe, it } from "mocha"
 import { parse_date } from "./my_date.js"
 
-function assert_date(a:Date, b:Date) {
+function assert_date(a: Date, b: Date) {
     assert.equal(a.toString(), b.toString())
 }
 
