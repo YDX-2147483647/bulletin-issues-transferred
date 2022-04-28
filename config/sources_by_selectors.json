@@ -121,7 +121,7 @@
             ],
             "url": "https://xuteli.bit.edu.cn/tzgg/index.htm",
             "selectors": {
-                "rows": ".articleList li"
+                "rows": ".article li"
             }
         },
         {
