@@ -60,9 +60,9 @@ npm run doc
 
 -   写明名称、网址、同学该如何找到它等等。
 
-    这些内容写在`config/notice_sources.json`中，详细规则见同文件夹的`*.schema.json`。
+    这些内容写在`config/sources_by_selectors.json`中，详细规则见同文件夹的`*.schema.json`。
 
-    其实也不用太研究那个 JSON Schema，只要看一下现有的`notice_sources.json`，结合 VS Code 的语法提示，照猫画虎就行了。
+    其实也不用太研究那个 JSON Schema，只要看一下现有的`sources_by_selectors.json`，结合 VS Code 的语法提示，照猫画虎就行了。
 
 -   描述如何从这个来源获取通知。
 
@@ -70,15 +70,15 @@ npm run doc
 
     -   先获取通知列表的静态网页，然后用 CSS 选择器从中提取信息。
 
-        CSS 选择器写在`config/notice_sources.json`中。
+        CSS 选择器写在`config/sources_by_selectors.json`中。
 
     -   利用学校的 API。
 
-        在`src/sources_special.ts`中的`specials`里实现虚基类`Source`的`fetch_notice()`方法。
+        在`src\core\sources\special.ts`中的`raw_sources: SourceSpecialInterface[]`里。
 
 ### 移植到别的学校
 
-只需要写新的`config/notice_sources.json`和`src/sources_special.ts`即可。
+只需要写新的`config/sources_by_selectors.json`和`src/sources_special.ts`即可。
 
 ## 这合法吗？
 
