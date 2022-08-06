@@ -25,29 +25,17 @@ type HooksType = {
  * Here there are 2 hooks: `fetch` and `fetch_each`.
  * - `fetch`: the whole process, fetching all of the sources.
  * - `fetch_each`: several parallel sub-processes, fetching each source.
- *
- * @todo Hook before `fetch`: const bar = cliProgress.SingleBar
- * @todo Hook before `fetch`: const is_recent = recent_checker(days_ago)
- * @todo Hook after `fetch_each`: bar.increment()
- * @todo Hook after `fetch_each`: `⚠ 未从“${source.name}”获取到任何通知。将忽略。`
- * @todo Hook after `fetch_each`: notices.filter(n => is_recent(n.date))
- * @todo Hook error `fetch_each`: FetchError `✗ 未能访问“${s.name}”（ENOTFOUND）。将忽略。`
- * @todo Hook after `fetch`: bar.stop()
- * @todo Hook after `fetch`: notices.sort(sort_by_date)
  */
-
 export async function fetch_all_sources ({
     sources, _hook,
 }: {
     sources: Source[],
     _hook: HookCollection<HooksType>,
-    verbose?: boolean,
-    days_ago?: number,
-    sort?: boolean
 }): Promise<{ notices: Notice[] }> {
     return await _hook(
         'fetch',
-        async ({ sources }) => {
+        // Why `options`? Plugins may add custom options in their before hooks.
+        async ({ sources, ...options }) => {
             // First create a non-hook version.
             async function fetch_each ({ source }: { source: Source }): Promise<{ notices: Notice[] }> {
                 const notices = await source.fetch_notice()
@@ -55,7 +43,7 @@ export async function fetch_all_sources ({
             }
             // Then wrap it with the hook.
             function fetch_each_hooked (s: Source): Promise<{ notices: Notice[] }> {
-                return _hook('fetch_each', fetch_each, { source: s })
+                return _hook('fetch_each', fetch_each, { source: s, ...options })
             }
             // Call `fetch_each` in parallel.
             const notices_grouped = await Promise.all(
