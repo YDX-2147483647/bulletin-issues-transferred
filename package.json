@@ -15,6 +15,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "before-after-hook": "^2.2.2",
     "chalk": "^5.0.0",
     "cli-progress": "^3.9.1",
     "jsdom": "^19.0.0",
