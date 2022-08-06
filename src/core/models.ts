@@ -29,7 +29,7 @@ export class Source {
     url: string
     guide: string[]
 
-    constructor({ name, full_name, alt_name = [], url, guide = [] }: SourceInterface) {
+    constructor ({ name, full_name, alt_name = [], url, guide = [] }: SourceInterface) {
         this.name = name
         this.full_name = full_name ?? name
         this.alt_name = alt_name
@@ -42,7 +42,7 @@ export class Source {
     /**
      * 抓取通知
      */
-    async fetch_notice(): Promise<Notice[]> {
+    async fetch_notice (): Promise<Notice[]> {
         throw new Error('Not implemented.')
     }
 }
@@ -72,7 +72,7 @@ export class Notice {
     source?: Source
     #source_ref: Source | string
 
-    constructor({ link, title, date, source }: NoticeInterface) {
+    constructor ({ link, title, date, source }: NoticeInterface) {
         this.link = link
         this.title = title
         this.date = date
@@ -81,7 +81,7 @@ export class Notice {
         this.id = this.link
     }
 
-    populate({ source }: { source?: Source[] }) {
+    populate ({ source }: { source?: Source[] }) {
         if (source !== undefined) {
             if (this.#source_ref instanceof Source) {
                 this.source = this.#source_ref
@@ -94,7 +94,7 @@ export class Notice {
         }
     }
 
-    get source_name() {
+    get source_name () {
         if (this.source !== undefined) {
             return this.source.name
         } else if (this.#source_ref instanceof Source) {
@@ -104,7 +104,7 @@ export class Notice {
         }
     }
 
-    get source_id() {
+    get source_id () {
         if (this.source !== undefined) {
             return this.source.id
         } else if (this.#source_ref instanceof Source) {
@@ -115,31 +115,32 @@ export class Notice {
     }
 
     /** @todo 应当是 plugin */
-    to_human_readable_rows() {
+    to_human_readable_rows () {
         return [
             `${this.source_name}｜${this.title}`,
             this.link,
-            this.date ? this.date.toLocaleString() : '（未知日期）'
+            this.date ? this.date.toLocaleString() : '（未知日期）',
         ]
     }
 
     /** @todo 应当是 plugin */
-    to_markdown(): string {
+    to_markdown (): string {
         return [
             `${this.source_name}：[${this.title}](${this.link})`,
-            this.date ? `（${this.date.toLocaleString()}）` : ''
+            this.date ? `（${this.date.toLocaleString()}）` : '',
         ].join('')
     }
 
-    to_raw() {
+    to_raw () {
         return {
             link: this.link,
             title: this.title,
             date: this.date,
-            source: this.source_id
+            source: this.source_id,
         } as NoticeInterface
     }
-    valueOf() {
+
+    valueOf () {
         return this.to_raw()
     }
 }

@@ -6,14 +6,12 @@
 import { Notice } from '../core/models.js'
 import { sort_by_date, recent_checker } from './my_date.js'
 
-
-
 /**
  * 筛选出新通知
  * @param original 已有通知，不会被修改
  * @param latest 新通知
  */
-export function diff(original: Notice[], latest: Notice[]) {
+export function diff (original: Notice[], latest: Notice[]) {
     const original_ids = original.map(n => n.id)
     return latest.filter(n => !original_ids.includes(n.id))
 }
@@ -26,7 +24,7 @@ export function diff(original: Notice[], latest: Notice[]) {
  * @param options.days_ago 筛选多少天内的通知，0表示不筛选。
  * @param options.sort 合并后是否按日期降序排列。
  */
-export function merge(original: Notice[], latest: Notice[],
+export function merge (original: Notice[], latest: Notice[],
     { days_ago = 0, sort = true } = {}) {
     const difference = diff(original, latest)
     const all = original.concat(difference)
@@ -39,7 +37,7 @@ export function merge(original: Notice[], latest: Notice[],
         notices: final,
         change: {
             add: difference.length,
-            drop: all.length - recent.length
-        }
+            drop: all.length - recent.length,
+        },
     }
 }

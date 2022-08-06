@@ -2,10 +2,8 @@
  * 更新通知
  */
 
-import { update_notices } from "../../../update_notices.js"
-import robot from "../index.js"
-
-
+import { update_notices } from '../../../update_notices.js'
+import robot from '../index.js'
 
 const { all_notices, new_notices, change } = await update_notices()
 
@@ -13,11 +11,10 @@ if (change.add === 0) {
     const message_rows = [
         '未发现新通知。',
         '以下是最新的3项通知。',
-        ...all_notices.slice(0, 3).map(n => '-   ' + n.to_markdown())
+        ...all_notices.slice(0, 3).map(n => '-   ' + n.to_markdown()),
     ]
 
     await robot.markdown('未发现新通知', message_rows.join('\n\n'))
-
 } else {
     const message_rows = [
         `发现 ${new_notices.length} 项新通知。`,

@@ -6,5 +6,7 @@
     "yaml.schemas": {
         "config/config.schema.json": "config/config.yml",
         "config/ding.secrets.schema.json": "config/ding.secrets.yaml"
-    }
+    },
+    "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+    "typescript.format.insertSpaceAfterConstructor": true
 }

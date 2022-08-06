@@ -5,7 +5,6 @@
 
 import crypto from 'crypto'
 
-
 export default (secret: string, content: string) => {
     const str = crypto.createHmac('sha256', secret)
         .update(content)

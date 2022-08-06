@@ -15,15 +15,14 @@ const config = {
     link: `${some_mysterious_website}/`,
     description: 'Bulletin Issues Transferred',
     rss_file: `${some_mysterious_website}/feed.rss`,
-    title: 'BulletinIT'
+    title: 'BulletinIT',
 }
 
-
 /**
- * 
+ *
  * @param notice 需要 source，因此请提前{@link Notice.populate}
  */
-function to_feed_item(notice: Notice) {
+function to_feed_item (notice: Notice) {
     let description: string
     if (notice.source.url) {
         description = `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source_name}</a>。`
@@ -41,11 +40,11 @@ function to_feed_item(notice: Notice) {
             {
                 guid: [
                     { _attr: { isPermaLink: true } },
-                    notice.link
-                ]
+                    notice.link,
+                ],
             },
-            { description: { _cdata: description } }
-        ]
+            { description: { _cdata: description } },
+        ],
     }
 }
 
@@ -53,34 +52,34 @@ function to_feed_item(notice: Notice) {
  * 将一系列通知转换为RSS
  * @param notices 需要 source，因此请提前{@link Notice.populate}
  */
-export function build_feed(notices: Notice[]) {
+export function build_feed (notices: Notice[]) {
     const feed_obj = {
         rss: [
             {
                 _attr: {
-                    version: "2.0",
-                    "xmlns:atom": "http://www.w3.org/2005/Atom",
+                    version: '2.0',
+                    'xmlns:atom': 'http://www.w3.org/2005/Atom',
                 },
             },
             {
                 channel: [
                     {
-                        "atom:link": {
+                        'atom:link': {
                             _attr: {
                                 href: config.rss_file,
-                                rel: "self",
-                                type: "application/rss+xml",
+                                rel: 'self',
+                                type: 'application/rss+xml',
                             },
                         },
                     },
-                    { title: config.title, },
-                    { link: config.link, },
+                    { title: config.title },
+                    { link: config.link },
                     { description: config.description },
-                    { language: "zh-CN" },
+                    { language: 'zh-CN' },
                     ...notices.map(to_feed_item),
-                ]
+                ],
             },
-        ]
+        ],
     }
 
     return '<?xml version="1.0" encoding="UTF-8"?>' + xml(feed_obj)
@@ -90,7 +89,7 @@ export function build_feed(notices: Notice[]) {
  * 用通知生成RSS，然后写入`data/feed.rss`
  * @param notices 需要 source，因此请提前{@link Notice.populate}
  */
-export async function write_rss(notices: Notice[]) {
+export async function write_rss (notices: Notice[]) {
     await writeFile('data/feed.rss', build_feed(notices))
     console.log(chalk.green('✓'), '已保存到 data/feed.rss')
 }

@@ -4,14 +4,12 @@
  */
 
 import { read_json, write_json } from './core/notices_saver.js'
-import import_sources from "./core/sources/index.js"
-import { diff, merge } from "./util/notices.js"
-import { sort_by_date } from "./util/my_date.js"
-import { fetch_all_sources } from "./plugin/cli/index.js"
+import import_sources from './core/sources/index.js'
+import { diff, merge } from './util/notices.js'
+import { sort_by_date } from './util/my_date.js'
+import { fetch_all_sources } from './plugin/cli/index.js'
 
-
-
-export async function update_notices() {
+export async function update_notices () {
     const sources = await import_sources()
     const latest_notices = await fetch_all_sources(sources,
         { verbose: true, days_ago: 90, sort: true })
@@ -28,7 +26,7 @@ export async function update_notices() {
 
     const { notices: notices_to_save, change } = merge(
         existed_notices, new_notices,
-        { days_ago: 90, sort: true }
+        { days_ago: 90, sort: true },
     )
 
     if (change.add) {
@@ -42,7 +40,7 @@ export async function update_notices() {
         return {
             all_notices: notices_to_save,
             new_notices,
-            change: { add: 0, drop: 0 }
+            change: { add: 0, drop: 0 },
         }
     }
 }
