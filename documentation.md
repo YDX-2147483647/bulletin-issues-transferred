@@ -1,5 +1,119 @@
 # Documentation
 
+## 引用结构
+
+### `plugin`地位不清
+
+存在越级引用、被引用。
+
+```mermaid
+flowchart LR
+    / --> plugin/cli
+    / --> core
+    / --> util
+    core --> util
+    util --> core
+    plugin/cli --> core
+    plugin/cli --> util
+    plugin/ding --> core
+    plugin/ding --> /
+    plugin/rss --> core
+
+```
+
+### 文件夹不是模块
+
+存在文件夹互相引用。而且没有封装，太散了。
+
+```mermaid
+flowchart LR
+    index --> update_notices
+    index --> plugin/cli/index
+    update_notices --> core/notices_saver
+    update_notices --> core/sources/index
+    update_notices --> util/notices
+    update_notices --> util/my_date
+    update_notices --> plugin/cli/index
+    core/notices_saver --> core/config
+    core/notices_saver --> core/models
+    %% core/notices_saver -.-> fs/promises
+    %% core/notices_saver -.-> chalk
+    %% core/config -.-> fs/promises
+    %% core/config -.-> yaml
+    core/sources/index --> core/models
+    core/sources/index --> core/sources/by_selectors
+    core/sources/index --> core/sources/special
+    %% core/sources/by_selectors -.-> fs/promises
+    %% core/sources/by_selectors -.-> node-fetch
+    %% core/sources/by_selectors -.-> jsdom
+    core/sources/by_selectors --> util/my_date
+    core/sources/by_selectors --> core/config
+    core/sources/by_selectors --> core/models
+    %% core/sources/special -.-> node-fetch
+    core/sources/special --> util/my_date
+    core/sources/special --> core/models
+    util/notices --> core/models
+    util/notices --> util/my_date
+    %% plugin/cli/index -.-> chalk
+    %% plugin/cli/index -.-> cli-progress
+    %% plugin/cli/index -.-> node-fetch
+    plugin/cli/index --> core/models
+    plugin/cli/index --> util/my_date
+    %% plugin/ding/index -.-> fs/promises
+    %% plugin/ding/index -.-> yaml
+    plugin/ding/index --> core/config
+    plugin/ding/index --> plugin/ding/bot
+    %% plugin/ding/bot -.-> node_fetch
+    plugin/ding/bot --> plugin/ding/sign
+    plugin/ding/examples/update --> update_notices
+    plugin/ding/examples/update --> plugin/ding/index
+    %% plugin/rss/index -.-> xml
+    %% plugin/rss/index -.-> chalk
+    %% plugin/rss/index -.-> fs/promises
+    plugin/rss/index --> core/models
+
+```
+
+去除`plugin/ding`和`plugin/rss`，合并`core/sources/`后如下。
+
+```mermaid
+flowchart LR
+    index --> update_notices
+    index --> plugin/cli/index
+    update_notices --> core/notices_saver
+    update_notices --> core/sources/
+    update_notices --> util/notices
+    update_notices --> util/my_date
+    update_notices --> plugin/cli/index
+    core/notices_saver --> core/config
+    core/notices_saver --> core/models
+    %% core/notices_saver -.-> fs/promises
+    %% core/notices_saver -.-> chalk
+    %% core/config -.-> fs/promises
+    %% core/config -.-> yaml
+    %% core/sources/ -.-> fs/promises
+    %% core/sources/ -.-> node-fetch
+    %% core/sources/ -.-> jsdom
+    core/sources/ --> core/config
+    core/sources/ --> core/models
+    core/sources/ --> util/my_date
+    util/notices --> core/models
+    util/notices --> util/my_date
+    %% plugin/cli/index -.-> chalk
+    %% plugin/cli/index -.-> cli-progress
+    %% plugin/cli/index -.-> node-fetch
+    plugin/cli/index --> core/models
+    plugin/cli/index --> util/my_date
+
+    subgraph core
+        core/config
+        core/notices_saver
+        core/models
+        core/sources/
+    end
+
+```
+
 ## Models
 
 ```mermaid
