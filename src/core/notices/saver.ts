@@ -5,8 +5,8 @@
 import { readFile, writeFile } from 'fs/promises'
 import chalk from 'chalk'
 
-import config from './config.js'
-import { Notice, NoticeInterface } from './models.js'
+import config from '../config.js'
+import { Notice, NoticeInterface } from '../models.js'
 
 /**
  * 自动转换为`Date`。

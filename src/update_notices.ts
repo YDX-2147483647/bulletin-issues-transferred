@@ -3,11 +3,11 @@
  * @module
  */
 
-import { read_json, write_json } from './core/notices_saver.js'
+import { read_json, write_json } from './core/notices/saver.js'
 import import_sources from './core/sources/index.js'
 import { diff, merge } from './util/notices.js'
 import { sort_by_date } from './util/my_date.js'
-import { fetch_all_sources } from './plugin/cli/index.js'
+import { fetch_all_sources } from './core/notices/fetcher.js'
 
 export async function update_notices () {
     const sources = await import_sources()
