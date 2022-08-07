@@ -5,14 +5,16 @@
 
 import { sort_by_date } from '../util/my_date.js'
 import type { HookCollectionType } from './hooks_type.js'
+import type { Notice } from './models.js'
 import { diff, fetch_all_sources, merge, read_json, write_json } from './notices/index.js'
 import import_sources from './sources/index.js'
 
-export async function update_notices ({ _hook }: { _hook: HookCollectionType }) {
+async function _update_notices ({ _hook, ...options }: { _hook: HookCollectionType }) {
     const sources = await import_sources()
     const { notices: latest_notices } = await fetch_all_sources({
         sources,
         _hook,
+        ...options,
     })
 
     const existed_notices = await read_json()
@@ -44,4 +46,21 @@ export async function update_notices ({ _hook }: { _hook: HookCollectionType }) 
             change: { add: 0, drop: 0 },
         }
     }
+}
+
+/**
+ *
+ * @param options
+ * @param options._hook (internal usage only) `update`
+ * @returns
+ */
+export function update_notices ({ _hook }: { _hook: HookCollectionType }): Promise<{
+    all_notices: Notice[]
+    new_notices: Notice[]
+    change: {
+        add: number
+        drop: number
+    }
+}> {
+    return _hook('update', _update_notices, { _hook })
 }

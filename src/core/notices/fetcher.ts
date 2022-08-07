@@ -6,9 +6,6 @@ import type { Notice, Source } from '../models.js'
  * @param options 选项
  * @param options.sources
  * @param options._hook (internal usage only) `fetch`, `fetch_each`
- * @param options.verbose 是否输出信息。@deprecated
- * @param options.days_ago 筛选多少天内的通知，0表示不筛选。@deprecated
- * @param options.sort 是否按日期降序排列。@deprecated
  *
  * Here there are 2 hooks: `fetch` and `fetch_each`.
  * - `fetch`: the whole process, fetching all of the sources.

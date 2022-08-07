@@ -28,12 +28,13 @@ $ python scripts/import_graph.py
 ```mermaid
 flowchart LR
   core/hooks_type --> core/models
-  core/index --> plugin/cli/index
-  core/index --> util/my_date
   core/index --> core/hooks_type
   core/index --> core/update_notices
+  core/index --> core/models
+  core/index --> core/models
   core/update_notices --> util/my_date
   core/update_notices --> core/hooks_type
+  core/update_notices --> core/models
   core/update_notices --> core/notices/index
   core/update_notices --> core/sources/index
   core/notices/comparer --> util/my_date
@@ -53,7 +54,13 @@ flowchart LR
   core/sources/index --> core/sources/special
   core/sources/special --> util/my_date
   core/sources/special --> core/models
-  plugin/cli/index --> core/models
+  plugin/cli/hooks --> core/index
+  plugin/cli/hooks --> util/my_date
+  plugin/cli/hooks --> plugin/cli/util
+  plugin/cli/index --> plugin/cli/hooks
+  plugin/cli/util --> core/index
+  plugin/cli/examples/cli --> core/index
+  plugin/cli/examples/cli --> plugin/cli/index
 
   subgraph core/sources
     core/sources/by_selectors
@@ -66,6 +73,13 @@ flowchart LR
     core/notices/saver
     core/notices/fetcher
     core/notices/comparer
+  end
+
+  subgraph plugin/cli
+    plugin/cli/index
+    plugin/cli/util
+    plugin/cli/hooks
+    plugin/cli/examples/cli
   end
 
 ```

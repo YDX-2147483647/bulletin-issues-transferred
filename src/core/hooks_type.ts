@@ -11,6 +11,16 @@ type HooksType = {
         Result: { notices: Notice[] }
         Error: Error
     }
+    update: {
+        Result: {
+            all_notices: Notice[]
+            new_notices: Notice[]
+            change: {
+                add: number
+                drop: number
+            }
+        }
+    }
 }
 
 type HookCollectionType = HookCollection<HooksType>
