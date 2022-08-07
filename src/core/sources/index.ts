@@ -11,9 +11,13 @@ import { Source } from '../models.js'
 import import_sources_by_selectors from './by_selectors.js'
 import import_sources_special from './special.js'
 
-export default async function import_sources (): Promise<Source[]> {
+/**
+ * @param param0
+ * @param param0.sources_by_selectors_path `sources_by_selectors.json`
+ */
+export default async function import_sources ({ sources_by_selectors_path }: { sources_by_selectors_path: string }): Promise<Source[]> {
     const promises = [
-        import_sources_by_selectors(),
+        import_sources_by_selectors({ path: sources_by_selectors_path }),
         import_sources_special(),
     ]
     const source_groups = await Promise.all(promises)

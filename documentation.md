@@ -28,6 +28,7 @@ $ python scripts/import_graph.py
 ```mermaid
 flowchart LR
   core/hooks_type --> core/models
+  core/index --> core/config
   core/index --> core/hooks_type
   core/index --> core/update_notices
   core/index --> core/models
@@ -44,10 +45,8 @@ flowchart LR
   core/notices/index --> core/notices/comparer
   core/notices/index --> core/notices/fetcher
   core/notices/index --> core/notices/saver
-  core/notices/saver --> core/config
   core/notices/saver --> core/models
   core/sources/by_selectors --> util/my_date
-  core/sources/by_selectors --> core/config
   core/sources/by_selectors --> core/models
   core/sources/index --> core/models
   core/sources/index --> core/sources/by_selectors

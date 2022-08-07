@@ -9,10 +9,7 @@
 import { readFile } from 'fs/promises'
 import { JSDOM } from 'jsdom'
 import fetch from 'node-fetch'
-
 import { parse_date } from '../../util/my_date.js'
-import config from '../config.js'
-
 import { Notice, Source, type SourceInterface } from '../models.js'
 
 interface SourceBySelectorsInterface extends SourceInterface {
@@ -66,8 +63,8 @@ class SourceBySelectors extends Source {
     }
 }
 
-export default async function import_sources_by_selectors (): Promise<Source[]> {
-    const file = await readFile(config.sources_by_selectors)
+export default async function import_sources_by_selectors ({ path }: { path: string }): Promise<Source[]> {
+    const file = await readFile(path)
 
     const raw_sources: SourceBySelectorsInterface[] =
         JSON.parse(file.toString()).sources

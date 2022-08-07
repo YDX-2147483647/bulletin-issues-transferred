@@ -1,14 +1,20 @@
 /**
  * 更新通知
+ *
+ * @todo 不调用`core`的细节
  */
 
 import { Hook } from 'before-after-hook'
+import config from '../../../core/config.js'
 import type { HooksType } from '../../../core/hooks_type.js'
 import { update_notices } from '../../../core/update_notices.js'
 import robot from '../index.js'
 
 const { all_notices, new_notices, change } = await update_notices({
     _hook: new Hook.Collection<HooksType>(),
+    read_json_path: config.output.json_path,
+    write_json_path: config.output.json_path,
+    sources_by_selectors_path: config.sources_by_selectors,
 })
 
 if (change.add === 0) {
