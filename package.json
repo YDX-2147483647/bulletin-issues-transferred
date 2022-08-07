@@ -8,7 +8,7 @@
     "test": "tsc && mocha dist/**/*.test.js",
     "lint": "eslint 'src/**' --fix --ignore-path .gitignore",
     "doc": "typedoc",
-    "update": "node dist/index.js",
+    "update": "node dist/core/index.js",
     "update-ding": "node dist/plugin/ding/examples/update.js"
   },
   "author": "Y.D.X.",

@@ -2,7 +2,7 @@
  * 更新通知
  */
 
-import { update_notices } from '../../../update_notices.js'
+import { update_notices } from '../../../core/update_notices.js'
 import robot from '../index.js'
 
 const { all_notices, new_notices, change } = await update_notices()

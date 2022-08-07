@@ -7,10 +7,10 @@ import { Hook, type HookCollection } from 'before-after-hook'
 import chalk from 'chalk'
 import cliProgress from 'cli-progress'
 import { FetchError } from 'node-fetch'
-import type { Notice, Source } from './core/models.js'
-import { diff, fetch_all_sources, merge, read_json, write_json } from './core/notices/index.js'
-import import_sources from './core/sources/index.js'
-import { recent_checker, sort_by_date } from './util/my_date.js'
+import { recent_checker, sort_by_date } from '../util/my_date.js'
+import type { Notice, Source } from './models.js'
+import { diff, fetch_all_sources, merge, read_json, write_json } from './notices/index.js'
+import import_sources from './sources/index.js'
 
 type HooksType = {
     fetch: {

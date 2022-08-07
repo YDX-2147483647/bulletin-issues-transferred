@@ -1,5 +1,5 @@
+import { print_notices } from '../plugin/cli/index.js'
 import { update_notices } from './update_notices.js'
-import { print_notices } from './plugin/cli/index.js'
 
 const { all_notices, new_notices, change } = await update_notices()
 
