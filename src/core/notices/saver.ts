@@ -2,11 +2,11 @@
  * 读取、写入通知（或者说从文件恢复、保存至文件）
  * @module
  */
-import { readFile, writeFile } from 'fs/promises'
 import chalk from 'chalk'
+import { readFile, writeFile } from 'fs/promises'
 
 import config from '../config.js'
-import { Notice, NoticeInterface } from '../models.js'
+import { Notice, type NoticeInterface } from '../models.js'
 
 /**
  * 自动转换为`Date`。

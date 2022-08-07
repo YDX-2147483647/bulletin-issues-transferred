@@ -4,7 +4,7 @@
  */
 
 import { recent_checker, sort_by_date } from '../../util/my_date.js'
-import { Notice } from '../models.js'
+import type { Notice } from '../models.js'
 
 /**
  * 筛选出新通知

@@ -7,7 +7,7 @@ import fetch from 'node-fetch'
 
 import { parse_date } from '../../util/my_date.js'
 
-import { SourceInterface, Source, Notice } from '../models.js'
+import { Notice, Source, type SourceInterface } from '../models.js'
 
 interface NoticeWithoutSource {
     link: string
@@ -16,7 +16,7 @@ interface NoticeWithoutSource {
 }
 
 interface SourceSpecialInterface extends SourceInterface {
-    fetch_notice(): Promise<NoticeWithoutSource[]>
+    fetch_notice (): Promise<NoticeWithoutSource[]>
 }
 
 const raw_sources: SourceSpecialInterface[] = [

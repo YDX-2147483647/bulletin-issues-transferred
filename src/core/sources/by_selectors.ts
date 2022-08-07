@@ -7,13 +7,13 @@
  */
 
 import { readFile } from 'fs/promises'
-import fetch from 'node-fetch'
 import { JSDOM } from 'jsdom'
+import fetch from 'node-fetch'
 
 import { parse_date } from '../../util/my_date.js'
 import config from '../config.js'
 
-import { SourceInterface, Source, Notice } from '../models.js'
+import { Notice, Source, type SourceInterface } from '../models.js'
 
 interface SourceBySelectorsInterface extends SourceInterface {
     selectors: {

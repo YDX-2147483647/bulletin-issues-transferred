@@ -3,11 +3,11 @@
  * （源代码中有`config`）
  * @module
  */
-import xml from 'xml'
 import chalk from 'chalk'
 import { writeFile } from 'fs/promises'
+import xml from 'xml'
 
-import { Notice } from '../../core/models.js'
+import type { Notice } from '../../core/models.js'
 
 const some_mysterious_website = ''
 
