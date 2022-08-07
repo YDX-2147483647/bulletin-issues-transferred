@@ -2,10 +2,14 @@
  * 更新通知
  */
 
+import { Hook } from 'before-after-hook'
+import type { HooksType } from '../../../core/hooks_type.js'
 import { update_notices } from '../../../core/update_notices.js'
 import robot from '../index.js'
 
-const { all_notices, new_notices, change } = await update_notices()
+const { all_notices, new_notices, change } = await update_notices({
+    _hook: new Hook.Collection<HooksType>(),
+})
 
 if (change.add === 0) {
     const message_rows = [

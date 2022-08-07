@@ -1,17 +1,5 @@
-import type { HookCollection } from 'before-after-hook'
+import type { HookCollectionType } from '../hooks_type.js'
 import type { Notice, Source } from '../models.js'
-
-type HooksType = {
-    fetch: {
-        Options: { sources: Source[] }
-        Result: { notices: Notice[] }
-    }
-    fetch_each: {
-        Options: { source: Source }
-        Result: { notices: Notice[] }
-        Error: Error
-    }
-}
 
 /**
  * 从一系列来源获取通知
@@ -30,7 +18,7 @@ export async function fetch_all_sources ({
     sources, _hook,
 }: {
     sources: Source[],
-    _hook: HookCollection<HooksType>,
+    _hook: HookCollectionType,
 }): Promise<{ notices: Notice[] }> {
     return await _hook(
         'fetch',
