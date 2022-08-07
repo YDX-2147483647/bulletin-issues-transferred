@@ -1,118 +1,72 @@
 # Documentation
 
-## 引用结构
+## 文件结构设计
 
-> 此节仅适用于 [2a87d6af](https://github.com/YDX-2147483647/bulletin-issues-transferred/tree/2a87d6af693342ac8aceb7311077445367a60e33)（≈ v2.0.0-alpha.4）。
+> 当前正在重构，可能与设计不完全相同。
 
-### `plugin`地位不清
+- 分工
+  - `core`只涉及核心功能，不考虑命令行界面等，不能引用任何`plugin`。
+  - `util`全部为纯函数，可单独测试，不能引用`core`或`plugin`。
+- 配置文件
+  - `core`内部模块不引入配置文件，而是把选项设计为参数。
+  - 在最表层引入配置文件。
+  - 配置文件（理论上）可被命令行参数替代。
+- `core`中钩子
+  - `core`内部模块通过参数`_hook`传入`hook`。
+  - 在最表层`new Hook.Collection<HooksType>()`，并向外暴露`hook.api`。
+- 尽量模块化
+  - 隐藏模块内细节：`core`中每个文件夹都有`index.ts`，外部一律引用它。
 
-存在越级引用、被引用。
+---
 
-```mermaid
-flowchart LR
-    / --> plugin/cli
-    / --> core
-    / --> util
-    core --> util
-    util --> core
-    plugin/cli --> core
-    plugin/cli --> util
-    plugin/ding --> core
-    plugin/ding --> /
-    plugin/rss --> core
+可生成 [mermaid .js](https://mermaid-js.github.io/mermaid/#/) 的 flowchart，如下图（不含 subgraph）。
 
+```shell
+$ python scripts/import_graph.py
 ```
 
-### 文件夹不是模块
-
-存在文件夹互相引用。而且没有封装，太散了。
-
 ```mermaid
 flowchart LR
-    index --> update_notices
-    index --> plugin/cli/index
-    update_notices --> core/notices_saver
-    update_notices --> core/sources/index
-    update_notices --> util/notices
-    update_notices --> util/my_date
-    update_notices --> plugin/cli/index
-    core/notices_saver --> core/config
-    core/notices_saver --> core/models
-    %% core/notices_saver -.-> fs/promises
-    %% core/notices_saver -.-> chalk
-    %% core/config -.-> fs/promises
-    %% core/config -.-> yaml
-    core/sources/index --> core/models
-    core/sources/index --> core/sources/by_selectors
-    core/sources/index --> core/sources/special
-    %% core/sources/by_selectors -.-> fs/promises
-    %% core/sources/by_selectors -.-> node-fetch
-    %% core/sources/by_selectors -.-> jsdom
-    core/sources/by_selectors --> util/my_date
-    core/sources/by_selectors --> core/config
-    core/sources/by_selectors --> core/models
-    %% core/sources/special -.-> node-fetch
-    core/sources/special --> util/my_date
-    core/sources/special --> core/models
-    util/notices --> core/models
-    util/notices --> util/my_date
-    %% plugin/cli/index -.-> chalk
-    %% plugin/cli/index -.-> cli-progress
-    %% plugin/cli/index -.-> node-fetch
-    plugin/cli/index --> core/models
-    plugin/cli/index --> util/my_date
-    %% plugin/ding/index -.-> fs/promises
-    %% plugin/ding/index -.-> yaml
-    plugin/ding/index --> core/config
-    plugin/ding/index --> plugin/ding/bot
-    %% plugin/ding/bot -.-> node_fetch
-    plugin/ding/bot --> plugin/ding/sign
-    plugin/ding/examples/update --> update_notices
-    plugin/ding/examples/update --> plugin/ding/index
-    %% plugin/rss/index -.-> xml
-    %% plugin/rss/index -.-> chalk
-    %% plugin/rss/index -.-> fs/promises
-    plugin/rss/index --> core/models
+  core/hooks_type --> core/models
+  core/index --> plugin/cli/index
+  core/index --> util/my_date
+  core/index --> core/hooks_type
+  core/index --> core/update_notices
+  core/update_notices --> util/my_date
+  core/update_notices --> core/hooks_type
+  core/update_notices --> core/notices/index
+  core/update_notices --> core/sources/index
+  core/notices/comparer --> util/my_date
+  core/notices/comparer --> core/models
+  core/notices/fetcher --> core/hooks_type
+  core/notices/fetcher --> core/models
+  core/notices/index --> core/notices/comparer
+  core/notices/index --> core/notices/fetcher
+  core/notices/index --> core/notices/saver
+  core/notices/saver --> core/config
+  core/notices/saver --> core/models
+  core/sources/by_selectors --> util/my_date
+  core/sources/by_selectors --> core/config
+  core/sources/by_selectors --> core/models
+  core/sources/index --> core/models
+  core/sources/index --> core/sources/by_selectors
+  core/sources/index --> core/sources/special
+  core/sources/special --> util/my_date
+  core/sources/special --> core/models
+  plugin/cli/index --> core/models
 
-```
+  subgraph core/sources
+    core/sources/by_selectors
+    core/sources/index
+    core/sources/special
+  end
 
-去除`plugin/ding`和`plugin/rss`，合并`core/sources/`后如下。
-
-```mermaid
-flowchart LR
-    index --> update_notices
-    index --> plugin/cli/index
-    update_notices --> core/notices_saver
-    update_notices --> core/sources/
-    update_notices --> util/notices
-    update_notices --> util/my_date
-    update_notices --> plugin/cli/index
-    core/notices_saver --> core/config
-    core/notices_saver --> core/models
-    %% core/notices_saver -.-> fs/promises
-    %% core/notices_saver -.-> chalk
-    %% core/config -.-> fs/promises
-    %% core/config -.-> yaml
-    %% core/sources/ -.-> fs/promises
-    %% core/sources/ -.-> node-fetch
-    %% core/sources/ -.-> jsdom
-    core/sources/ --> core/config
-    core/sources/ --> core/models
-    core/sources/ --> util/my_date
-    util/notices --> core/models
-    util/notices --> util/my_date
-    %% plugin/cli/index -.-> chalk
-    %% plugin/cli/index -.-> cli-progress
-    %% plugin/cli/index -.-> node-fetch
-    plugin/cli/index --> core/models
-    plugin/cli/index --> util/my_date
-
-    subgraph core
-        core/config
-        core/notices_saver
-        core/models
-        core/sources/
-    end
+  subgraph core/notices
+    core/notices/index
+    core/notices/saver
+    core/notices/fetcher
+    core/notices/comparer
+  end
 
 ```
 
