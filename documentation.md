@@ -2,11 +2,11 @@
 
 ## 文件结构设计
 
-> 当前正在重构，可能与设计不完全相同。
+> 适用于 [v2.0.0](https://github.com/YDX-2147483647/bulletin-issues-transferred/releases/tag/v2.0.0)。
 
 - 分工
   - `core`只涉及核心功能，不考虑命令行界面等，不能引用任何`plugin`。
-  - `util`全部为纯函数，可单独测试，不能引用`core`或`plugin`。
+  - `util`尽量为纯函数，可单独测试，不能引用`core`或`plugin`。
   
 - 配置文件
   - `core`内部模块不引入配置文件，而是把选项设计为参数。
@@ -120,9 +120,9 @@ classDiagram
         + title: string
         + date: Date | null
         + source?: Source
-        + source_name: string
+        - #source_ref: Source | string
 
-        + id: String
+        + id: string
     }
 
     class Source {

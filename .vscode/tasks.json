@@ -20,7 +20,7 @@
 			"script": "update",
 			"problemMatcher": [],
 			"label": "npm: update",
-			"detail": "node dist/index.js"
+			"detail": "Update notices. (plugin/cli)"
 		},
 		{
 			"type": "npm",

@@ -2,7 +2,7 @@
   "name": "bulletin-issues-transferred",
   "version": "2.0.0",
   "description": "汇总BIT各种网站的通知。",
-  "main": "index.js",
+  "main": "dist/core/index.js",
   "scripts": {
     "build": "run-p lint build-only",
     "build-only": "tsc",
