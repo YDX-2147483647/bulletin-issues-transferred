@@ -15,8 +15,8 @@ export type HookCollectionType = typeof hook
 export function update_notices () {
     return _update_notices({
         _hook,
-        read_json_path: config.output.json_path,
-        write_json_path: config.output.json_path,
+        read_json_path: config.json_path,
+        write_json_path: config.json_path,
         sources_by_selectors_path: config.sources_by_selectors,
     })
 }

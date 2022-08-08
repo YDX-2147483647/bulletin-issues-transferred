@@ -1,6 +1,12 @@
 sources_by_selectors_path: config/sources_by_selectors.json
-output:
-  json_path: output/notices.json
+json_path: output/notices.json
 
 ding:
   secrets_path: config/ding.secrets.yaml
+
+rss:
+  title: BulletinIT
+  description: Bulletin Issues Transferred
+  link: https://haobit.top/dev/notices/
+  rss_href: https://haobit.top/dev/notices/feed.rss
+  output_path: output/feed.rss

@@ -6,11 +6,13 @@
   "scripts": {
     "build": "run-p lint build-only",
     "build-only": "tsc",
+    "build-dev": "tsc --sourceMap",
     "test": "tsc && mocha dist/**/*.test.js",
     "lint": "eslint 'src/**' --fix --ignore-path .gitignore",
     "doc": "typedoc",
     "update": "node dist/plugin/cli/examples/cli.js",
-    "update-ding": "node dist/plugin/ding/examples/cli.js"
+    "update-ding": "node dist/plugin/ding/examples/cli.js",
+    "update-rss": "node dist/plugin/rss/examples/cli.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",

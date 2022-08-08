@@ -23,7 +23,7 @@ export function verbose (hook: HookCollectionType) {
         }
     })
     hook.after('update', (result, { write_json_path }) => {
-        console.log(chalk.green('🛈'), `已保存到“${write_json_path}”。`)
+        console.log(chalk.green('✓'), `已保存到“${write_json_path}”。`)
     })
 }
 

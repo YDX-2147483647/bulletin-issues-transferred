@@ -1,95 +1,35 @@
 /**
  * 简易RSS
- * （源代码中有`config`）
+ *
  * @module
  */
-import chalk from 'chalk'
-import { writeFile } from 'fs/promises'
-import xml from 'xml'
 
-import type { Notice } from '../../core/models.js'
+import { config, type HookCollectionType, type Source } from '../../core/index.js'
+import { write_rss } from './rss.js'
 
-const some_mysterious_website = ''
-
-const config = {
-    link: `${some_mysterious_website}/`,
-    description: 'Bulletin Issues Transferred',
-    rss_file: `${some_mysterious_website}/feed.rss`,
-    title: 'BulletinIT',
+const { output_path, ...rss_options } = config.rss as {
+    title: string
+    description: string
+    link: string
+    rss_href: string
+    output_path: string
 }
 
 /**
+ * `update`后保存 RSS
  *
- * @param notice 需要 source，因此请提前{@link Notice.populate}
+ * 副作用：`update`的`result.all_notices`会被`populate`。
  */
-function to_feed_item (notice: Notice) {
-    let description: string
-    if (notice.source.url) {
-        description = `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source_name}</a>。`
-    } else if (notice.source) {
-        description = `来自${notice.source_name}。`
-    } else {
-        description = '未知来源。'
-    }
-
-    return {
-        item: [
-            { title: notice.title },
-            { pubDate: notice.date ? notice.date.toUTCString() : null },
-            { link: notice.link },
-            {
-                guid: [
-                    { _attr: { isPermaLink: true } },
-                    notice.link,
-                ],
-            },
-            { description: { _cdata: description } },
-        ],
-    }
-}
-
-/**
- * 将一系列通知转换为RSS
- * @param notices 需要 source，因此请提前{@link Notice.populate}
- */
-export function build_feed (notices: Notice[]) {
-    const feed_obj = {
-        rss: [
-            {
-                _attr: {
-                    version: '2.0',
-                    'xmlns:atom': 'http://www.w3.org/2005/Atom',
-                },
-            },
-            {
-                channel: [
-                    {
-                        'atom:link': {
-                            _attr: {
-                                href: config.rss_file,
-                                rel: 'self',
-                                type: 'application/rss+xml',
-                            },
-                        },
-                    },
-                    { title: config.title },
-                    { link: config.link },
-                    { description: config.description },
-                    { language: 'zh-CN' },
-                    ...notices.map(to_feed_item),
-                ],
-            },
-        ],
-    }
-
-    return '<?xml version="1.0" encoding="UTF-8"?>' + xml(feed_obj)
-}
-
-/**
- * 用通知生成RSS，然后写入`data/feed.rss`
- * @param notices 需要 source，因此请提前{@link Notice.populate}
- */
-export async function write_rss (notices: Notice[]) {
-    await writeFile('data/feed.rss', build_feed(notices))
-    console.log(chalk.green('✓'), '已保存到 data/feed.rss')
+export default function add_hook (hook: HookCollectionType) {
+    let sources = null as Source[] | null
+    hook.before('fetch', ({ sources: s }) => {
+        sources = s
+    })
+    hook.after('update', async ({ all_notices: notices }) => {
+        if (sources === null) {
+            throw new Error("Cannot generate RSS because there's no known source.")
+        }
+        notices.forEach(n => n.populate({ sources }))
+        await write_rss(notices, output_path, rss_options)
+    })
 }

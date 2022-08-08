@@ -81,12 +81,12 @@ export class Notice {
         this.id = this.link
     }
 
-    populate ({ source }: { source?: Source[] }) {
-        if (source !== undefined) {
+    populate ({ sources }: { sources?: Source[] }) {
+        if (sources !== undefined) {
             if (this.#source_ref instanceof Source) {
                 this.source = this.#source_ref
             } else {
-                this.source = source.find(s => s.id === this.#source_ref)
+                this.source = sources.find(s => s.id === this.#source_ref)
                 if (this.source === undefined) {
                     throw new Error(`找不到来源：${this.#source_ref}。`)
                 }

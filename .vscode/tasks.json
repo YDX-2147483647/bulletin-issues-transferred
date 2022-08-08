@@ -6,8 +6,14 @@
 			"script": "build",
 			"group": "build",
 			"problemMatcher": [],
-			"label": "npm: build",
-			"detail": "tsc"
+			"label": "npm: build"
+		},
+		{
+			"type": "npm",
+			"script": "build-dev",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build-dev"
 		},
 		{
 			"type": "npm",
