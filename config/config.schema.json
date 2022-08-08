@@ -1,0 +1,75 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$id": "config.schema.json-v0.2.2",
+    "title": "Bulletin IT 设置",
+    "type": "object",
+    "properties": {
+        "sources_by_selectors_path": {
+            "title": "基于选择器的通知来源的文件名",
+            "type": "string",
+            "default": "config/sources_by_selectors.json"
+        },
+        "json_path": {
+            "title": "以 JSON 格式保存通知时的文件名",
+            "type": "string",
+            "default": "output/notices.json"
+        },
+        "save_for": {
+            "title": "保存天数",
+            "description": "0表示永远保存。",
+            "type": "number",
+            "default": 90
+        },
+        "ding": {
+            "title": "钉钉插件",
+            "type": "object",
+            "properties": {
+                "secrets_path": {
+                    "type": "string",
+                    "title": "ding.secrets.yaml 的文件名"
+                }
+            },
+            "required": [
+                "secrets_path"
+            ]
+        },
+        "rss": {
+            "title": "RSS 插件",
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "title": "频道标题"
+                },
+                "link": {
+                    "type": "string",
+                    "format": "uri",
+                    "title": "频道链接"
+                },
+                "description": {
+                    "type": "string",
+                    "title": "频道描述"
+                },
+                "rss_href": {
+                    "type": "string",
+                    "format": "uri",
+                    "title": "RSS 文件在网站上的 URL"
+                },
+                "output_path": {
+                    "type": "string",
+                    "title": "输出文件路径",
+                    "examples": [
+                        "output/feed.rss"
+                    ]
+                }
+            },
+            "required": [
+                "title",
+                "link",
+                "description",
+                "rss_href",
+                "output_path"
+            ]
+        }
+    }
+}

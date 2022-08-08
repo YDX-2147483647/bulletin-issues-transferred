@@ -1,0 +1,35 @@
+/**
+ * 简易RSS
+ *
+ * @module
+ */
+
+import { config, type HookCollectionType, type Source } from '../../core/index.js'
+import { write_rss } from './rss.js'
+
+const { output_path, ...rss_options } = config.rss as {
+    title: string
+    description: string
+    link: string
+    rss_href: string
+    output_path: string
+}
+
+/**
+ * `update`后保存 RSS
+ *
+ * 副作用：`update`的`result.all_notices`会被`populate`。
+ */
+export default function add_hook (hook: HookCollectionType) {
+    let sources = null as Source[] | null
+    hook.before('fetch', ({ sources: s }) => {
+        sources = s
+    })
+    hook.after('update', async ({ all_notices: notices }) => {
+        if (sources === null) {
+            throw new Error("Cannot generate RSS because there's no known source.")
+        }
+        notices.forEach(n => n.populate({ sources }))
+        await write_rss(notices, output_path, rss_options)
+    })
+}

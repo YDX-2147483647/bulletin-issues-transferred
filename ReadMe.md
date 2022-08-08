@@ -2,53 +2,57 @@
 
 BulletinIT 旨在汇总 BIT 各种网站的通知。
 
-```powershell
+```shell
 # 第一次使用前需要先安装包
 npm init
 # 然后编译 TypeScript
 npm run build
 
 # 日常使用（效果见下）
-npm run update-data
-
-# 如果你想看看代码，可以生成文档
-npm run doc
+npm run update
 ```
 
 ## 能干什么？
 
-日常使用时，`npm run update-data`会在控制台输出类似这样的内容。
+日常使用时，`npm run update`会在控制台输出类似这样的内容。
 
 ```
-> bulletin-issues-transferred@1.2.3 update-data
-> node dist/update_notices.js
+> bulletin-issues-transferred@2.0.0 update
+> node dist/plugin/cli/examples/cli.js
 
-🛈  发现25个通知来源。
-🛈  从“数学实验”获取到5项通知。
-🛈  从“睿信”获取到20项通知。
-🛈  从“经管”获取到20项通知。
-🛈  从“求是”获取到20项通知。
-……
-🛈  从“网信”获取到20项通知。
-共筛选出271项通知。
+抓取通知 ████████████████████████████████████████ 100% | 25/25 | 已用2s，预计还需0s
 未发现新通知。
- 1  第二课堂｜【思】精工书院“精•沙龙”系列活动第二十六期——数字时代的技术与经济
-    http://dekt.bit.edu.cn/portal/CourseView.jsp?course_id=661175968422
-    2021/12/24 上午12:00:00
+ 1  留学生｜2022北京理工大学国际学生招生简章
+    https://isc.bit.edu.cn/eventsnotices/dd3551f3e64646b497d9f6288d1bb82b.htm
+    2022/8/8 21:22:13
 
- 2  第二课堂｜【文】精工书院“精•沙龙”系列活动第二十五期——礼仪文化与形象塑造
-    http://dekt.bit.edu.cn/portal/CourseView.jsp?course_id=422231297409
-    2021/12/22 上午12:00:00
+ 2  留学生｜2022 BIT ACCP Summer Session Application Opens 2022年北京理工大学学术学分课程暑期项目招生简章
+    https://isc.bit.edu.cn/eventsnotices/65e5e36535e24b3aae7c03d8ec95d7f6.htm
+    2022/8/8 21:22:13
 
-……
-
- 5  研究生｜关于公布2021年度北京理工大学研究生教育培养综合改革教研教改一般项目认定结果的通知
-    https://grd.bit.edu.cn/pygz/jyjg/tzgg_jyjg/18c31d7e346f431ab836544cf8510e51.htm
-    2021/12/20 上午12:00:00
-以上是最新的5项通知。
+ 3  留学生｜2022 BIT ACCP December Session Application Opens 2022年12月北京理工大学学术学分课程招生简章
+    https://isc.bit.edu.cn/eventsnotices/fb526c44d11a41d2846132448fa46687.htm
+    2022/8/8 21:22:13
+以上是最新的3项通知。
 ```
 
-如果你看一下`data/`文件夹，会发现以往信息存储在`notices.json`中。这个文件夹里还有用通知生成的`feed.rss`（但从未测试过）。
+以往信息存储在`output/notices.json`中。
+
+- `npm run update`
+
+  更新通知。
+
+- `npm run update-ding`
+
+  更新通知，然后向 i 北理群发送新通知。
+
+  需要配置钉钉机器人的秘密信息，请参考`config/ding.secrets.schema.json`。
+
+- `npm run update-rss`
+
+  更新通知，并生成 RSS。
+
+  注意，尚未实际测试过`output/feed.rss`是否可用。
 
 ## 如何贡献？
 
@@ -60,9 +64,9 @@ npm run doc
 
 -   写明名称、网址、同学该如何找到它等等。
 
-    这些内容写在`config/notice_sources.json`中，详细规则见同文件夹的`*.schema.json`。
+    这些内容写在`config/sources_by_selectors.json`中，详细规则见同文件夹的`*.schema.json`。
 
-    其实也不用太研究那个 JSON Schema，只要看一下现有的`notice_sources.json`，结合 VS Code 的语法提示，照猫画虎就行了。
+    其实也不用太研究那个 JSON Schema，只要看一下现有的`sources_by_selectors.json`，结合 VS Code 的语法提示，照猫画虎就行了。
 
 -   描述如何从这个来源获取通知。
 
@@ -70,15 +74,19 @@ npm run doc
 
     -   先获取通知列表的静态网页，然后用 CSS 选择器从中提取信息。
 
-        CSS 选择器写在`config/notice_sources.json`中。
+        CSS 选择器写在`config/sources_by_selectors.json`中。
 
     -   利用学校的 API。
 
-        在`src/sources_special.ts`中的`specials`里实现虚基类`Source`的`fetch_notice()`方法。
+        在`src/core/sources/special.ts`中的`raw_sources: SourceSpecialInterface[]`里。
 
 ### 移植到别的学校
 
-只需要写新的`config/notice_sources.json`和`src/sources_special.ts`即可。
+只需要写新的`config/sources_by_selectors.json`和`src/core/sources/special.ts`即可。
+
+### 编程
+
+[documentation.md](./documentation.md) 描述了一些思路、细节。另外`npm run doc`可以生成文档。
 
 ## 这合法吗？
 

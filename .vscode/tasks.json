@@ -1,0 +1,41 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build"
+		},
+		{
+			"type": "npm",
+			"script": "build-dev",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build-dev"
+		},
+		{
+			"type": "npm",
+			"script": "update",
+			"problemMatcher": [],
+			"label": "npm: update",
+			"detail": "Update notices. (plugin/cli)"
+		},
+		{
+			"type": "npm",
+			"script": "doc",
+			"problemMatcher": [],
+			"label": "npm: doc",
+			"detail": "typedoc"
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: test",
+			"detail": "tsc && mocha dist/**/*.test.js"
+		}
+	]
+}

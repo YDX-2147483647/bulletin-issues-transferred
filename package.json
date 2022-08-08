@@ -1,34 +1,51 @@
 {
   "name": "bulletin-issues-transferred",
-  "version": "1.2.5",
+  "version": "2.0.0",
   "description": "汇总BIT各种网站的通知。",
-  "main": "update_notices.js",
+  "main": "dist/core/index.js",
   "scripts": {
-    "test": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./node_modules/.bin/mocha test/test-*",
-    "build": "tsc",
+    "build": "run-p lint build-only",
+    "build-only": "tsc",
+    "build-dev": "tsc --sourceMap",
+    "test": "tsc && mocha dist/**/*.test.js",
+    "lint": "eslint 'src/**' --fix --ignore-path .gitignore",
     "doc": "typedoc",
-    "fetch-data": "node test/fetch_data.js",
-    "update-data": "node dist/update_notices.js"
+    "update": "node dist/plugin/cli/examples/cli.js",
+    "update-ding": "node dist/plugin/ding/examples/cli.js",
+    "update-rss": "node dist/plugin/rss/examples/cli.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "before-after-hook": "^2.2.2",
     "chalk": "^5.0.0",
     "cli-progress": "^3.9.1",
     "jsdom": "^19.0.0",
-    "node-fetch": "^3.1.1",
-    "typescript": "^4.5.3",
-    "xml": "^1.0.1"
+    "node-fetch": "^3.2.10",
+    "winston": "^3.8.1",
+    "xml": "^1.0.1",
+    "yaml": "^2.0.0-10"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.0",
     "@types/cli-progress": "^3.9.2",
     "@types/jsdom": "^16.2.13",
+    "@types/mocha": "^9.1.0",
     "@types/node": "^16.11.12",
     "@types/xml": "^1.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
+    "@typescript-eslint/parser": "^5.32.0",
     "chai": "^4.3.4",
+    "eslint": "^8.21.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0",
     "mocha": "^9.1.3",
-    "typedoc": "^0.22.10"
+    "npm-run-all": "^4.1.5",
+    "typedoc": "^0.22.10",
+    "typescript": "^4.7.4"
   },
   "directories": {
     "lib": "lib",
