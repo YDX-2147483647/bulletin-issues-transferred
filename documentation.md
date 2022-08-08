@@ -91,7 +91,7 @@ flowchart LR
 ```
 
 ```shell
-# Turn on `case  LinkType.absolute` in `generate_markdown` in advance.
+# Turn on `case LinkType.absolute` in `generate_markdown` in advance.
 $ python scripts/import_graph_single.py plugin/ding
 ```
 
