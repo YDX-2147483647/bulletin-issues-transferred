@@ -1,7 +1,7 @@
-import chalk from 'chalk'
 import { writeFile } from 'fs/promises'
 import xml from 'xml'
 import type { Notice } from '../../core/index.js'
+import { logger } from '../../util/logger.js'
 
 /**
  * @param notice 需要 source，因此请提前{@link Notice.populate}
@@ -81,5 +81,5 @@ export async function write_rss (notices: Notice[], path: string, options: {
     rss_href: string; title: string; link: string; description: string
 }) {
     await writeFile(path, build_feed(notices, options))
-    console.log(chalk.green('✓'), `已保存到“${path}”。`)
+    logger.info(`已保存到“${path}”。`, { plugin: 'rss' })
 }

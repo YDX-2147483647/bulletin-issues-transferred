@@ -1,29 +1,29 @@
-import chalk from 'chalk'
 import cliProgress from 'cli-progress'
 import { FetchError } from 'node-fetch'
 import type { HookCollectionType } from '../../core/index.js'
+import { logger } from '../../util/logger.js'
 import { recent_checker } from '../../util/my_date.js'
 import { print_notices } from './util.js'
 
 export function verbose (hook: HookCollectionType) {
     hook.before('fetch', (options) => {
         const { sources } = options
-        console.log(chalk.green('🛈'), `发现${sources.length}个通知来源。`)
+        logger.info(`发现${sources.length}个通知来源。`, { plugin: 'cli' })
     })
     hook.error('fetch_each', (err, { source }) => {
         if (err instanceof FetchError && err.errno === 'ENOTFOUND') {
-            console.error(chalk.red(`✗ 未能访问“${source.name}”（ENOTFOUND）。将忽略。`))
+            logger.http(`未能访问“${source.name}”（ENOTFOUND）。将忽略。`, { plugin: 'cli' })
         } else {
             throw err
         }
     })
     hook.after('fetch_each', (result, { source }) => {
         if (result !== undefined && result.notices.length === 0) {
-            console.log(chalk.yellow(`⚠ 未从“${source.name}”获取到任何通知。将忽略。`))
+            logger.warn(`未从“${source.name}”获取到任何通知。将忽略。`, { plugin: 'cli' })
         }
     })
     hook.after('update', (result, { write_json_path }) => {
-        console.log(chalk.green('✓'), `已保存到“${write_json_path}”。`)
+        logger.info(`已按需保存到“${write_json_path}”。`, { plugin: 'cli' })
     })
 }
 

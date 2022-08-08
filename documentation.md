@@ -50,10 +50,12 @@ flowchart LR
   plugin/ding --> core
   plugin/rss/examples --> plugin/cli
   plugin/cli --> core
+  plugin/ding/examples --> util
   core --> util
   plugin/ding/examples --> core
   plugin/rss/examples --> core
   plugin/cli/examples --> plugin/cli
+  plugin/rss --> util
   plugin/cli/examples --> core
 ```
 
@@ -79,7 +81,7 @@ flowchart LR
   end
   core/notices -.-> util/my_date
   core/sources -.-> util/my_date
-  core/update_notices -.-> util/my_date
+  core/notices -.-> util/logger
   plugin/ding/examples/cli -.-> core/index
   plugin/cli/examples/cli -.-> core/index
   plugin/rss/examples/cli -.-> core/index

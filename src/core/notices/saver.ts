@@ -2,8 +2,8 @@
  * 读取、写入通知（或者说从文件恢复、保存至文件）
  * @module
  */
-import chalk from 'chalk'
 import { readFile, writeFile } from 'fs/promises'
+import { logger } from '../../util/logger.js'
 import { Notice, type NoticeInterface } from '../models.js'
 
 /**
@@ -29,7 +29,7 @@ export async function read_json ({ path }: { path: string }) {
         return json.map(n => new Notice(n))
     } catch (error) {
         if (error.code === 'ENOENT') {
-            console.log(chalk.yellow('⚠ 未找到以往通知，您可能是第一次运行。将忽略。'))
+            logger.warn('未找到以往通知，您可能是第一次运行。将忽略。')
             return []
         } else {
             throw error

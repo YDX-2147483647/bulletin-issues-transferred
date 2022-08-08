@@ -2,8 +2,8 @@
  * 更新通知
  */
 
-import chalk from 'chalk'
 import { hook, update_notices } from '../../../core/index.js'
+import { logger } from '../../../util/logger.js'
 import { add_hook } from '../../cli/index.js'
 import robot from '../index.js'
 
@@ -29,4 +29,4 @@ if (change.add === 0) {
 
     await robot.markdown('发现新通知', message_rows.join('\n\n'))
 }
-console.log(chalk.green('🛈'), '已发送到 i 北理。')
+logger.info('已发送到 i 北理。', { plugin: 'ding' })
