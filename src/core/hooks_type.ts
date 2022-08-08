@@ -12,6 +12,11 @@ type HooksType = {
         Error: Error
     }
     update: {
+        Options: {
+            read_json_path: string
+            write_json_path: string
+            sources_by_selectors_path: string
+        }
         Result: {
             all_notices: Notice[]
             new_notices: Notice[]

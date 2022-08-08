@@ -3,6 +3,4 @@
  * @module
  */
 
-import add_hook from './hooks.js'
-
-export { add_hook }
+export * as add_hook from './hooks.js'

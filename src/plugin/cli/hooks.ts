@@ -5,7 +5,7 @@ import type { HookCollectionType } from '../../core/index.js'
 import { recent_checker } from '../../util/my_date.js'
 import { print_notices } from './util.js'
 
-function verbose (hook: HookCollectionType) {
+export function verbose (hook: HookCollectionType) {
     hook.before('fetch', (options) => {
         const { sources } = options
         console.log(chalk.green('🛈'), `发现${sources.length}个通知来源。`)
@@ -22,6 +22,12 @@ function verbose (hook: HookCollectionType) {
             console.log(chalk.yellow(`⚠ 未从“${source.name}”获取到任何通知。将忽略。`))
         }
     })
+    hook.after('update', (result, { write_json_path }) => {
+        console.log(chalk.green('🛈'), `已保存到“${write_json_path}”。`)
+    })
+}
+
+export function preview_output (hook: HookCollectionType) {
     hook.after('update', ({ change, all_notices, new_notices }) => {
         if (change.add === 0) {
             console.log('未发现新通知。')
@@ -36,7 +42,7 @@ function verbose (hook: HookCollectionType) {
     })
 }
 
-function progress_bar (hook: HookCollectionType) {
+export function progress_bar (hook: HookCollectionType) {
     hook.before('fetch', (options) => {
         const bar = new cliProgress.SingleBar({
             format: '抓取通知 {bar} {percentage}% | {value}/{total} | 已用{duration_formatted}，预计还需{eta_formatted}',
@@ -63,7 +69,7 @@ function progress_bar (hook: HookCollectionType) {
  * @param hook
  * @param days_ago 筛选多少天内的通知
  */
-function recent_filter (hook: HookCollectionType, days_ago: number) {
+export function recent_filter (hook: HookCollectionType, days_ago: number) {
     hook.before('fetch', (options) => {
         // @ts-ignore For other hooks
         options.is_recent = recent_checker(days_ago)
@@ -75,10 +81,4 @@ function recent_filter (hook: HookCollectionType, days_ago: number) {
             result.notices = result.notices.filter(n => is_recent(n.date))
         }
     })
-}
-
-export default {
-    verbose,
-    progress_bar,
-    recent_filter,
 }
