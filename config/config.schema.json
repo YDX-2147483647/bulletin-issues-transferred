@@ -14,6 +14,12 @@
             "type": "string",
             "default": "output/notices.json"
         },
+        "save_for": {
+            "title": "保存天数",
+            "description": "0表示永远保存。",
+            "type": "number",
+            "default": 90
+        },
         "ding": {
             "title": "钉钉插件",
             "type": "object",

@@ -26,15 +26,17 @@ export function diff (original: Notice[], latest: Notice[]) {
  */
 export function merge (original: Notice[], latest: Notice[],
     { days_ago = 0, sort = true } = {}) {
+    const is_recent = recent_checker(days_ago)
+
+    latest = latest.filter(n => is_recent(n.date))
     const difference = diff(original, latest)
     const all = original.concat(difference)
-
-    const is_recent = recent_checker(days_ago)
     const recent = all.filter(n => is_recent(n.date))
 
     const final = sort ? recent.sort(sort_by_date) : recent
     return {
         notices: final,
+        new_notices: difference,
         change: {
             add: difference.length,
             drop: all.length - recent.length,

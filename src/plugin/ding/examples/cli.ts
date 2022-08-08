@@ -9,7 +9,6 @@ import robot from '../index.js'
 
 add_hook.verbose(hook)
 add_hook.progress_bar(hook)
-add_hook.recent_filter(hook, 90)
 
 const { all_notices, new_notices, change } = await update_notices()
 

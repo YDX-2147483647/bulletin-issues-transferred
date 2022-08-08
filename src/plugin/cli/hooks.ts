@@ -66,6 +66,7 @@ export function progress_bar (hook: HookCollectionType) {
 }
 
 /**
+ * 如果`days_ago`与全局设置的`save_for`一致，则这个钩子对结果无影响，只是提前了筛选步骤，并且不会阻止`core`的筛选。
  * @param hook
  * @param days_ago 筛选多少天内的通知
  */

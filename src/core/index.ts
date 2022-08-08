@@ -18,5 +18,6 @@ export function update_notices () {
         read_json_path: config.json_path,
         write_json_path: config.json_path,
         sources_by_selectors_path: config.sources_by_selectors,
+        save_for: config.save_for,
     })
 }
