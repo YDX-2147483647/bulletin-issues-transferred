@@ -34,81 +34,79 @@
 
 ---
 
-可生成 [mermaid .js](https://mermaid-js.github.io/mermaid/#/) 的 flowchart，如下图（不含 subgraph）。
+可生成 [mermaid .js](https://mermaid-js.github.io/mermaid/#/) 的 flowchart，如下图。
 
 ```shell
-$ python scripts/import_graph.py
+$ python scripts/import_graph_mod.py
 ```
 
 ```mermaid
 flowchart LR
-  core/hooks_type --> core/models
-  core/index --> core/config
-  core/index --> core/hooks_type
-  core/index --> core/update_notices
-  core/index --> core/models
-  core/index --> core/models
-  core/update_notices --> util/my_date
-  core/update_notices --> core/hooks_type
-  core/update_notices --> core/models
-  core/update_notices --> core/notices/index
-  core/update_notices --> core/sources/index
-  core/notices/comparer --> util/my_date
-  core/notices/comparer --> core/models
-  core/notices/fetcher --> core/hooks_type
-  core/notices/fetcher --> core/models
-  core/notices/index --> core/notices/comparer
-  core/notices/index --> core/notices/fetcher
-  core/notices/index --> core/notices/saver
-  core/notices/saver --> core/models
-  core/sources/by_selectors --> util/my_date
-  core/sources/by_selectors --> core/models
-  core/sources/index --> core/models
-  core/sources/index --> core/sources/by_selectors
-  core/sources/index --> core/sources/special
-  core/sources/special --> util/my_date
-  core/sources/special --> core/models
-  plugin/cli/hooks --> core/index
-  plugin/cli/hooks --> util/my_date
-  plugin/cli/hooks --> plugin/cli/util
-  plugin/cli/index --> plugin/cli/hooks
-  plugin/cli/util --> core/index
-  plugin/cli/examples/cli --> core/index
-  plugin/cli/examples/cli --> plugin/cli/index
-  plugin/ding/bot --> plugin/ding/sign
-  plugin/ding/index --> core/index
-  plugin/ding/index --> plugin/ding/bot
-  plugin/ding/examples/cli --> core/index
-  plugin/ding/examples/cli --> plugin/cli/index
-  plugin/ding/examples/cli --> plugin/ding/index
+  plugin/ding/examples --> plugin/ding
+  plugin/rss/examples --> plugin/rss
+  plugin/rss --> core
+  plugin/cli --> util
+  plugin/ding/examples --> plugin/cli
+  plugin/ding --> core
+  plugin/rss/examples --> plugin/cli
+  plugin/cli --> core
+  core --> util
+  plugin/ding/examples --> core
+  plugin/rss/examples --> core
+  plugin/cli/examples --> plugin/cli
+  plugin/cli/examples --> core
+```
 
-  subgraph core/sources
-    core/sources/by_selectors
-    core/sources/index
-    core/sources/special
+```shell
+$ python scripts/import_graph_single.py core
+```
+
+```mermaid
+flowchart LR
+  subgraph core
+    core/index --> core/config
+    core/index --> core/hooks_type
+    core/notices --> core/hooks_type
+    core/update_notices --> core/hooks_type
+    core/notices --> core/models
+    core/index --> core/update_notices
+    core/update_notices --> core/notices
+    core/sources --> core/models
+    core/update_notices --> core/sources
+    core/hooks_type --> core/models
+    core/index --> core/models
+    core/update_notices --> core/models
   end
+  core/notices -.-> util/my_date
+  core/sources -.-> util/my_date
+  core/update_notices -.-> util/my_date
+  plugin/ding/examples/cli -.-> core/index
+  plugin/cli/examples/cli -.-> core/index
+  plugin/rss/examples/cli -.-> core/index
+  plugin/cli/util -.-> core/index
+  plugin/rss/index -.-> core/index
+  plugin/rss/rss -.-> core/index
+  plugin/ding/index -.-> core/index
+  plugin/cli/hooks -.-> core/index
+```
 
-  subgraph core/notices
-    core/notices/index
-    core/notices/saver
-    core/notices/fetcher
-    core/notices/comparer
-  end
+```shell
+# Turn on `case  LinkType.absolute` in `generate_markdown` in advance.
+$ python scripts/import_graph_single.py plugin/ding
+```
 
-  subgraph plugin/cli
-    plugin/cli/index
-    plugin/cli/util
-    plugin/cli/hooks
-    plugin/cli/examples/cli
-  end
-
+```mermaid
+flowchart LR
   subgraph plugin/ding
-    plugin/ding/index
-    plugin/ding/bot
-    plugin/ding/sign
-    plugin/ding/examples/cli
+    plugin/ding/index --> plugin/ding/bot
+    plugin/ding/bot --> plugin/ding/sign
   end
-
+  plugin/ding/index -.-> core/index
+  plugin/ding/index -.-> yaml
+  plugin/ding/sign -.-> crypto
+  plugin/ding/bot -.-> node-fetch
+  plugin/ding/index -.-> fs/promises
+  plugin/ding/examples/cli -.-> plugin/ding/index
 ```
 
 ## Models
