@@ -60,6 +60,12 @@ flowchart LR
   plugin/cli/util --> core/index
   plugin/cli/examples/cli --> core/index
   plugin/cli/examples/cli --> plugin/cli/index
+  plugin/ding/bot --> plugin/ding/sign
+  plugin/ding/index --> core/index
+  plugin/ding/index --> plugin/ding/bot
+  plugin/ding/examples/cli --> core/index
+  plugin/ding/examples/cli --> plugin/cli/index
+  plugin/ding/examples/cli --> plugin/ding/index
 
   subgraph core/sources
     core/sources/by_selectors
@@ -79,6 +85,13 @@ flowchart LR
     plugin/cli/util
     plugin/cli/hooks
     plugin/cli/examples/cli
+  end
+
+  subgraph plugin/ding
+    plugin/ding/index
+    plugin/ding/bot
+    plugin/ding/sign
+    plugin/ding/examples/cli
   end
 
 ```

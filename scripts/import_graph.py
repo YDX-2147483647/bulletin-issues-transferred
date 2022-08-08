@@ -51,7 +51,7 @@ md: list[str] = ['flowchart LR']
 for src, dst, link_type in links:
     match link_type:
         case LinkType.relative:
-            if src.startswith(('plugin/rss', 'plugin/ding')):
+            if src.startswith('plugin/rss'):
                 continue
             if src.endswith('.test'):
                 continue

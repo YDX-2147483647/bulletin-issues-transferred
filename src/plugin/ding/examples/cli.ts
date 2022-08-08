@@ -1,21 +1,17 @@
 /**
  * 更新通知
- *
- * @todo 不调用`core`的细节
  */
 
-import { Hook } from 'before-after-hook'
-import config from '../../../core/config.js'
-import type { HooksType } from '../../../core/hooks_type.js'
-import { update_notices } from '../../../core/update_notices.js'
+import chalk from 'chalk'
+import { hook, update_notices } from '../../../core/index.js'
+import { add_hook } from '../../cli/index.js'
 import robot from '../index.js'
 
-const { all_notices, new_notices, change } = await update_notices({
-    _hook: new Hook.Collection<HooksType>(),
-    read_json_path: config.output.json_path,
-    write_json_path: config.output.json_path,
-    sources_by_selectors_path: config.sources_by_selectors,
-})
+add_hook.verbose(hook)
+add_hook.progress_bar(hook)
+add_hook.recent_filter(hook, 90)
+
+const { all_notices, new_notices, change } = await update_notices()
 
 if (change.add === 0) {
     const message_rows = [
@@ -34,3 +30,4 @@ if (change.add === 0) {
 
     await robot.markdown('发现新通知', message_rows.join('\n\n'))
 }
+console.log(chalk.green('🛈'), '已发送到 i 北理。')

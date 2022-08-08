@@ -5,6 +5,7 @@ import { update_notices as _update_notices } from './update_notices.js'
 
 export { Notice, Source } from './models.js'
 export type { NoticeInterface, SourceInterface } from './models.js'
+export { config }
 
 const _hook = new Hook.Collection<HooksType>()
 
