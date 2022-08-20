@@ -8,8 +8,9 @@
 
 import { readFile } from 'fs/promises'
 import { JSDOM } from 'jsdom'
-import fetch from 'node-fetch'
 import { parse_date } from '../../util/my_date.js'
+import fetch from '../fetch_wrapper.js'
+import type { HookCollectionType } from '../hooks_type.js'
 import { Notice, Source, type SourceInterface } from '../models.js'
 
 interface SourceBySelectorsInterface extends SourceInterface {
@@ -53,8 +54,8 @@ class SourceBySelectors extends Source {
         })
     }
 
-    async fetch_notice () {
-        const html = await (await fetch(this.url)).text()
+    async fetch_notice ({ _hook }: { _hook: HookCollectionType }) {
+        const html = await (await fetch({ url: this.url, _hook })).text()
         const dom = new JSDOM(html)
 
         const rows = dom.window.document.querySelectorAll(this.selectors.rows)

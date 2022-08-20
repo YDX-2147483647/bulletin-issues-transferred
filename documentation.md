@@ -42,6 +42,11 @@ $ python scripts/import_graph_mod.py
 
 ```mermaid
 flowchart LR
+  plugin/proxy/examples --> plugin/cli
+  plugin/proxy/examples --> core
+  plugin/proxy/examples --> plugin/proxy
+  plugin/proxy --> core
+  plugin/proxy --> util
   plugin/ding/examples --> plugin/ding
   plugin/rss/examples --> plugin/rss
   plugin/rss --> core
@@ -66,7 +71,10 @@ $ python scripts/import_graph_single.py core
 ```mermaid
 flowchart LR
   subgraph core
+    core/fetch_wrapper --> core/hooks_type
     core/index --> core/config
+    core/sources --> core/fetch_wrapper
+    core/models --> core/hooks_type
     core/index --> core/hooks_type
     core/notices --> core/hooks_type
     core/update_notices --> core/hooks_type
@@ -74,6 +82,7 @@ flowchart LR
     core/index --> core/update_notices
     core/update_notices --> core/notices
     core/sources --> core/models
+    core/sources --> core/hooks_type
     core/update_notices --> core/sources
     core/hooks_type --> core/models
     core/index --> core/models
@@ -90,6 +99,8 @@ flowchart LR
   plugin/rss/rss -.-> core/index
   plugin/ding/index -.-> core/index
   plugin/cli/hooks -.-> core/index
+  plugin/proxy/index -.-> core/index
+  plugin/proxy/examples/cli -.-> core/index
 ```
 
 ```shell

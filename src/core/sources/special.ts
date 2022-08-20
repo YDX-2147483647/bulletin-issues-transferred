@@ -3,10 +3,9 @@
  * @module
  */
 
-import fetch from 'node-fetch'
-
 import { parse_date } from '../../util/my_date.js'
-
+import fetch from '../fetch_wrapper.js'
+import type { HookCollectionType } from '../hooks_type.js'
 import { Notice, Source, type SourceInterface } from '../models.js'
 
 interface NoticeWithoutSource {
@@ -16,7 +15,7 @@ interface NoticeWithoutSource {
 }
 
 interface SourceSpecialInterface extends SourceInterface {
-    fetch_notice (): Promise<NoticeWithoutSource[]>
+    fetch_notice (options: { _hook: HookCollectionType }): Promise<NoticeWithoutSource[]>
 }
 
 const raw_sources: SourceSpecialInterface[] = [
@@ -28,8 +27,12 @@ const raw_sources: SourceSpecialInterface[] = [
             '党政部',
             '校内通知',
         ],
-        async fetch_notice () {
-            const response = await fetch('https://dzb.bit.edu.cn/cms/web/notify/search?page=1&status=7&rows=20&order=1&sortFiled=publishDate', { method: 'post' })
+        async fetch_notice ({ _hook }) {
+            const response = await fetch({
+                url: 'https://dzb.bit.edu.cn/cms/web/notify/search?page=1&status=7&rows=20&order=1&sortFiled=publishDate',
+                method: 'post',
+                _hook,
+            })
             const json: any = await response.json()
             const rows = Array.from(json.object) as { notifyType: string, articleID: string, title: string }[]
 
@@ -52,12 +55,17 @@ const raw_sources: SourceSpecialInterface[] = [
             '新闻公告',
         ],
         url: 'http://mec.bit.edu.cn/infos/index.html',
-        async fetch_notice () {
+        async fetch_notice ({ _hook }) {
             const response =
-                await fetch('http://mec.bit.edu.cn/pcmd/ajax.php?act=getmanage_nologin&w=新闻公告&size=20')
-                    .then(response => response.text())
-            const json = response.split('\n').at(-1)
-            const original_data = JSON.parse(json).data.data as { id: string, type: string, jmtype: string, jmdate: string, jmtitle: string, jmnr: string }[]
+                await fetch({
+                    url: 'http://mec.bit.edu.cn/pcmd/ajax.php?vpn-12-o1-mec.bit.edu.cn&act=getmanage_nologin&w=新闻公告',
+                    headers: {
+                        Referer: 'http://mec.bit.edu.cn/',
+                    },
+                    _hook,
+                })
+            const json = await response.json() as { data: { data: { id: string, type: string, jmtype: string, jmdate: string, jmtitle: string, jmnr: string }[] } }
+            const original_data = json.data.data
 
             return original_data.map(
                 ({ id, jmtype: type, jmdate: date_str, jmtitle: title }) => ({
@@ -73,8 +81,8 @@ const raw_sources: SourceSpecialInterface[] = [
 
 const sources = raw_sources.map(raw => {
     const source = new Source(raw)
-    source.fetch_notice = async () => {
-        const notices = await raw.fetch_notice()
+    source.fetch_notice = async ({ _hook }) => {
+        const notices = await raw.fetch_notice({ _hook })
         return notices.map(({ link, title, date }) =>
             new Notice({ link, title, date, source }),
         )

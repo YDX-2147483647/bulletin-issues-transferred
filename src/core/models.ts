@@ -7,6 +7,9 @@
  * 通知来源，可用作构造{@link Source}的参数
  * @see `sources.schema.json`
  */
+
+import type { HookCollectionType } from './hooks_type.js'
+
 export interface SourceInterface {
     name: string
     full_name?: string
@@ -42,7 +45,7 @@ export class Source {
     /**
      * 抓取通知
      */
-    async fetch_notice (): Promise<Notice[]> {
+    async fetch_notice ({ _hook }: { _hook: HookCollectionType }): Promise<Notice[]> {
         throw new Error('Not implemented.')
     }
 }

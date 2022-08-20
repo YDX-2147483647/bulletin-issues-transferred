@@ -8,7 +8,7 @@
     "build-only": "tsc",
     "build-dev": "tsc --sourceMap",
     "test": "tsc && mocha dist/**/*.test.js",
-    "lint": "eslint 'src/**' --fix --ignore-path .gitignore",
+    "lint": "eslint \"src/**\" --fix --ignore-path .gitignore",
     "doc": "typedoc",
     "update": "node dist/plugin/cli/examples/cli.js",
     "update-ding": "node dist/plugin/ding/examples/cli.js",
@@ -23,6 +23,7 @@
     "cli-progress": "^3.9.1",
     "jsdom": "^19.0.0",
     "node-fetch": "^3.2.10",
+    "virtual-bit-network": "github:YDX-2147483647/virtual-BIT-network",
     "winston": "^3.8.1",
     "xml": "^1.0.1",
     "yaml": "^2.0.0-10"

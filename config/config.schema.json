@@ -70,6 +70,19 @@
                 "rss_href",
                 "output_path"
             ]
+        },
+        "proxy": {
+            "title": "虚拟校园网插件",
+            "type": "object",
+            "properties": {
+                "secrets_path": {
+                    "type": "string",
+                    "title": "proxy.secrets.yaml 的文件名"
+                }
+            },
+            "required": [
+                "secrets_path"
+            ]
         }
     }
 }

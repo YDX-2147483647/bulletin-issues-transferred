@@ -11,3 +11,6 @@ rss:
   link: https://haobit.top/dev/notices/
   rss_href: https://haobit.top/dev/notices/feed.rss
   output_path: output/feed.rss
+
+proxy:
+  secrets_path: config/proxy.secrets.yaml

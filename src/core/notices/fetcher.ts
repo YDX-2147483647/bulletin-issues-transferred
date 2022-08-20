@@ -23,7 +23,7 @@ export async function fetch_all_sources ({
         async ({ sources, ...options }) => {
             // First create a non-hook version.
             async function fetch_each ({ source }: { source: Source }): Promise<{ notices: Notice[] }> {
-                const notices = await source.fetch_notice()
+                const notices = await source.fetch_notice({ _hook })
                 return { notices }
             }
             // Then wrap it with the hook.
