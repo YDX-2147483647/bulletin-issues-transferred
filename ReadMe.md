@@ -48,11 +48,17 @@ npm run update
 
   [YDX-2147483647/virtual-BIT-network: BIT WebVPN 登录与转换 (github.com)](https://github.com/YDX-2147483647/virtual-BIT-network)
 
+  需要配置统一身份认证的秘密信息，请参考`config/proxy.secrets.schema.json`。
+
 - `npm run update-ding`
 
   更新通知，然后向 i 北理群发送新通知。
 
   需要配置钉钉机器人的秘密信息，请参考`config/ding.secrets.schema.json`。
+
+- `npm run update-server`
+
+  proxy + ding，可用于服务器上的 crontab。
 
 - `npm run update-rss`
 

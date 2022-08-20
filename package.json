@@ -13,7 +13,8 @@
     "update": "node dist/examples/cli.js",
     "update-ding": "node dist/examples/ding-cli.js",
     "update-rss": "node dist/examples/rss-cli.js",
-    "update-proxy": "node dist/examples/proxy-cli.js"
+    "update-proxy": "node dist/examples/proxy-cli.js",
+    "update-server": "node dist/examples/server-cli.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",
