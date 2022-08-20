@@ -1,5 +1,5 @@
-import { hook, update_notices } from '../../../core/index.js'
-import { add_hook } from '../index.js'
+import { hook, update_notices } from '../core/index.js'
+import { add_hook } from '../plugin/cli/index.js'
 
 add_hook.verbose(hook)
 add_hook.preview_output(hook)

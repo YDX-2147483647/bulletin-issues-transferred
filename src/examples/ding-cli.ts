@@ -2,10 +2,10 @@
  * 更新通知
  */
 
-import { hook, update_notices } from '../../../core/index.js'
-import { logger } from '../../../util/logger.js'
-import { add_hook } from '../../cli/index.js'
-import robot from '../index.js'
+import { hook, update_notices } from '../core/index.js'
+import { add_hook } from '../plugin/cli/index.js'
+import robot from '../plugin/ding/index.js'
+import { logger } from '../util/logger.js'
 
 add_hook.verbose(hook)
 add_hook.progress_bar(hook)

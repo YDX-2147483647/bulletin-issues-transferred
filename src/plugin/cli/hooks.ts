@@ -12,7 +12,7 @@ export function verbose (hook: HookCollectionType) {
     })
     hook.error('fetch_each', (err, { source }) => {
         if (err instanceof FetchError && err.errno === 'ENOTFOUND') {
-            logger.http(`未能访问“${source.name}”（ENOTFOUND）。将忽略。`, { plugin: 'cli' })
+            logger.warn(`未能访问“${source.name}”（ENOTFOUND）。将忽略。`, { plugin: 'cli' })
         } else {
             throw err
         }

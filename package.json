@@ -10,10 +10,10 @@
     "test": "tsc && mocha dist/**/*.test.js",
     "lint": "eslint \"src/**\" --fix --ignore-path .gitignore",
     "doc": "typedoc",
-    "update": "node dist/plugin/cli/examples/cli.js",
-    "update-ding": "node dist/plugin/ding/examples/cli.js",
-    "update-rss": "node dist/plugin/rss/examples/cli.js",
-    "update-proxy": "node dist/plugin/proxy/examples/cli.js"
+    "update": "node dist/examples/cli.js",
+    "update-ding": "node dist/examples/ding-cli.js",
+    "update-rss": "node dist/examples/rss-cli.js",
+    "update-proxy": "node dist/examples/proxy-cli.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",

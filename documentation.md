@@ -42,26 +42,20 @@ $ python scripts/import_graph_mod.py
 
 ```mermaid
 flowchart LR
-  plugin/proxy/examples --> plugin/cli
-  plugin/proxy/examples --> core
-  plugin/proxy/examples --> plugin/proxy
+  examples --> plugin/rss
+  examples --> plugin/proxy
+  examples --> plugin/ding
+  examples --> plugin/cli
+  examples --> util
+  examples --> core
   plugin/proxy --> core
   plugin/proxy --> util
-  plugin/ding/examples --> plugin/ding
-  plugin/rss/examples --> plugin/rss
   plugin/rss --> core
   plugin/cli --> util
-  plugin/ding/examples --> plugin/cli
   plugin/ding --> core
-  plugin/rss/examples --> plugin/cli
   plugin/cli --> core
-  plugin/ding/examples --> util
-  core --> util
-  plugin/ding/examples --> core
-  plugin/rss/examples --> core
-  plugin/cli/examples --> plugin/cli
   plugin/rss --> util
-  plugin/cli/examples --> core
+  core --> util
 ```
 
 ```shell
@@ -91,16 +85,16 @@ flowchart LR
   core/notices -.-> util/my_date
   core/sources -.-> util/my_date
   core/notices -.-> util/logger
-  plugin/ding/examples/cli -.-> core/index
-  plugin/cli/examples/cli -.-> core/index
-  plugin/rss/examples/cli -.-> core/index
+  examples/ding-cli -.-> core/index
+  examples/cli -.-> core/index
+  examples/rss-cli -.-> core/index
   plugin/cli/util -.-> core/index
   plugin/rss/index -.-> core/index
   plugin/rss/rss -.-> core/index
   plugin/ding/index -.-> core/index
   plugin/cli/hooks -.-> core/index
   plugin/proxy/index -.-> core/index
-  plugin/proxy/examples/cli -.-> core/index
+  examples/proxy-cli -.-> core/index
 ```
 
 ```shell
@@ -119,7 +113,7 @@ flowchart LR
   plugin/ding/sign -.-> crypto
   plugin/ding/bot -.-> node-fetch
   plugin/ding/index -.-> fs/promises
-  plugin/ding/examples/cli -.-> plugin/ding/index
+  examples/ding-cli -.-> plugin/ding/index
 ```
 
 ## Models
