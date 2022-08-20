@@ -12,7 +12,8 @@
     "doc": "typedoc",
     "update": "node dist/plugin/cli/examples/cli.js",
     "update-ding": "node dist/plugin/ding/examples/cli.js",
-    "update-rss": "node dist/plugin/rss/examples/cli.js"
+    "update-rss": "node dist/plugin/rss/examples/cli.js",
+    "update-proxy": "node dist/plugin/proxy/examples/cli.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",

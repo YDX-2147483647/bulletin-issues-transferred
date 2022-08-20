@@ -14,3 +14,12 @@ rss:
 
 proxy:
   secrets_path: config/proxy.secrets.yaml
+  match:
+    # spell-checker: disable
+    - century.bit.edu.cn
+    - cxcy.bit.edu.cn
+    - dekt.bit.edu.cn
+    - dzb.bit.edu.cn
+    - mec.bit.edu.cn
+    - student.bit.edu.cn
+    # spell-checker: enable

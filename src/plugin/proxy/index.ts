@@ -9,17 +9,18 @@ import { readFile } from 'fs/promises'
 import { Headers } from 'node-fetch'
 import VirtualBIT, { cli, decrypt_URL, encrypt_URL } from 'virtual-bit-network'
 import { parse } from 'yaml'
-import { config, HookCollectionType } from '../../core/index.js'
+import { config as all_config, HookCollectionType } from '../../core/index.js'
 import { logger } from '../../util/logger.js'
 
-async function load_config () {
-    // @ts-ignore
-    const { proxy: { secrets_path } }: { proxy: { secrets_path: string } } = config
+async function load_config ({ secrets_path, match: hostnames }: { secrets_path: string, match: string[] }) {
     const file = await readFile(secrets_path)
-    return parse(file.toString()) as { username: string, password: string }
+    const secrets = parse(file.toString()) as { username: string, password: string }
+    return { secrets, hostnames }
 }
 
-const proxy = new VirtualBIT(await load_config())
+// @ts-ignore
+const config = await load_config(all_config.proxy)
+const proxy = new VirtualBIT(config.secrets)
 await proxy.sign_in(cli.display_captcha_then_ask_from_command_line({ width: '80%' }))
 logger.info('Signed in successfully.', { plugin: 'proxy' })
 
@@ -28,6 +29,10 @@ await proxy.fetch('http://mec.bit.edu.cn')
 
 export default function add_proxy_hook (hook: HookCollectionType) {
     hook.wrap('request', async (original_fetch, options) => {
+        if (!config.hostnames.includes((new URL(options.url)).hostname)) {
+            return original_fetch(options)
+        }
+
         const { url, ...init } = options
 
         if (init.headers) {
@@ -40,6 +45,7 @@ export default function add_proxy_hook (hook: HookCollectionType) {
             }
         }
 
+        logger.http(`Request ${url} with proxy.`, { plugin: 'proxy' })
         return proxy.fetch(url, init)
     })
 

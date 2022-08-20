@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema",
-    "$id": "config.schema.json-v0.2.2",
+    "$id": "config.schema.json-v0.3.0",
     "title": "Bulletin IT 设置",
     "type": "object",
     "properties": {
@@ -78,10 +78,22 @@
                 "secrets_path": {
                     "type": "string",
                     "title": "proxy.secrets.yaml 的文件名"
+                },
+                "match": {
+                    "type": "array",
+                    "title": "要代理的 hostname 的列表",
+                    "items": {
+                        "type": "string",
+                        "format": "hostname",
+                        "examples": [
+                            "dekt.bit.edu.cn"
+                        ]
+                    }
                 }
             },
             "required": [
-                "secrets_path"
+                "secrets_path",
+                "match"
             ]
         }
     }

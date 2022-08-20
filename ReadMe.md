@@ -42,6 +42,12 @@ npm run update
 
   更新通知。
 
+- `npm run update-proxy`
+
+  使用代理更新通知。
+
+  [YDX-2147483647/virtual-BIT-network: BIT WebVPN 登录与转换 (github.com)](https://github.com/YDX-2147483647/virtual-BIT-network)
+
 - `npm run update-ding`
 
   更新通知，然后向 i 北理群发送新通知。
@@ -109,7 +115,3 @@ npm run update
 -   原理基于公开内容
 
     CSS 选择器只是描述学校网页，API 是搜索学校网页源代码得到的。这些内容都在 Web 前端，是公开的。
-
-## 相关项目
-
-- [YDX-2147483647/virtual-BIT-network: BIT WebVPN 登录与转换 (github.com)](https://github.com/YDX-2147483647/virtual-BIT-network)
