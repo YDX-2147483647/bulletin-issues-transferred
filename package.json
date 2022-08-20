@@ -1,6 +1,6 @@
 {
   "name": "bulletin-issues-transferred",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "汇总BIT各种网站的通知。",
   "main": "dist/core/index.js",
   "scripts": {
