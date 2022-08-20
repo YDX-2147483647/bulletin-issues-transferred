@@ -1,8 +1,11 @@
 import { createLogger, format, transports } from 'winston'
 
 const logger = createLogger({
-    level: 'info',
-    format: format.json(),
+    level: 'silly',
+    format: format.combine(
+        format.timestamp(),
+        format.json(),
+    ),
     transports: [
         new transports.File({ filename: 'output/combined.log' }),
     ],
@@ -10,9 +13,14 @@ const logger = createLogger({
 
 if (process.env.NODE_ENV !== 'production') {
     logger.add(new transports.Console({
+        level: 'verbose',
         format: format.combine(
             format.colorize({ all: true }),
             format.simple(),
+            format.printf(info => {
+                const plugin = info.plugin ? `（${info.plugin}）` : ''
+                return `${info.level}: ${info.message}${plugin}`
+            }),
         ),
     }))
 }
