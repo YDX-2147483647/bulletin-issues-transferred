@@ -191,15 +191,15 @@
             }
         },
         {
-            "name": "教务处",
+            "name": "教务部",
             "guide": [
-                "教务处",
+                "教务部",
                 "通知公告",
                 "更多"
             ],
-            "url": "https://jwc.bit.edu.cn/tzgg/index.htm",
+            "url": "https://jwb.bit.edu.cn/tzgg/index.htm",
             "selectors": {
-                "rows": ".crules li"
+                "rows": "ul.block-list57 li"
             }
         },
         {
