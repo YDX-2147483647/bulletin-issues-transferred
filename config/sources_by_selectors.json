@@ -299,6 +299,14 @@
             "selectors": {
                 "rows": ".BTG-list13 li"
             }
+        },
+        {
+            "name": "人事",
+            "full_name": "党委教师工作部、人力资源部",
+            "url": "https://renshichu.bit.edu.cn/gbtzgg/index.htm",
+            "selectors": {
+                "rows": ".pageArticle ul.list01 > li"
+            }
         }
     ]
 }

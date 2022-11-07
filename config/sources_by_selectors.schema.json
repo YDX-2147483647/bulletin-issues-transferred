@@ -1,34 +1,36 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "sources_by_selectors.schema.json-v0.3.0",
+    "$id": "sources_by_selectors.schema.json-v0.3.1",
     "title": "通知来源",
     "description": "通知公告页面中通知的标题、日期的选择器等。",
     "type": "object",
     "properties": {
         "last_updated": {
-            "description": "最后更新日期",
+            "title": "最后更新日期",
             "type": "string",
             "format": "date"
         },
         "sources": {
-            "description": "通知来源",
+            "title": "通知来源",
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
                     "name": {
-                        "description": "来源简称\n唯一。会直接显示给同学，尽量简短，尤其不要包含“通知”几个字。",
+                        "title": "来源简称",
+                        "description": "唯一。会直接显示给同学，尽量简短，尤其不要包含“通知”几个字。",
                         "type": "string",
                         "examples": [
                             "睿信"
                         ]
                     },
                     "full_name": {
-                        "description": "来源简称的全名",
+                        "title": "来源简称的全名",
                         "type": "string"
                     },
                     "alt_name": {
-                        "description": "来源的别名\n可用于搜索等。",
+                        "title": "来源的别名",
+                        "description": "可用于搜索等。",
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -40,7 +42,8 @@
                         "format": "uri"
                     },
                     "guide": {
-                        "description": "导航指引\n如果同学不记得链接，怎样一步一步导航到通知页面。",
+                        "title": "导航指引",
+                        "description": "如果同学不记得链接，怎样一步一步导航到通知页面。",
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -54,31 +57,34 @@
                         ]
                     },
                     "selectors": {
-                        "description": "用于抓取通知的CSS选择器\n只有`fetch_by`是`selectors`时需要。",
+                        "title": "用于抓取通知的CSS选择器",
                         "type": "object",
                         "items": true,
                         "properties": {
                             "rows": {
-                                "description": "每项通知\n可能是<li>。",
+                                "title": "每项通知",
+                                "description": "可能是<li>。",
                                 "type": "string",
                                 "examples": [
                                     ".subRight li"
                                 ]
                             },
                             "link": {
-                                "description": "这一项的链接及标题\n一般是<a>。",
+                                "title": "这一项的链接及标题",
+                                "description": "一般是<a>。",
                                 "type": "string",
                                 "default": "a"
                             },
                             "title": {
-                                "description": "这一项的标题\n一般不需要。如果链接和标题不是同一元素，可用`link`定位链接，用`title`定位标题。",
+                                "title": "这一项的标题",
+                                "description": "一般不需要。如果链接和标题不是同一元素，可用`link`定位链接，用`title`定位标题。",
                                 "type": "string",
                                 "examples": [
                                     "h3"
                                 ]
                             },
                             "date": {
-                                "description": "这一项的发布日期",
+                                "title": "这一项的发布日期",
                                 "type": [
                                     "string",
                                     "null"
