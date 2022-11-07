@@ -6,12 +6,12 @@
  * @module
  */
 
-import fetch, { type RequestInit, type Response } from 'node-fetch'
+import _fetch, { type RequestInit, type Response } from 'node-fetch'
 import type { HookCollectionType } from './hooks_type.js'
 
 function fetch_wrapper (request: RequestInit & { url: string }) {
     const { url, ...init } = request
-    return fetch(url, init)
+    return _fetch(url, init)
 }
 
 /**

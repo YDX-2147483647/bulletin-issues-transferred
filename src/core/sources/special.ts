@@ -4,7 +4,7 @@
  */
 
 import { parse_date } from '../../util/my_date.js'
-import fetch from '../fetch_wrapper.js'
+import hooked_fetch from '../fetch_wrapper.js'
 import type { HookCollectionType } from '../hooks_type.js'
 import { Notice, Source, type SourceInterface } from '../models.js'
 
@@ -28,7 +28,7 @@ const raw_sources: SourceSpecialInterface[] = [
             '校内通知',
         ],
         async fetch_notice ({ _hook }) {
-            const response = await fetch({
+            const response = await hooked_fetch({
                 url: 'https://dzb.bit.edu.cn/cms/web/notify/search?page=1&status=7&rows=20&order=1&sortFiled=publishDate',
                 method: 'post',
                 _hook,
@@ -57,7 +57,7 @@ const raw_sources: SourceSpecialInterface[] = [
         url: 'http://mec.bit.edu.cn/infos/index.html',
         async fetch_notice ({ _hook }) {
             const response =
-                await fetch({
+                await hooked_fetch({
                     url: 'http://mec.bit.edu.cn/pcmd/ajax.php?vpn-12-o1-mec.bit.edu.cn&act=getmanage_nologin&w=新闻公告',
                     headers: {
                         Referer: 'http://mec.bit.edu.cn/',
