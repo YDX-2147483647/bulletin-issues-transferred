@@ -307,6 +307,30 @@
             "selectors": {
                 "rows": ".pageArticle ul.list01 > li"
             }
+        },
+        {
+            "name": "公开数据",
+            "guide": [
+                "信息公开",
+                "最新公开信息",
+                "更多"
+            ],
+            "url": "https://xxgk.bit.edu.cn/zxgkxx/index.htm",
+            "selectors": {
+                "rows": ".BIT-list01 li"
+            }
+        },
+        {
+            "name": "公开通知",
+            "guide": [
+                "信息公开",
+                "通知公告",
+                "更多"
+            ],
+            "url": "https://xxgk.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".BIT-list01 li"
+            }
         }
     ]
 }
