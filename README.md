@@ -98,7 +98,7 @@ npm run update
 
 ### 编程
 
-[documentation.md](./documentation.md) 描述了一些思路、细节。另外`npm run doc`可以生成文档。
+[DEVELOPMENT.md](./DEVELOPMENT.md) 描述了一些思路、细节。另外`npm run doc`可以生成文档。
 
 ## 这合法吗？
 
