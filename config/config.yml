@@ -8,8 +8,8 @@ ding:
 rss:
   title: BulletinIT
   description: Bulletin Issues Transferred
-  link: https://haobit.top/dev/notices/
-  rss_href: https://haobit.top/dev/notices/feed.rss
+  link: https://haobit.top/dev/site/notice/
+  rss_href: https://haobit.top/dev/feed.rss
   output_path: output/feed.rss
 
 proxy:
