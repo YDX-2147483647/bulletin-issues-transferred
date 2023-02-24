@@ -2,6 +2,7 @@ import { writeFile } from 'fs/promises'
 import xml from 'xml'
 import type { Notice } from '../../core/index.js'
 import { logger } from '../../util/logger.js'
+import { sort_by_date } from '../../util/my_date.js'
 
 /**
  * @param notice 需要 source，因此请提前{@link Notice.populate}
@@ -78,8 +79,11 @@ export function build_feed (notices: Notice[], options: {
  * @param options
  */
 export async function write_rss (notices: Notice[], path: string, options: {
-    rss_href: string; title: string; link: string; description: string
+    rss_href: string; title: string; link: string; description: string, max_items: number
 }) {
-    await writeFile(path, build_feed(notices, options))
+    const { max_items, ...rss_options } = options
+
+    notices.sort(sort_by_date)
+    await writeFile(path, build_feed(notices.slice(0, max_items), rss_options))
     logger.info(`已保存到“${path}”。`, { plugin: 'rss' })
 }

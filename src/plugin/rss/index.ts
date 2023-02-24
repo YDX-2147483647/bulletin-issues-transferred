@@ -7,12 +7,13 @@
 import { config, type HookCollectionType, type Source } from '../../core/index.js'
 import { write_rss } from './rss.js'
 
-const { output_path, ...rss_options } = config.rss as {
+const { output_path, ...rss_options } = Object.assign({ max_items: 30 }, config.rss) as {
     title: string
     description: string
     link: string
     rss_href: string
-    output_path: string
+    output_path: string,
+    max_items: number,
 }
 
 /**
