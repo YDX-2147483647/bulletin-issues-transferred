@@ -41,13 +41,16 @@ class SourceBySelectors extends Source {
         this.selectors = { rows, link, date, title: title || link }
     }
 
-    private _row_to_notice (row: Element) {
+    /**
+     * @param base_url 页面的 URL（插件可以让实际页面的 URL 与`this.url`不同）
+     */
+    private _row_to_notice (row: Element, base_url: string) {
         const link: HTMLAnchorElement = row.querySelector(this.selectors.link)
         const title = row.querySelector(this.selectors.title)
         const date = this.selectors.date ? row.querySelector(this.selectors.date) : null
 
         return new Notice({
-            link: (new URL(link.href, this.url)).href,
+            link: (new URL(link.href, base_url)).href,
             title: title.textContent.trim(),
             date: date ? parse_date(date.textContent) : null,
             source: this,
@@ -55,12 +58,13 @@ class SourceBySelectors extends Source {
     }
 
     async fetch_notice ({ _hook }: { _hook: HookCollectionType }) {
-        const html = await (await hooked_fetch({ url: this.url, _hook })).text()
+        const response = await hooked_fetch({ url: this.url, _hook })
+        const html = await response.text()
         const dom = new JSDOM(html)
 
         const rows = dom.window.document.querySelectorAll(this.selectors.rows)
 
-        return Array.from(rows).map(row => this._row_to_notice(row))
+        return Array.from(rows).map(row => this._row_to_notice(row, response.url))
     }
 }
 
