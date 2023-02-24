@@ -4,7 +4,7 @@ BulletinIT 旨在汇总 BIT 各种网站的通知。
 
 ```shell
 # 第一次使用前需要先安装包
-npm init
+npm install
 # 然后编译 TypeScript
 npm run build
 
@@ -56,15 +56,16 @@ npm run update
 
   需要配置钉钉机器人的秘密信息，请参考`config/ding.secrets.schema.json`。
 
-- `npm run update-server`
-
-  proxy + ding，可用于服务器上的 crontab。
-
 - `npm run update-rss`
 
   更新通知，并生成 RSS。
 
-  注意，尚未实际测试过`output/feed.rss`是否可用。
+- `npm run update-server`
+
+  proxy + ding + rss，可用于服务器上的 crontab。
+
+  我们已部署了一个，可在 [HaoBIT](https://haobit.top/dev/site/notice/) 查看，例如 [RSS](http://haobit.top/dev/feed.rss)。
+
 
 ## 如何贡献？
 
