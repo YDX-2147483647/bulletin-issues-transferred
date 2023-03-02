@@ -266,10 +266,11 @@
         {
             "name": "大创",
             "full_name": "大学生创新创业训练计划管理系统",
-            "url": "http://cxcy.bit.edu.cn/CXCY/BIT/NoticeBulletin",
+            "url": "http://cxcy.bit.edu.cn/pt/pt/Notice",
             "selectors": {
-                "rows": "tr[id^=noticebulletin]",
-                "date": "td:last-child"
+                "rows": "ul.c-ul-notice > li",
+                "date": ".c-date",
+                "link": ".c-text > a"
             }
         },
         {
