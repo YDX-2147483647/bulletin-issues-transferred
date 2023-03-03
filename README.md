@@ -62,10 +62,13 @@ npm run update
 
 - `npm run update-server`
 
-  proxy + ding + rss，可用于服务器上的 crontab。
+  proxy + rss，可用于服务器上的 crontab。
 
   我们已部署了一个，可在 [HaoBIT](https://haobit.top/dev/site/notice/) 查看，例如 [RSS](http://haobit.top/dev/feed.rss)。
 
+- `npm run update-server-ding`
+
+  server + ding，可用于服务器上的 crontab。
 
 ## 如何贡献？
 
