@@ -29,6 +29,7 @@ function to_feed_item (notice: Notice) {
                 ],
             },
             { description: { _cdata: description } },
+            { category: notice.source_name ?? '未知来源' },
         ],
     }
 }
@@ -60,10 +61,21 @@ export function build_feed (notices: Notice[], options: {
                             },
                         },
                     },
+                    {
+                        'atom:link': {
+                            _attr: {
+                                href: options.link,
+                                rel: 'alternate',
+                                type: 'text/html',
+                            },
+                        },
+                    },
                     { title: options.title },
                     { link: options.link },
                     { description: options.description },
                     { language: 'zh-CN' },
+                    { generator: 'Bulletin Issues Transferred' },
+                    { lastBuildDate: (new Date()).toUTCString() },
                     ...notices.map(to_feed_item),
                 ],
             },
