@@ -282,7 +282,7 @@
             "url": "http://dekt.bit.edu.cn/portal/CourseList.jsp",
             "selectors": {
                 "rows": "tbody tr",
-                "date": "td.list_sj em"
+                "date": null
             }
         },
         {
