@@ -2,7 +2,7 @@ import { writeFile } from 'fs/promises'
 import xml from 'xml'
 import type { Notice } from '../../core/index.js'
 import { logger } from '../../util/logger.js'
-import { sort_by_date } from '../../util/my_date.js'
+import { sort_by_date, format_date } from '../../util/my_date.js'
 
 /**
  * @param notice 需要 source，因此请提前{@link Notice.populate}
@@ -20,7 +20,7 @@ function to_feed_item (notice: Notice) {
     return {
         item: [
             { title: notice.title },
-            { pubDate: notice.date ? notice.date.toUTCString() : null },
+            { pubDate: notice.date ? format_date(notice.date) : null },
             { link: notice.link },
             {
                 guid: [
@@ -75,7 +75,7 @@ export function build_feed (notices: Notice[], options: {
                     { description: options.description },
                     { language: 'zh-CN' },
                     { generator: 'Bulletin Issues Transferred' },
-                    { lastBuildDate: (new Date()).toUTCString() },
+                    { lastBuildDate: format_date(new Date()) },
                     ...notices.map(to_feed_item),
                 ],
             },

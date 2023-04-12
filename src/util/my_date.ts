@@ -50,3 +50,14 @@ export function recent_checker (days_ago: number) {
     const ago = new Date(today.getFullYear(), today.getMonth(), today.getDate() - days_ago)
     return (date: Date | null) => date === null || date.getTime() >= ago.getTime()
 }
+
+/**
+ * 格式化日期
+ *
+ * 按 RFC 822，但时区不使用名称。
+ *
+ * 这是为了绕开 [Joda Time parser limitation](https://github.com/clj-time/clj-time/issues/97)。
+ */
+export function format_date (date: Date) {
+    return date.toUTCString().replace(/GMT$/, '+0000')
+}

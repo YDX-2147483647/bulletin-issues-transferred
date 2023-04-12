@@ -1,7 +1,7 @@
 import { assert } from 'chai'
 import { describe, it } from 'mocha'
 
-import { parse_date, sort_by_date } from './my_date.js'
+import { parse_date, sort_by_date, format_date } from './my_date.js'
 
 function assert_date (actual: Date, expected: Date) {
     assert.equal(actual.toString(), expected.toString())
@@ -58,5 +58,11 @@ describe('排序日期', () => {
         actual.sort(sort_by_date)
 
         assert_dates(actual, [{ date: c }, { date: b }, { date: a }, { date: null }, { date: null }])
+    })
+})
+
+describe('格式化日期', () => {
+    it('不含“GMT”', () => {
+        assert.equal(format_date(new Date(2021, 5, 20)), 'Sat, 19 Jun 2021 16:00:00 +0000')
     })
 })
