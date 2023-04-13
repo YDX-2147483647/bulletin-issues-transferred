@@ -4,6 +4,7 @@
 [![RSS Valid](https://img.shields.io/badge/RSS-Valid-orange?logo=rss)](https://validator.w3.org/feed/check.cgi?url=https%3A%2F%2Fhaobit.top%2Fdev%2Ffeed.rss)
 [![rssto.email](https://img.shields.io/badge/邮件-rssto.email-pink?logo=maildotru)](https://rssto.email?url=https://haobit.top/dev/feed.rss)
 [![QQ群 757113685](https://img.shields.io/badge/QQ群-757113685-0852d6?logo=tencentqq)](https://jq.qq.com/?_wv=1027&k=j13nOAhr)
+![Updated](https://img.shields.io/endpoint?url=https%3A%2F%2Fhaobit.top%2Fdev%2Fbadge)
 
 BulletinIT 旨在汇总 BIT 各种网站的通知。
 
