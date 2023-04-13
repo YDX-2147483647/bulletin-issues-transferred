@@ -5,6 +5,7 @@
 [![rssto.email](https://img.shields.io/badge/邮件-rssto.email-pink?logo=maildotru)](https://rssto.email?url=https://haobit.top/dev/feed.rss)
 [![QQ群 757113685](https://img.shields.io/badge/QQ群-757113685-0852d6?logo=tencentqq)](https://jq.qq.com/?_wv=1027&k=j13nOAhr)
 ![Updated](https://img.shields.io/endpoint?url=https%3A%2F%2Fhaobit.top%2Fdev%2Fbadge)
+[![Mirror Gitee](https://img.shields.io/badge/Mirror-Gitee-red?logo=gitee)](https://gitee.com/YDX-2147483647/bulletin-issues-transferred/)
 
 BulletinIT 旨在汇总 BIT 各种网站的通知。
 
