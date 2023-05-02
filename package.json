@@ -31,7 +31,7 @@
     "virtual-bit-network": "github:YDX-2147483647/virtual-BIT-network",
     "winston": "^3.8.1",
     "xml": "^1.0.1",
-    "yaml": "^2.0.0-10"
+    "yaml": "^2.2.2"
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",
