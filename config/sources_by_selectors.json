@@ -332,6 +332,19 @@
             "selectors": {
                 "rows": ".BIT-list01 li"
             }
+        },
+        {
+            "name": "校医院",
+            "full_name": "医院和社区卫生服务中心",
+            "guide": [
+                "校医院",
+                "通知公告",
+                "更多"
+            ],
+            "url": "https://xyy.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".list02 > ul > li"
+            }
         }
     ]
 }
