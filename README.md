@@ -79,6 +79,10 @@ npm run update
 
   server + ding，可用于服务器上的 crontab。
 
+## 星标历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=YDX-2147483647/bulletin-issues-transferred&type=Date)](https://star-history.com/#YDX-2147483647/bulletin-issues-transferred&Date)
+
 ## 如何贡献？
 
 请注意，这个项目报了2021-2022学年的校创及2022年的北京市市创（服务器钱就来源于此），大家在这个仓库的贡献可能会被答辩老师算在我们头上。
