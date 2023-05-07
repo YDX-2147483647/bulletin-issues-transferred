@@ -26,9 +26,15 @@ async function _update_notices ({
         ...options,
     })
 
-    // Sign today for sort
+    // 规范日期
+    //
+    // - 有些来源未给出日期，之后无法排序。
+    // - 有些来源的日期在未来，这存在兼容性问题（implausible date）。
+    //
+    // 这两种情况都设置为当前日期。
+    const now = new Date()
     latest_notices.forEach(n => {
-        if (!n.date) {
+        if (!n.date || n.date > now) {
             n.date = new Date()
         }
     })
