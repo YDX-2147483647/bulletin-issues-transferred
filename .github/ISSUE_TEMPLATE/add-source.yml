@@ -1,0 +1,68 @@
+name: 添加通知来源
+description: 如果现在没包括你平常需要的通知，可通过此模板要求添加。
+title: 添加通知来源：【名称】
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢帮忙添加新的来源！请确保这个来源不需登录就能访问到。
+
+        ## 基本信息
+
+        请尽量提供信息，不过以下大部分都是选填，填不全也没关系。
+  - type: input
+    id: name
+    attributes:
+      label: 名称
+      description: 会直接显示给同学，尽量简短，尤其不要包含“通知”几个字。
+      placeholder: 睿信
+    validations:
+      required: true
+  - type: input
+    id: full_name
+    attributes:
+      label: 全名
+      description: 只有与“名称”不同时才需要。
+  - type: input
+    id: url
+    attributes:
+      label: 通知页面的链接
+      placeholder: https://www.bit.edu.cn/rcpy_sjb/blsy87/rxsygb/index.htm
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 用于抓取通知的CSS选择器
+
+        如果你不知道这是什么，或者不想填，可以忽略。
+  - type: input
+    id: selectors-rows
+    attributes:
+      label: rows
+      description: 每项通知
+      placeholder: ".subRight li"
+  - type: textarea
+    id: selectors-other
+    attributes:
+      label: 其它选择器
+      description: |
+        若较复杂，可能还需其它选择器。请参考`config/sources_by_selectors.schema.json`。
+      placeholder: |
+        link: a
+        date: span
+
+        # 如果链接和标题不是同一元素，可用link定位链接，用title定位标题。
+        # title: h3
+
+  - type: markdown
+    attributes:
+      value: |
+        ### 补充
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 补充信息
+      description: 如有其它相关信息，可在这里注明。
+      placeholder: （可选）
