@@ -18,6 +18,50 @@ interface SourceSpecialInterface extends SourceInterface {
     fetch_notice (options: { _hook: HookCollectionType }): Promise<NoticeWithoutSource[]>
 }
 
+/**
+ * 获取 lib.bit.edu.cn 的通知
+ */
+async function fetch_lib_notice ({ _hook, general_id, engine_id }: { _hook: HookCollectionType, general_id: string, engine_id: string }) {
+    const response =
+        await hooked_fetch({
+            url: `https://lib.bit.edu.cn/engine2/general/${general_id}/type/more-datas`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            },
+            body: `engineInstanceId=${engine_id}`,
+            _hook,
+        })
+    const json = await response.json() as {
+        data: { datas: { datas: { url: string, '1': { value: string }, '6': { value: string }, id: string }[] } }
+    }
+    const original_data = json.data.datas.datas
+
+    return original_data.map(
+        ({ url: url_str, 1: title, 6: date, id }) => {
+            const url = new URL(url_str, 'https://lib.bit.edu.cn')
+            if (url.hostname === 'lib.bit.edu.cn') {
+                // 图书馆直接返回的是长 URL，
+                // 实际访问时再用`window.location.href`跳转到实际页面。
+                // 这里直接缩短一下。
+                url.pathname = [
+                    'engine2/d',
+                    id,
+                    url.searchParams.get('engineInstanceId'),
+                    '0',
+                ].join('/')
+                url.search = ''
+            }
+
+            return {
+                link: url.href,
+                title: title.value,
+                date: parse_date(date.value),
+            }
+        },
+    )
+}
+
 const raw_sources: SourceSpecialInterface[] = [
     {
         name: '党政部',
@@ -87,44 +131,20 @@ const raw_sources: SourceSpecialInterface[] = [
         ],
         url: 'https://lib.bit.edu.cn/engine2/m/7252A82F2C1BEA45',
         async fetch_notice ({ _hook }) {
-            const response =
-                await hooked_fetch({
-                    url: 'https://lib.bit.edu.cn/engine2/general/1430281/type/more-datas',
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    },
-                    body: 'engineInstanceId=2047535',
-                    _hook,
-                })
-            const json = await response.json() as {
-                data: { datas: { datas: { url: string, '1': { value: string }, '6': { value: string }, id: string }[] } }
-            }
-            const original_data = json.data.datas.datas
-
-            return original_data.map(
-                ({ url: url_str, 1: title, 6: date, id }) => {
-                    const url = new URL(url_str, 'https://lib.bit.edu.cn')
-                    if (url.hostname === 'lib.bit.edu.cn') {
-                        // 图书馆直接返回的是长 URL，
-                        // 实际访问时再用`window.location.href`跳转到实际页面。
-                        // 这里直接缩短一下。
-                        url.pathname = [
-                            'engine2/d',
-                            id,
-                            url.searchParams.get('engineInstanceId'),
-                            '0',
-                        ].join('/')
-                        url.search = ''
-                    }
-
-                    return {
-                        link: url.href,
-                        title: title.value,
-                        date: parse_date(date.value),
-                    }
-                },
-            )
+            return await fetch_lib_notice({ general_id: '1430281', engine_id: '2047535', _hook })
+        },
+    },
+    {
+        name: '图书馆讲座',
+        guide: [
+            '图书馆',
+            '动态发布',
+            '讲座活动',
+            '更多',
+        ],
+        url: 'https://lib.bit.edu.cn/engine2/m/57D956B0E35360B0',
+        async fetch_notice ({ _hook }) {
+            return await fetch_lib_notice({ general_id: '1387413', engine_id: '1722985', _hook })
         },
     },
 ]
