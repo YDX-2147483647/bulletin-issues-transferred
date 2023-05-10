@@ -12,6 +12,7 @@ interface NoticeWithoutSource {
     link: string
     title: string
     date: Date | null
+    id?: string
 }
 
 interface SourceSpecialInterface extends SourceInterface {
@@ -153,8 +154,8 @@ const sources = raw_sources.map(raw => {
     const source = new Source(raw)
     source.fetch_notice = async ({ _hook }) => {
         const notices = await raw.fetch_notice({ _hook })
-        return notices.map(({ link, title, date }) =>
-            new Notice({ link, title, date, source }),
+        return notices.map(({ link, title, date, id }) =>
+            new Notice({ link, title, date, source, id }),
         )
     }
     return source

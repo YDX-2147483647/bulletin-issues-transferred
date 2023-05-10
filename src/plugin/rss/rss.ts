@@ -24,8 +24,8 @@ function to_feed_item (notice: Notice) {
             { link: notice.link },
             {
                 guid: [
-                    { _attr: { isPermaLink: true } },
-                    notice.link,
+                    { _attr: { isPermaLink: notice.id === notice.link } },
+                    notice.id,
                 ],
             },
             { description: { _cdata: description } },
