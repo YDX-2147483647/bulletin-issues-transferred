@@ -148,6 +148,41 @@ const raw_sources: SourceSpecialInterface[] = [
             return await fetch_lib_notice({ general_id: '1387413', engine_id: '1722985', _hook })
         },
     },
+    {
+        name: '延河',
+        full_name: '延河课堂更新日志',
+        url: 'https://www.yanhekt.cn/supportCenter/releases',
+        guide: [
+            '延河课堂',
+            '右边栏',
+            '用户手册',
+            '左边栏',
+            '更新日志',
+        ],
+        async fetch_notice ({ _hook }) {
+            const response =
+                await hooked_fetch({
+                    url: 'https://cbiz.yanhekt.cn/v1/notice/list?with_brief=false',
+                    headers: {
+                        Referer: 'https://www.yanhekt.cn/',
+                        'Xdomain-Client': 'web_user',
+                    },
+                    _hook,
+                })
+            const json = await response.json() as { data: { title: string, created_at: string, id: number }[] }
+            const original_data = json.data
+
+            return original_data.map(
+                ({ title, created_at, id }) => ({
+                    link: 'https://www.yanhekt.cn/supportCenter/releases',
+                    id: `https://www.yanhekt.cn/supportCenter/releases#${id}`,
+                    // 无专门页面，延河课堂网页又不支持 hash（加了就不能正常显示），只好自制 id
+                    title,
+                    date: parse_date(created_at),
+                }),
+            )
+        },
+    },
 ]
 
 const sources = raw_sources.map(raw => {
