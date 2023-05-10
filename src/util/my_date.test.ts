@@ -23,6 +23,9 @@ describe('解析日期', () => {
     it('完整的ISO字符串还是按ISO解析', () => {
         assert_date(parse_date('2021-12-10T20:00:00.000Z'), new Date('2021-12-10T20:00:00.000Z'))
     })
+    it('用空格分隔的ISO日期和时间', () => {
+        assert_date(parse_date('2023-03-31 17:28:49'), new Date(2023, 2, 31, 17, 28, 49))
+    })
     it('省略“年”时理解为当年', () => {
         assert_date(parse_date('1-1'), new Date((new Date()).getFullYear(), 0, 1))
     })

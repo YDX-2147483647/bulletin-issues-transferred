@@ -58,6 +58,9 @@ export interface NoticeInterface {
     title: string
     date: Date | null
 
+    /** 标识符，在（所有来源的）所有通知中唯一，一般无需指定，直接采用`link` */
+    id?: string
+
     /** 通知来源或 id */
     source: Source | string
 }
@@ -75,13 +78,13 @@ export class Notice {
     source?: Source
     #source_ref: Source | string
 
-    constructor ({ link, title, date, source }: NoticeInterface) {
+    constructor ({ link, title, date, source, id }: NoticeInterface) {
         this.link = link
         this.title = title
         this.date = date
         this.#source_ref = source
 
-        this.id = this.link
+        this.id = id ?? this.link
     }
 
     populate ({ sources }: { sources?: Source[] }) {
@@ -140,6 +143,7 @@ export class Notice {
             title: this.title,
             date: this.date,
             source: this.source_id,
+            ...(this.id === this.link ? {} : { id: this.id }),
         } as NoticeInterface
     }
 
