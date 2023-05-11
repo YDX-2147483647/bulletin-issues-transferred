@@ -345,6 +345,18 @@
             "selectors": {
                 "rows": ".list02 > ul > li"
             }
+        },
+        {
+            "name": "国际交流",
+            "url":"https://abroad.bit.edu.cn/xwtz/tzgg/index.htm",
+            "guide": [
+                "国际交流",
+                "通知公告",
+                "更多"
+            ],
+            "selectors": {
+                "rows": ".list_sub li"
+            }
         }
     ]
 }
