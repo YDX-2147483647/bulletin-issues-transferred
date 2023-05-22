@@ -86,6 +86,7 @@ npm run update
 ## 如何贡献？
 
 请注意，这个项目报了2021-2022学年的校创及2022年的北京市市创（服务器钱就来源于此），大家在这个仓库的贡献可能会被答辩老师算在我们头上。
+您可以通过[HaoBIT](https://haobit.top/)关于页内提供的渠道联系我们以提供您的建议和意见。
 
 ### 添加别的通知来源
 
@@ -112,6 +113,7 @@ npm run update
 ### 移植到别的学校
 
 只需要写新的`config/sources_by_selectors.json`和`src/core/sources/special.ts`即可。
+另外，如果有移植类似[HaoBIT](https://haobit.top/)的全套网页的想法，请使用该网站关于页内提供的渠道联系我们。
 
 ### 编程
 
