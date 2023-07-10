@@ -1,5 +1,6 @@
 # Bulletin Issues Transferred
 
+[![best of BITs](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/YDX-2147483647/best-of-bits/main/config/badge/v1.json)](https://github.com/YDX-2147483647/best-of-bits)
 ![version](https://img.shields.io/github/package-json/v/YDX-2147483647/bulletin-issues-transferred)
 [![RSS Valid](https://img.shields.io/badge/RSS-Valid-orange?logo=rss)](https://validator.w3.org/feed/check.cgi?url=https%3A%2F%2Fhaobit.top%2Fdev%2Ffeed.rss)
 [![rssto.email](https://img.shields.io/badge/邮件-rssto.email-pink?logo=maildotru)](https://rssto.email?url=https://haobit.top/dev/feed.rss)
