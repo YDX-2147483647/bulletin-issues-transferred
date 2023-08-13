@@ -348,7 +348,7 @@
         },
         {
             "name": "国际交流",
-            "url":"https://abroad.bit.edu.cn/xwtz/tzgg/index.htm",
+            "url": "https://abroad.bit.edu.cn/xwtz/tzgg/index.htm",
             "guide": [
                 "国际交流",
                 "通知公告",
@@ -356,6 +356,18 @@
             ],
             "selectors": {
                 "rows": ".list_sub li"
+            }
+        },
+        {
+            "name": "新生",
+            "full_name": "迎新动态",
+            "url": "https://hi.bit.edu.cn/rxbd/dttzyx/index.htm",
+            "guide": [
+                "迎新",
+                "迎新动态"
+            ],
+            "selectors": {
+                "rows": ".rt01_list > ul > li"
             }
         }
     ]
