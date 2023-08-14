@@ -381,6 +381,35 @@
             "selectors": {
                 "rows": ".mode6_lt > ul > li"
             }
+        },
+        {
+            "name": "网安",
+            "full_name": "网络空间安全学院",
+            "url": "https://cst.bit.edu.cn/xxfw/tzgg/index.htm",
+            "guide": [
+                "网络空间安全学院",
+                "通知公告",
+                "点击查看更多"
+            ],
+            "selectors": {
+                "rows": ".sub_list003 > ul > li",
+                "title": ".title",
+                "date": ".time"
+            }
+        },
+        {
+            "name": "集电",
+            "full_name": "集成电路与电子学院",
+            "url": "https://ice.bit.edu.cn/xxfw/tzgg1/index.htm",
+            "guide": [
+                "集成电路与电子学院",
+                "通知公告",
+                "更多"
+            ],
+            "selectors": {
+                "rows": "ul.inform > li",
+                "title": "p"
+            }
         }
     ]
 }
