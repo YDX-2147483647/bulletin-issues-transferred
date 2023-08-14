@@ -28,6 +28,7 @@ describe('解析日期', () => {
     })
     it('省略“年”时理解为当年', () => {
         assert_date(parse_date('1-1'), new Date((new Date()).getFullYear(), 0, 1))
+        assert_date(parse_date('08-14'), new Date((new Date()).getFullYear(), 7, 14))
     })
     it('忽略两边的字符', () => {
         assert_date(parse_date('[2021-12-10]'), new Date(2021, 11, 10))

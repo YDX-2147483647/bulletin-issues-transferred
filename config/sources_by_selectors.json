@@ -369,6 +369,18 @@
             "selectors": {
                 "rows": ".rt01_list > ul > li"
             }
+        },
+        {
+            "name": "信电",
+            "full_name": "信息与电子学院",
+            "url": "https://sie.bit.edu.cn/index.htm",
+            "guide": [
+                "信息与电子学院",
+                "通知公告"
+            ],
+            "selectors": {
+                "rows": ".mode6_lt > ul > li"
+            }
         }
     ]
 }
