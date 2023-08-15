@@ -414,6 +414,140 @@
                 "rows": "ul.inform > li",
                 "title": "p"
             }
+        },
+        {
+            "name": "机车",
+            "full_name": "机械与车辆学院",
+            "url": "https://me.bit.edu.cn/tzgg/index.htm",
+            "guide": [
+                "机械与车辆学院",
+                "通知公告",
+                "更多"
+            ],
+            "selectors": {
+                "rows": "ul.bitj-list6 > li"
+            }
+        },
+        {
+            "name": "数学",
+            "full_name": "数学与统计学院",
+            "url": "https://math.bit.edu.cn/tzgg/index.htm",
+            "guide": [
+                "数学与统计学院",
+                "通知公告",
+                "更多"
+            ],
+            "selectors": {
+                "rows": "ul.list1 > li"
+            }
+        },
+        {
+            "name": "物理",
+            "full_name": "物理学院",
+            "url": "https://physics.bit.edu.cn/tzgg4/index.htm",
+            "guide": [
+                "物理学院",
+                "通知公告",
+                "MORE+"
+            ],
+            "selectors": {
+                "rows": "ul.directory > li",
+                "title": "p"
+            }
+        },
+        {
+            "name": "机电",
+            "full_name": "机电学院",
+            "url": "https://smen.bit.edu.cn/tzgg1/index.htm",
+            "guide": [
+                "机电学院",
+                "通知公告",
+                "⏩"
+            ],
+            "selectors": {
+                "rows": ".con1_left_con2 > ul > li"
+            }
+        },
+        {
+            "name": "生命",
+            "full_name": "生命学院",
+            "url": "https://ls.bit.edu.cn/xytz/index.htm",
+            "guide": [
+                "生命学院",
+                "学院通知",
+                "more"
+            ],
+            "selectors": {
+                "rows": ".box_list > ul > li"
+            }
+        },
+        {
+            "name": "宇航",
+            "full_name": "宇航学院",
+            "url": "https://sae.bit.edu.cn/tzgggb/index.htm",
+            "guide": [
+                "宇航学院",
+                "通知公告",
+                "+"
+            ],
+            "selectors": {
+                "rows": ".subList01 > ul > li",
+                "title": ".title",
+                "date": ".time"
+            }
+        },
+        {
+            "name": "医学",
+            "full_name": "医学技术学院",
+            "url": "https://smt.bit.edu.cn/tzgg/index.htm",
+            "guide": [
+                "医学技术学院",
+                "通知公告",
+                "更多"
+            ],
+            "selectors": {
+                "rows": "ul.demeanor > li",
+                "title": "p"
+            }
+        },
+        {
+            "name": "自动化",
+            "full_name": "自动化学院",
+            "url": "https://ac.bit.edu.cn/tzgg/index.htm",
+            "guide": [
+                "自动化学院",
+                "通知公告",
+                "查看更多"
+            ],
+            "selectors": {
+                "rows": "ul.list01 > li"
+            }
+        },
+        {
+            "name": "人文",
+            "full_name": "人文与社会科学学院",
+            "url": "https://rw.bit.edu.cn/tzgg/index.htm",
+            "guide": [
+                "人文与社会科学学院",
+                "通知公告",
+                "more+"
+            ],
+            "selectors": {
+                "rows": ".list > ul > li"
+            }
+        },
+        {
+            "name": "人文素质",
+            "full_name": "人文素质教研部",
+            "url": "https://rw.bit.edu.cn/rwszjyb/tzxw/index.htm",
+            "guide": [
+                "人文与社会科学学院",
+                "人文素质教研部",
+                "通知新闻"
+            ],
+            "selectors": {
+                "rows": ".list > ul > li"
+            }
         }
     ]
 }
