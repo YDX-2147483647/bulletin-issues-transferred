@@ -548,6 +548,74 @@
             "selectors": {
                 "rows": ".list > ul > li"
             }
+        },
+        {
+            "name": "国际组织",
+            "full_name": "国际组织创新学院",
+            "url": "https://sgg.bit.edu.cn/tzgg/index.htm",
+            "guide": [
+                "国际组织创新学院",
+                "通知公告",
+                "更多"
+            ],
+            "selectors": {
+                "rows": "ul.block-list160 > li",
+                "title": "p"
+            }
+        },
+        {
+            "name": "法学",
+            "full_name": "法学院学生",
+            "url": "https://law.bit.edu.cn/tzgg/xsbd/index.htm",
+            "guide": [
+                "法学院",
+                "通知公告",
+                "学生必读"
+            ],
+            "selectors": {
+                "rows": ".articleList5 > ul > li"
+            }
+        },
+        {
+            "name": "材料",
+            "full_name": "材料学院",
+            "url": "https://mse.bit.edu.cn/tzgg/index.htm",
+            "guide": [
+                "材料学院",
+                "通知公告",
+                "更多"
+            ],
+            "selectors": {
+                "rows": "ul.generalUltwo > li",
+                "title": "p"
+            }
+        },
+        {
+            "name": "外国语",
+            "full_name": "外国语学院",
+            "url": "https://sfl.bit.edu.cn/tzgg/index.htm",
+            "guide": [
+                "外国语学院",
+                "通知公告",
+                "更多+"
+            ],
+            "selectors": {
+                "rows": ".page-list17 li.gpTextArea"
+            }
+        },
+        {
+            "name": "化学",
+            "full_name": "化学与化工学院",
+            "url": "https://cce.bit.edu.cn/tzgg/index.htm",
+            "guide": [
+                "化学与化工学院",
+                "通知公告",
+                "更多+"
+            ],
+            "selectors": {
+                "rows": "ul.partyUl > li",
+                "date": ".date"
+            }
         }
     ]
 }
