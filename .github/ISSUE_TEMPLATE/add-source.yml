@@ -1,7 +1,8 @@
 name: 添加通知来源
 description: 如果现在没包括你平常需要的通知，可通过此模板要求添加。
 title: 添加通知来源：【名称】
-labels: [enhancement]
+labels:
+  - type:feature
 body:
   - type: markdown
     attributes:
