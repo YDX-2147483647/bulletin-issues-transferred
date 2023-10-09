@@ -10,9 +10,17 @@ export function verbose (hook: HookCollectionType) {
         const { sources } = options
         logger.info(`发现${sources.length}个通知来源。`, { plugin: 'cli' })
     })
-    hook.error('fetch_each', (err, { source }) => {
+    hook.error('fetch_each', (
+        err,
+        // @ts-ignore If `fetch_each` has an error hook, the after hook may get `undefined`
+        { source } = { source: { name: undefined } },
+    ) => {
         if (err instanceof FetchError && err.errno === 'ENOTFOUND') {
             logger.warn(`未能访问“${source.name}”（ENOTFOUND）。将忽略。`, { plugin: 'cli' })
+        } else if (err instanceof FetchError && err.errno === 'ETIMEDOUT') {
+            logger.error(`访问“${source.name}”（ETIMEDOUT）超时，可能因为访问太频繁。将忽略。`, { plugin: 'cli' })
+        } else if (err instanceof FetchError) {
+            logger.error(err.toString(), { plugin: 'cli', hook: 'fetch_each.error' })
         } else {
             throw err
         }
