@@ -19,5 +19,6 @@ export function update_notices () {
         write_json_path: config.json_path,
         sources_by_selectors_path: config.sources_by_selectors,
         save_for: config.save_for,
+        fetch_concurrency: config.fetch_concurrency,
     })
 }

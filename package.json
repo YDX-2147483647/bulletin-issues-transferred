@@ -28,6 +28,7 @@
     "cli-progress": "^3.9.1",
     "jsdom": "^19.0.0",
     "node-fetch": "^3.2.10",
+    "p-map": "^6.0.0",
     "virtual-bit-network": "^0.3.0",
     "winston": "^3.8.1",
     "xml": "^1.0.1",
