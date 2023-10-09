@@ -1,3 +1,5 @@
+import pMap from 'p-map'
+
 import type { HookCollectionType } from '../hooks_type.js'
 import type { Notice, Source } from '../models.js'
 
@@ -5,6 +7,7 @@ import type { Notice, Source } from '../models.js'
  * 从一系列来源获取通知
  * @param options 选项
  * @param options.sources
+ * @param options.concurrency
  * @param options._hook (internal usage only) `fetch`, `fetch_each`
  *
  * Here there are 2 hooks: `fetch` and `fetch_each`.
@@ -12,9 +15,10 @@ import type { Notice, Source } from '../models.js'
  * - `fetch_each`: several parallel sub-processes, fetching each source.
  */
 export async function fetch_all_sources ({
-    sources, _hook,
+    sources, concurrency, _hook,
 }: {
     sources: Source[],
+    concurrency: number,
     _hook: HookCollectionType,
 }): Promise<{ notices: Notice[] }> {
     return await _hook(
@@ -31,8 +35,7 @@ export async function fetch_all_sources ({
                 return _hook('fetch_each', fetch_each, { source: s, ...options })
             }
             // Call `fetch_each` in parallel.
-            const notices_grouped = await Promise.all(
-                sources.map(fetch_each_hooked))
+            const notices_grouped = await pMap(sources, fetch_each_hooked, { concurrency })
 
             // Ignore `undefined`.
             // (If `fetch_each` has an error hook, we may get here even though there's nothing.)
