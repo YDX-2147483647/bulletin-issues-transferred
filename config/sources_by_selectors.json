@@ -548,6 +548,23 @@
             "selectors": {
                 "rows": ".list > ul > li"
             }
+        },
+        {
+            "name": "课程",
+            "full_name": "课表、课程调整、选课",
+            "alt_name": [
+                "教学运行"
+            ],
+            "url": "https://jxzx.bit.edu.cn/jxyx/index.htm",
+            "guide": [
+                "教学中心",
+                "教学运行",
+                "您目前的位置",
+                "教学运行"
+            ],
+            "selectors": {
+                "rows": "div.articleList li"
+            }
         }
     ]
 }
