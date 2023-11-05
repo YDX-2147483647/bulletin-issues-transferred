@@ -7,7 +7,7 @@
  */
 
 import { readFile } from 'node:fs/promises'
-import { JSDOM } from 'jsdom'
+import { DOMParser } from 'https://deno.land/x/deno_dom@v0.1.42/deno-dom-wasm.ts'
 import { parse_date } from '../../util/my_date.ts'
 import hooked_fetch from '../fetch_wrapper.ts'
 import type { HookCollectionType } from '../hooks_type.ts'
@@ -60,9 +60,9 @@ class SourceBySelectors extends Source {
     async fetch_notice ({ _hook }: { _hook: HookCollectionType }) {
         const response = await hooked_fetch({ url: this.url, _hook })
         const html = await response.text()
-        const dom = new JSDOM(html)
+        const document = new DOMParser().parseFromString(html, 'text/html')
 
-        const rows = dom.window.document.querySelectorAll(this.selectors.rows)
+        const rows = document.querySelectorAll(this.selectors.rows)
 
         return Array.from(rows).map(row => this._row_to_notice(row, response.url))
     }

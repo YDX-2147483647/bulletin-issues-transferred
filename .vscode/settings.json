@@ -8,5 +8,8 @@
         "config/ding.secrets.schema.json": "config/ding.secrets.yaml"
     },
     "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
-    "typescript.format.insertSpaceAfterConstructor": true
+    "typescript.format.insertSpaceAfterConstructor": true,
+    "deno.enable": true,
+    "deno.lint": true,
+    "deno.unstable": false
 }
