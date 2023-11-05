@@ -1,7 +1,7 @@
 import { assert } from 'chai'
 import { describe, it } from 'mocha'
 
-import { parse_date, sort_by_date, format_date } from './my_date.js'
+import { parse_date, sort_by_date, format_date } from './my_date.ts'
 
 function assert_date (actual: Date, expected: Date) {
     assert.equal(actual.toString(), expected.toString())

@@ -4,8 +4,8 @@
  * @module
  */
 
-import { config, type HookCollectionType, type Source } from '../../core/index.js'
-import { write_rss } from './rss.js'
+import { config, type HookCollectionType, type Source } from '../../core/index.ts'
+import { write_rss } from './rss.ts'
 
 const { output_path, ...rss_options } = Object.assign({ max_items: 30 }, config.rss) as {
     title: string

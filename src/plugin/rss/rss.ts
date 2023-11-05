@@ -1,8 +1,8 @@
-import { writeFile } from 'fs/promises'
+import { writeFile } from 'node:fs/promises'
 import xml from 'xml'
-import type { Notice } from '../../core/index.js'
-import { logger } from '../../util/logger.js'
-import { sort_by_date, format_date } from '../../util/my_date.js'
+import type { Notice } from '../../core/index.ts'
+import { logger } from '../../util/logger.ts'
+import { sort_by_date, format_date } from '../../util/my_date.ts'
 
 /**
  * @param notice 需要 source，因此请提前{@link Notice.populate}

@@ -3,10 +3,10 @@
  * @module
  */
 
-import type { HookCollectionType } from './hooks_type.js'
-import type { Notice } from './models.js'
-import { fetch_all_sources, merge, read_json, write_json } from './notices/index.js'
-import import_sources from './sources/index.js'
+import type { HookCollectionType } from './hooks_type.ts'
+import type { Notice } from './models.ts'
+import { fetch_all_sources, merge, read_json, write_json } from './notices/index.ts'
+import import_sources from './sources/index.ts'
 
 type UpdateNoticesOptions = {
     read_json_path: string,

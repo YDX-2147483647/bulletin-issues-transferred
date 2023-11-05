@@ -1,7 +1,7 @@
 import { assert } from 'chai'
 import { describe, it } from 'mocha'
 
-import { normalize } from './normalize.js'
+import { normalize } from './normalize.ts'
 
 function assert_normalize (raw: string, expected: string) {
     assert.equal(normalize(raw), expected)

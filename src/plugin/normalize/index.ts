@@ -3,8 +3,8 @@
  * @module
  */
 
-import { type HookCollectionType } from '../../core/index.js'
-import { normalize } from './normalize.js'
+import { type HookCollectionType } from '../../core/index.ts'
+import { normalize } from './normalize.ts'
 
 /**
  * `fetch_each`后重整不完整的标题

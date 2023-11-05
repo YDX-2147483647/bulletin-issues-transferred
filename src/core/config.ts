@@ -4,7 +4,7 @@
  * @see `config/config.schema.json`
  */
 
-import { readFile } from 'fs/promises'
+import { readFile } from 'node:fs/promises'
 import { parse } from 'yaml'
 
 interface Config {

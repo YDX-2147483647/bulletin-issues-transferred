@@ -3,10 +3,10 @@
  * @module
  */
 
-import { parse_date } from '../../util/my_date.js'
-import hooked_fetch from '../fetch_wrapper.js'
-import type { HookCollectionType } from '../hooks_type.js'
-import { Notice, Source, type SourceInterface } from '../models.js'
+import { parse_date } from '../../util/my_date.ts'
+import hooked_fetch from '../fetch_wrapper.ts'
+import type { HookCollectionType } from '../hooks_type.ts'
+import { Notice, Source, type SourceInterface } from '../models.ts'
 
 interface NoticeWithoutSource {
     link: string

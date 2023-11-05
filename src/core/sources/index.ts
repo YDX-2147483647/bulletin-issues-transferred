@@ -6,10 +6,10 @@
  * @module
  */
 
-import { Source } from '../models.js'
+import { Source } from '../models.ts'
 
-import import_sources_by_selectors from './by_selectors.js'
-import import_sources_special from './special.js'
+import import_sources_by_selectors from './by_selectors.ts'
+import import_sources_special from './special.ts'
 
 /**
  * @param param0

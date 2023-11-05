@@ -2,13 +2,13 @@
  * 更新通知
  */
 
-import { hook, update_notices } from '../core/index.js'
-import { add_hook } from '../plugin/cli/index.js'
-import robot from '../plugin/ding/index.js'
-import add_proxy_hook from '../plugin/proxy/index.js'
-import add_normalize_hook from '../plugin/normalize/index.js'
-import add_rss_hook from '../plugin/rss/index.js'
-import { logger } from '../util/logger.js'
+import { hook, update_notices } from '../core/index.ts'
+import { add_hook } from '../plugin/cli/index.ts'
+import robot from '../plugin/ding/index.ts'
+import add_proxy_hook from '../plugin/proxy/index.ts'
+import add_normalize_hook from '../plugin/normalize/index.ts'
+import add_rss_hook from '../plugin/rss/index.ts'
+import { logger } from '../util/logger.ts'
 
 add_hook.verbose(hook)
 add_hook.progress_bar(hook)
