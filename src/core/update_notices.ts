@@ -14,16 +14,18 @@ type UpdateNoticesOptions = {
     sources_by_selectors_path: string
     save_for: number
     fetch_concurrency: number
+    fetch_sleep: number
 }
 
 async function _update_notices ({
-    sources_by_selectors_path, read_json_path, write_json_path, save_for, fetch_concurrency,
+    sources_by_selectors_path, read_json_path, write_json_path, save_for, fetch_concurrency, fetch_sleep,
     _hook, ...options
 }: { _hook: HookCollectionType } & UpdateNoticesOptions) {
     const sources = await import_sources({ sources_by_selectors_path })
     const { notices: latest_notices } = await fetch_all_sources({
         sources,
         concurrency: fetch_concurrency,
+        sleep: fetch_sleep,
         _hook,
         ...options,
     })
