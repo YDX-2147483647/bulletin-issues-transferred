@@ -1,3 +1,4 @@
+import { setTimeout } from 'node:timers/promises'
 import pMap from 'p-map'
 
 import type { HookCollectionType } from '../hooks_type.js'
@@ -15,10 +16,11 @@ import type { Notice, Source } from '../models.js'
  * - `fetch_each`: several parallel sub-processes, fetching each source.
  */
 export async function fetch_all_sources ({
-    sources, concurrency, _hook,
+    sources, concurrency, sleep, _hook,
 }: {
     sources: Source[],
     concurrency: number,
+    sleep: number,
     _hook: HookCollectionType,
 }): Promise<{ notices: Notice[] }> {
     return await _hook(
@@ -28,6 +30,7 @@ export async function fetch_all_sources ({
             // First create a non-hook version.
             async function fetch_each ({ source }: { source: Source }): Promise<{ notices: Notice[] }> {
                 const notices = await source.fetch_notice({ _hook })
+                await setTimeout(sleep)
                 return { notices }
             }
             // Then wrap it with the hook.

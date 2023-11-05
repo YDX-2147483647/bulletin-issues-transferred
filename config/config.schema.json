@@ -20,11 +20,22 @@
             "type": "number",
             "default": 90
         },
-        "fetch_concurrency": {
-            "title": "获取通知时并发数量上限",
-            "description": "必须是正整数。",
-            "type": "number",
-            "default": 5
+        "fetch": {
+            "title": "如何获取通知",
+            "type": "object",
+            "properties": {
+                "concurrency": {
+                    "title": "并发数量上限",
+                    "description": "必须是正整数。",
+                    "type": "number",
+                    "default": 5
+                },
+                "sleep": {
+                    "title": "获取通知后等待的毫秒数",
+                    "type": "number",
+                    "default": 0
+                }
+            }
         },
         "ding": {
             "title": "钉钉插件",
