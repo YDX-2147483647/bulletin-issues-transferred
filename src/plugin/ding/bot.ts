@@ -4,7 +4,6 @@
  */
 
 import sign from './sign.ts'
-import fetch from 'node-fetch'
 
 /* spell-checker: words msgtype */
 
