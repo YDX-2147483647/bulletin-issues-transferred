@@ -1,5 +1,4 @@
 import cliProgress from 'cli-progress'
-import { FetchError } from 'node-fetch'
 import type { HookCollectionType } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
 import { recent_checker } from '../../util/my_date.ts'
@@ -15,6 +14,8 @@ export function verbose (hook: HookCollectionType) {
         // @ts-ignore If `fetch_each` has an error hook, the after hook may get `undefined`
         { source } = { source: { name: undefined } },
     ) => {
+        // todo: Catch fetch errors
+        return
         if (err instanceof FetchError && err.errno === 'ENOTFOUND') {
             logger.warn(`未能访问“${source.name}”（ENOTFOUND）。将忽略。`, { plugin: 'cli' })
         } else if (err instanceof FetchError && err.errno === 'ETIMEDOUT') {
