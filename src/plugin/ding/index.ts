@@ -3,12 +3,12 @@
  * @module
  */
 
-import { readFile } from 'fs/promises'
+import { readFile } from 'node:fs/promises'
 import { parse } from 'yaml'
 
-import { config } from '../../core/index.js'
+import { config } from '../../core/index.ts'
 
-import Robot from './bot.js'
+import Robot from './bot.ts'
 
 async function load_config () {
     // @ts-ignore

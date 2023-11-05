@@ -7,7 +7,7 @@
  */
 
 import _fetch, { type RequestInit, type Response } from 'node-fetch'
-import type { HookCollectionType } from './hooks_type.js'
+import type { HookCollectionType } from './hooks_type.ts'
 
 function fetch_wrapper (request: RequestInit & { url: string }) {
     const { url, ...init } = request

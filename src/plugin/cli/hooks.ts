@@ -1,9 +1,9 @@
 import cliProgress from 'cli-progress'
 import { FetchError } from 'node-fetch'
-import type { HookCollectionType } from '../../core/index.js'
-import { logger } from '../../util/logger.js'
-import { recent_checker } from '../../util/my_date.js'
-import { print_notices } from './util.js'
+import type { HookCollectionType } from '../../core/index.ts'
+import { logger } from '../../util/logger.ts'
+import { recent_checker } from '../../util/my_date.ts'
+import { print_notices } from './util.ts'
 
 export function verbose (hook: HookCollectionType) {
     hook.before('fetch', (options) => {

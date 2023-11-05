@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import type { Notice } from '../../core/index.js'
+import type { Notice } from '../../core/index.ts'
 
 /**
  * 打印一系列通知

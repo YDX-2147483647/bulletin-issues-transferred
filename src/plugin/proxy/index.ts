@@ -5,12 +5,12 @@
 
 // spell-checker: words webvpn
 
-import { readFile } from 'fs/promises'
+import { readFile } from 'node:fs/promises'
 import { Headers } from 'node-fetch'
 import VirtualBIT, { cli, decrypt_URL, encrypt_URL } from 'virtual-bit-network'
 import { parse } from 'yaml'
-import { config as all_config, HookCollectionType } from '../../core/index.js'
-import { logger } from '../../util/logger.js'
+import { config as all_config, HookCollectionType } from '../../core/index.ts'
+import { logger } from '../../util/logger.ts'
 
 async function load_config ({ secrets_path, match: hostnames }: { secrets_path: string, match: string[] }) {
     const file = await readFile(secrets_path)

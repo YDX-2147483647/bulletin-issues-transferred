@@ -8,7 +8,7 @@
  * @see `sources.schema.json`
  */
 
-import type { HookCollectionType } from './hooks_type.js'
+import type { HookCollectionType } from './hooks_type.ts'
 
 export interface SourceInterface {
     name: string

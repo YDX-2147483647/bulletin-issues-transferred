@@ -1,6 +1,6 @@
 import type { HookCollection } from 'before-after-hook'
 import type { RequestInit, Response } from 'node-fetch'
-import type { Notice, Source } from './models.js'
+import type { Notice, Source } from './models.ts'
 
 type HooksType = {
     request: {

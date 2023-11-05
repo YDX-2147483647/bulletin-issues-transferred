@@ -3,7 +3,7 @@
  * @see https://github.com/x-cold/dingtalk-robot/blob/master/lib/bot.js
  */
 
-import sign from './sign.js'
+import sign from './sign.ts'
 import fetch from 'node-fetch'
 
 /* spell-checker: words msgtype */

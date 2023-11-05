@@ -2,9 +2,9 @@
  * 读取、写入通知（或者说从文件恢复、保存至文件）
  * @module
  */
-import { readFile, writeFile } from 'fs/promises'
-import { logger } from '../../util/logger.js'
-import { Notice, type NoticeInterface } from '../models.js'
+import { readFile, writeFile } from 'node:fs/promises'
+import { logger } from '../../util/logger.ts'
+import { Notice, type NoticeInterface } from '../models.ts'
 
 /**
  * 自动转换为`Date`。

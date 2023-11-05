@@ -3,8 +3,8 @@
  * @module
  */
 
-import { recent_checker, sort_by_date } from '../../util/my_date.js'
-import type { Notice } from '../models.js'
+import { recent_checker, sort_by_date } from '../../util/my_date.ts'
+import type { Notice } from '../models.ts'
 
 /**
  * 筛选出新通知

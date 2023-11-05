@@ -1,5 +1,5 @@
-import type { HookCollectionType } from '../hooks_type.js'
-import type { Notice, Source } from '../models.js'
+import type { HookCollectionType } from '../hooks_type.ts'
+import type { Notice, Source } from '../models.ts'
 
 /**
  * 从一系列来源获取通知
