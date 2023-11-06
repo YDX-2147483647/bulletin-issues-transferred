@@ -39,7 +39,7 @@ export default function add_hook(hook: HookCollectionType) {
                 'Cannot generate RSS because there\'s no known source.',
             )
         }
-        notices.forEach((n) => n.populate({ sources }))
+        notices.forEach((n) => n.populate({ sources } as { sources: Source[] }))
         await write_rss(notices, output_path, rss_options)
     })
 }

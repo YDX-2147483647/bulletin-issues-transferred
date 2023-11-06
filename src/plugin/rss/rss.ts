@@ -9,7 +9,7 @@ import { format_date, sort_by_date } from '../../util/my_date.ts'
  */
 function to_feed_item(notice: Notice) {
     let description: string
-    if (notice.source.url) {
+    if (notice.source?.url) {
         description =
             `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source_name}</a>。`
     } else if (notice.source) {
