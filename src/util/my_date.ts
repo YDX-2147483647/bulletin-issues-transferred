@@ -5,7 +5,7 @@
  */
 export function parse_date (date: string) {
     const match = date.match(/((?<year>\d+)[-/年])?(?<month>\d+)[-/月](?<day>\d+)日?((?<hour>\d+)时)?(?![-/T\s\d])/)
-    if (match) {
+    if (match && match.groups) {
         return new Date(parseInt(match.groups.year) || (new Date()).getFullYear(),
             parseInt(match.groups.month) - 1,
             parseInt(match.groups.day),
