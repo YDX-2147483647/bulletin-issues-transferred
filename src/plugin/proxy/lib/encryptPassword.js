@@ -4,7 +4,8 @@
  * [Modified by flwfdd in February 2022.](https://github.com/flwfdd/BIT101/blob/e196258e6048db798baeaeb8a03d098ae7ca4479/src/utils/EncryptPassword.js)
  */
 
-/* eslint-disable */
+// deno-lint-ignore-file
+// deno-fmt-ignore-file
 var CryptoJS = CryptoJS || function (u, p) {
     var d = {},
         l = d.lib = {},

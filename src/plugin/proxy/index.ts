@@ -6,7 +6,11 @@
 // spell-checker: words webvpn
 
 import { readFile } from 'node:fs/promises'
-import VirtualBIT, { cli, decrypt_URL, encrypt_URL } from './virtual-bit-network/index.ts'
+import VirtualBIT, {
+    cli,
+    decrypt_URL,
+    encrypt_URL,
+} from './virtual-bit-network/index.ts'
 import { parse } from 'yaml'
 import { config as all_config, HookCollectionType } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
@@ -25,7 +29,7 @@ async function load_config(
     return { secrets, hostnames }
 }
 
-// @ts-ignore
+// @ts-ignore 允许扩展设置
 const config = await load_config(all_config.proxy)
 const proxy = new VirtualBIT(config.secrets)
 await proxy.sign_in(
