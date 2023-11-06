@@ -2,10 +2,10 @@
  * {@link CaptchaHandler}示例
  */
 
-import { createWriteStream } from 'fs'
+import { createWriteStream } from 'node:fs'
 import inquirer from 'inquirer'
 import terminalImage from 'terminal-image'
-import { CaptchaHandler } from './webvpn.js'
+import type { CaptchaHandler } from './webvpn.ts'
 
 export async function ask_from_command_line (message: string = "What's the captcha? (case-insensitive)"): Promise<string> {
   const answers = await inquirer.prompt([{
