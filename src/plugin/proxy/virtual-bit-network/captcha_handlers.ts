@@ -2,7 +2,7 @@
  * {@link CaptchaHandler}示例
  */
 
-import { createWriteStream } from 'node:fs'
+import { Buffer } from 'node:buffer'
 import inquirer from 'inquirer'
 import terminalImage from 'terminal-image'
 import type { CaptchaHandler } from './webvpn.ts'
@@ -27,7 +27,8 @@ export function save_captcha_then_ask_from_command_line(
     save_path: string,
 ): CaptchaHandler {
     return async (response) => {
-        response.body?.pipe(createWriteStream(save_path))
+        const file = await Deno.open(save_path, { write: true, create: true })
+        response.body?.pipeTo(file.writable)
         return await ask_from_command_line(
             `Please check “${save_path}”. What's the captcha? (case-insensitive)`,
         )
