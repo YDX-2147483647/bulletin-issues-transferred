@@ -26,7 +26,7 @@
     "chalk": "^5.0.0",
     "check-links": "^2.1.2",
     "cli-progress": "^3.9.1",
-    "virtual-bit-network": "github:YDX-2147483647/virtual-BIT-network",
+    "virtual-bit-network": "^0.2.2",
     "winston": "^3.8.1",
     "xml": "^1.0.1",
     "yaml": "^2.2.2"
