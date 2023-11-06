@@ -94,7 +94,7 @@ const raw_sources: SourceSpecialInterface[] = [
                 method: 'post',
                 _hook,
             })
-            const json: any = await response.json()
+            const json = await response.json()
             const rows = Array.from(json.object) as {
                 notifyType: string
                 articleID: string
@@ -236,6 +236,6 @@ const sources = raw_sources.map((raw) => {
     return source
 })
 
-export default async function import_sources_special(): Promise<Source[]> {
-    return sources
+export default function import_sources_special(): Promise<Source[]> {
+    return Promise.resolve(sources)
 }

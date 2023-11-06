@@ -47,6 +47,7 @@ export class Source {
     /**
      * 抓取通知
      */
+    // deno-lint-ignore require-await
     async fetch_notice(
         { _hook }: { _hook: HookCollectionType },
     ): Promise<Notice[]> {

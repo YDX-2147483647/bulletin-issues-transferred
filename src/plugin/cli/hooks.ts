@@ -14,24 +14,21 @@ export function verbose(hook: HookCollectionType) {
         // @ts-ignore If `fetch_each` has an error hook, the after hook may get `undefined`
         { source } = { source: { name: undefined } },
     ) => {
-        // todo: Catch fetch errors
-        return
-        if (err instanceof FetchError && err.errno === 'ENOTFOUND') {
-            logger.warn(`未能访问“${source.name}”（ENOTFOUND）。将忽略。`, {
+        // todo: Catch only errors about fetching
+        if (err instanceof Deno.errors.NotFound) {
+            logger.warn(`未能访问“${source.name}”（NotFound）。将忽略。`, {
                 plugin: 'cli',
             })
-        } else if (err instanceof FetchError && err.errno === 'ETIMEDOUT') {
+        } else if (err instanceof Deno.errors.TimedOut) {
             logger.error(
-                `访问“${source.name}”（ETIMEDOUT）超时，可能因为访问太频繁。将忽略。`,
+                `访问“${source.name}”（TimedOut）超时，可能因为访问太频繁。将忽略。`,
                 { plugin: 'cli' },
             )
-        } else if (err instanceof FetchError) {
+        } else {
             logger.error(err.toString(), {
                 plugin: 'cli',
                 hook: 'fetch_each.error',
             })
-        } else {
-            throw err
         }
     })
     hook.after('fetch_each', (result, { source }) => {
@@ -41,7 +38,7 @@ export function verbose(hook: HookCollectionType) {
             })
         }
     })
-    hook.after('update', (result, { write_json_path }) => {
+    hook.after('update', (_result, { write_json_path }) => {
         logger.info(`已按需保存到“${write_json_path}”。`, { plugin: 'cli' })
     })
 }
@@ -72,12 +69,12 @@ export function progress_bar(hook: HookCollectionType) {
 
         bar.start(options.sources.length, 0)
     })
-    hook.after('fetch_each', (result, options) => {
+    hook.after('fetch_each', (_result, options) => {
         // @ts-ignore See the before hook
         const bar = options.bar as cliProgress.SingleBar
         bar.increment()
     })
-    hook.after('fetch', (result, options) => {
+    hook.after('fetch', (_result, options) => {
         // @ts-ignore See the before hook
         const bar = options.bar as cliProgress.SingleBar
         bar.stop()

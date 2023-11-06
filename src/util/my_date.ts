@@ -49,7 +49,7 @@ export function sort_by_date(
  */
 export function recent_checker(days_ago: number) {
     if (days_ago === 0) {
-        return (date: Date | null) => true
+        return (_date: Date | null) => true
     }
 
     const today = new Date()

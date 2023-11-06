@@ -11,6 +11,7 @@ interface Config {
     sources_by_selectors: string
     json_path: string
     save_for: number
+    // deno-lint-ignore no-explicit-any
     [propName: string]: any
 }
 

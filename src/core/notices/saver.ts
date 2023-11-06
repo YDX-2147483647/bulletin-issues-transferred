@@ -9,6 +9,7 @@ import { Notice, type NoticeInterface } from '../models.ts'
 /**
  * 自动转换为`Date`。
  */
+// deno-lint-ignore no-explicit-any
 function json_date_reviver(key: string, value: any) {
     if (key === 'date') {
         return value === 'null' ? null : new Date(value)
