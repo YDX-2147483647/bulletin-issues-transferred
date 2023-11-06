@@ -28,6 +28,8 @@
     "check-links": "^2.1.2",
     "cheerio": "^1.0.0-rc.12",
     "cli-progress": "^3.9.1",
+    "inquirer": "^9.2.11",
+    "terminal-image": "^2.0.0",
     "winston": "^3.8.1",
     "xml": "^1.0.1",
     "yaml": "^2.2.2"
@@ -47,9 +49,5 @@
   "bugs": {
     "url": "https://github.com/YDX-2147483647/bulletin-issues-transferred/issues"
   },
-  "homepage": "https://github.com/YDX-2147483647/bulletin-issues-transferred#readme",
-  "peerDependencies": {
-    "inquirer": "^9.2.11",
-    "terminal-image": "^2.0.0"
-  }
+  "homepage": "https://github.com/YDX-2147483647/bulletin-issues-transferred#readme"
 }

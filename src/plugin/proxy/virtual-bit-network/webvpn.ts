@@ -3,9 +3,8 @@
  */
 
 import { load as load_html } from 'cheerio'
-import fetch, { Response } from 'node-fetch'
 import { encryptPassword } from '../lib/encryptPassword.js'
-import { to_form_data } from './util.js'
+import { to_form_data } from './util.ts'
 
 /** auth server URL with trailing slash */
 const auth_server = 'https://webvpn.bit.edu.cn/https/77726476706e69737468656265737421fcf84695297e6a596a468ca88d1b203b/authserver/'

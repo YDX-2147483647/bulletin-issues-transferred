@@ -1,5 +1,3 @@
-import { FormData } from 'node-fetch'
-
 export function to_form_data (dict: { [key: string]: string | boolean | null }): FormData {
   const form = new FormData()
   for (const [key, value] of Object.entries(dict)) {

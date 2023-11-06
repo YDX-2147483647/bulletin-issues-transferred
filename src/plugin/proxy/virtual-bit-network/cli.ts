@@ -3,7 +3,7 @@
 import chalk from 'chalk'
 import { load } from 'cheerio'
 import inquirer from 'inquirer'
-import VirtualBIT, { cli } from './index.js'
+import VirtualBIT, { cli } from './index.ts'
 
 const { username, password } = await inquirer.prompt([
   {

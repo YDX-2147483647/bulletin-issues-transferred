@@ -1,14 +1,13 @@
-import fetch, { Headers, Request, RequestInfo, RequestInit, Response } from 'node-fetch'
 import {
   ask_from_command_line,
   display_captcha_then_ask_from_command_line,
   save_captcha_then_ask_from_command_line,
-} from './captcha_handlers.js'
-import { decrypt_URL, encrypt_URL } from './convert.js'
-import { CaptchaHandler, prepare, sign_in } from './webvpn.js'
+} from './captcha_handlers.ts'
+import { decrypt_URL, encrypt_URL } from './convert.ts'
+import { type CaptchaHandler, prepare, sign_in } from './webvpn.ts'
 
 export { decrypt_URL, encrypt_URL }
-export { CaptchaHandler }
+export type { CaptchaHandler }
 export const cli = {
   ask_from_command_line,
   save_captcha_then_ask_from_command_line,

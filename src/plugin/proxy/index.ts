@@ -6,7 +6,6 @@
 // spell-checker: words webvpn
 
 import { readFile } from 'node:fs/promises'
-import { Headers } from 'node-fetch'
 import VirtualBIT, { cli, decrypt_URL, encrypt_URL } from './virtual-bit-network/index.ts'
 import { parse } from 'yaml'
 import { config as all_config, HookCollectionType } from '../../core/index.ts'
