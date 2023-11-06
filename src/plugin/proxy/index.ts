@@ -41,7 +41,7 @@ logger.info('Signed in successfully.', { plugin: 'proxy' })
 await proxy.fetch('http://mec.bit.edu.cn')
 
 export default function add_proxy_hook(hook: HookCollectionType) {
-    hook.wrap('request', async (original_fetch, options) => {
+    hook.wrap('request', (original_fetch, options) => {
         if (!config.hostnames.includes((new URL(options.url)).hostname)) {
             return original_fetch(options)
         }
