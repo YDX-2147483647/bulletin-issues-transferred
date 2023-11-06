@@ -1,4 +1,4 @@
-import { assertEquals } from 'https://deno.land/std@0.205.0/assert/mod.ts'
+import { assertEquals } from 'std/assert/mod.ts'
 
 import { parse_date, sort_by_date, format_date } from './my_date.ts'
 
