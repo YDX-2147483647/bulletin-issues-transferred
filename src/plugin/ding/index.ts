@@ -11,7 +11,7 @@ import { config } from '../../core/index.ts'
 import Robot from './bot.ts'
 
 async function load_config() {
-    // @ts-ignore
+    // @ts-ignore 允许扩展设置
     const { ding: { secrets_path } }: { ding: { secrets_path: string } } =
         config
     const file = await readFile(secrets_path)
