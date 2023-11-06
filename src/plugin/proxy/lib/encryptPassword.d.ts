@@ -5,4 +5,4 @@
  *
  * 在原网站中，后端只接收加密后的密码，前端匿名，因此有这一步骤。
  */
-export function encryptPassword (password: string, salt: string): string
+export function encryptPassword(password: string, salt: string): string

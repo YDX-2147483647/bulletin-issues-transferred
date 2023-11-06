@@ -19,49 +19,49 @@ const AesCfb = aesjs.ModeOfOperation.cfb
 const magic_word = 'wrdvpnisthebest!'
 
 const textRightAppend = (text: string, mode: string) => {
-  const segmentByteSize = mode === 'utf8' ? 16 : 32
-  if (text.length % segmentByteSize === 0) {
-    return text
-  }
+    const segmentByteSize = mode === 'utf8' ? 16 : 32
+    if (text.length % segmentByteSize === 0) {
+        return text
+    }
 
-  const appendLength = segmentByteSize - (text.length % segmentByteSize)
-  let i = 0
-  while (i++ < appendLength) {
-    text += '0'
-  }
-  return text
+    const appendLength = segmentByteSize - (text.length % segmentByteSize)
+    let i = 0
+    while (i++ < appendLength) {
+        text += '0'
+    }
+    return text
 }
 
 const encrypt = (text: string, key: string, iv: string) => {
-  const textLength = text.length
-  text = textRightAppend(text, 'utf8')
+    const textLength = text.length
+    text = textRightAppend(text, 'utf8')
 
-  const keyBytes = utf8.toBytes(key)
-  const ivBytes = utf8.toBytes(iv)
-  const textBytes = utf8.toBytes(text)
+    const keyBytes = utf8.toBytes(key)
+    const ivBytes = utf8.toBytes(iv)
+    const textBytes = utf8.toBytes(text)
 
-  const aesCfb = new AesCfb(keyBytes, ivBytes, 16)
-  const encryptBytes = aesCfb.encrypt(textBytes)
+    const aesCfb = new AesCfb(keyBytes, ivBytes, 16)
+    const encryptBytes = aesCfb.encrypt(textBytes)
 
-  return (
-    hex.fromBytes(ivBytes) +
-    hex.fromBytes(encryptBytes).slice(0, textLength * 2)
-  )
+    return (
+        hex.fromBytes(ivBytes) +
+        hex.fromBytes(encryptBytes).slice(0, textLength * 2)
+    )
 }
 
 // eslint-disable-next-line
 const decrypt = (text: string, key: string) => {
-  const textLength = (text.length - 32) / 2
-  text = textRightAppend(text, 'hex')
+    const textLength = (text.length - 32) / 2
+    text = textRightAppend(text, 'hex')
 
-  const keyBytes = utf8.toBytes(key)
-  const ivBytes = hex.toBytes(text.slice(0, 32))
-  const textBytes = hex.toBytes(text.slice(32))
+    const keyBytes = utf8.toBytes(key)
+    const ivBytes = hex.toBytes(text.slice(0, 32))
+    const textBytes = hex.toBytes(text.slice(32))
 
-  const aesCfb = new AesCfb(keyBytes, ivBytes, 16)
-  const decryptBytes = aesCfb.decrypt(textBytes)
+    const aesCfb = new AesCfb(keyBytes, ivBytes, 16)
+    const decryptBytes = aesCfb.decrypt(textBytes)
 
-  return utf8.fromBytes(decryptBytes).slice(0, textLength)
+    return utf8.fromBytes(decryptBytes).slice(0, textLength)
 }
 
 /**
@@ -69,16 +69,16 @@ const decrypt = (text: string, key: string) => {
  * @param url_str
  * @returns 补足协议类型的 URL
  */
-function guess_protocol (url_str: string): string {
-  if (!url_str.includes('://')) {
-    if (url_str.includes('.bit.edu.cn')) {
-      return 'http://' + url_str
+function guess_protocol(url_str: string): string {
+    if (!url_str.includes('://')) {
+        if (url_str.includes('.bit.edu.cn')) {
+            return 'http://' + url_str
+        } else {
+            return 'https://' + url_str
+        }
     } else {
-      return 'https://' + url_str
+        return url_str
     }
-  } else {
-    return url_str
-  }
 }
 
 /**
@@ -89,17 +89,17 @@ function guess_protocol (url_str: string): string {
  * @description 与 0.0 版的区别：此版本返回值是完整 URL，使用 URL API（无需特别处理 IPv6）；但无法处理 SSH 等。
  * @see {@link decrypt_URL}
  */
-export function encrypt_URL (url_str: string): string {
-  const url = new URL(guess_protocol(url_str))
+export function encrypt_URL(url_str: string): string {
+    const url = new URL(guess_protocol(url_str))
 
-  const protocol = url.protocol.slice(0, -1).toLowerCase() // "https:" -> "https"
-  const port = url.port
-  const pathname_etc = url.pathname + url.search + url.hash
+    const protocol = url.protocol.slice(0, -1).toLowerCase() // "https:" -> "https"
+    const port = url.port
+    const pathname_etc = url.pathname + url.search + url.hash
 
-  const protocol_and_port = port ? `${protocol}-${port}` : protocol
-  const cipher = encrypt(url.hostname, magic_word, magic_word)
+    const protocol_and_port = port ? `${protocol}-${port}` : protocol
+    const cipher = encrypt(url.hostname, magic_word, magic_word)
 
-  return `https://webvpn.bit.edu.cn/${protocol_and_port}/${cipher}${pathname_etc}`
+    return `https://webvpn.bit.edu.cn/${protocol_and_port}/${cipher}${pathname_etc}`
 }
 
 /**
@@ -110,35 +110,38 @@ export function encrypt_URL (url_str: string): string {
  * @description 非 WebVPN URL 将报错。
  * @see {@link encrypt_URL}
  */
-export function decrypt_URL (url_str: string): string {
-  const url = new URL(guess_protocol(url_str))
-  if (url.hostname !== 'webvpn.bit.edu.cn') {
-    throw RangeError('只能转换 WebVPN URL。')
-  }
-  if (url.pathname === '' || url.pathname === '/') {
-    return url.href
-  }
+export function decrypt_URL(url_str: string): string {
+    const url = new URL(guess_protocol(url_str))
+    if (url.hostname !== 'webvpn.bit.edu.cn') {
+        throw RangeError('只能转换 WebVPN URL。')
+    }
+    if (url.pathname === '' || url.pathname === '/') {
+        return url.href
+    }
 
-  const [, protocol_and_port, cipher] = url.pathname.split('/', 3)
-  const pathname_etc = url.pathname.slice(`/${protocol_and_port}/${cipher}`.length) + url.search + url.hash
+    const [, protocol_and_port, cipher] = url.pathname.split('/', 3)
+    const pathname_etc =
+        url.pathname.slice(`/${protocol_and_port}/${cipher}`.length) +
+        url.search + url.hash
 
-  const hostname = decrypt(cipher, magic_word) // `hostname`无法修改
-  // ↓ 这里原来是`nothing`，可能导致之后`protocol`无法更改。
-  const host_etc = new URL('https://' + hostname)
+    const hostname = decrypt(cipher, magic_word) // `hostname`无法修改
+    // ↓ 这里原来是`nothing`，可能导致之后`protocol`无法更改。
+    const host_etc = new URL('https://' + hostname)
 
-  const match_obj = protocol_and_port.match(
-    /^(?<protocol>[-0-9a-z]+?)(-(?<port>\d+))?$/)
-  if (match_obj === null || match_obj.groups === undefined) {
-    throw RangeError('无法识别 WebVPN URL 的协议或端口。')
-  }
-  // 以下两个 URL API 都会自动转换。
-  host_etc.protocol = match_obj.groups.protocol
-  // 此后`host_etc.href`结尾可能有“/”
-  host_etc.port = match_obj.groups.port
+    const match_obj = protocol_and_port.match(
+        /^(?<protocol>[-0-9a-z]+?)(-(?<port>\d+))?$/,
+    )
+    if (match_obj === null || match_obj.groups === undefined) {
+        throw RangeError('无法识别 WebVPN URL 的协议或端口。')
+    }
+    // 以下两个 URL API 都会自动转换。
+    host_etc.protocol = match_obj.groups.protocol
+    // 此后`host_etc.href`结尾可能有“/”
+    host_etc.port = match_obj.groups.port
 
-  if (host_etc.href.endsWith('/')) {
-    return host_etc.href.slice(0, -1) + pathname_etc
-  } else {
-    return host_etc.href + pathname_etc
-  }
+    if (host_etc.href.endsWith('/')) {
+        return host_etc.href.slice(0, -1) + pathname_etc
+    } else {
+        return host_etc.href + pathname_etc
+    }
 }
