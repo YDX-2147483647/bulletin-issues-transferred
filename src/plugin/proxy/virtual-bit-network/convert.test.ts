@@ -1,4 +1,6 @@
-import { decrypt_URL, encrypt_URL } from './convert.js'
+import { assertEquals } from 'std/assert/mod.ts'
+
+import { decrypt_URL, encrypt_URL } from './convert.ts'
 
 const pairs = [
   {
@@ -23,14 +25,14 @@ const pairs = [
   },
 ]
 
-test('Encrypt URL', () => {
+Deno.test('Encrypt URL', () => {
   for (const { original, encrypted } of pairs) {
-    expect(encrypt_URL(original)).toBe(encrypted)
+    assertEquals(encrypt_URL(original), encrypted)
   }
 })
 
-test('Decrypt URL', () => {
+Deno.test('Decrypt URL', () => {
   for (const { original, encrypted } of pairs) {
-    expect(decrypt_URL(encrypted)).toBe(original)
+    assertEquals(decrypt_URL(encrypted), original)
   }
 })
