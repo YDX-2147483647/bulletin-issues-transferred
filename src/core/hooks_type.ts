@@ -20,6 +20,8 @@ type HooksType = {
             read_json_path: string
             write_json_path: string
             sources_by_selectors_path: string
+            save_for: number
+            _hook: HookCollectionType
         }
         Result: {
             all_notices: Notice[]
