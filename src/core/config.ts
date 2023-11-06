@@ -20,7 +20,9 @@ const defaults: Config = {
     save_for: 90,
 }
 
-async function _import_config ({ config_path = 'config/config.yml' } = {}): Promise<Config> {
+async function _import_config(
+    { config_path = 'config/config.yml' } = {},
+): Promise<Config> {
     const file = await readFile(config_path)
     const given = parse(file.toString())
     return Object.assign({}, defaults, given) as Config

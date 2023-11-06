@@ -2,7 +2,7 @@ import { assertEquals } from 'std/assert/mod.ts'
 
 import { normalize } from './normalize.ts'
 
-function assert_normalize (raw: string, expected: string) {
+function assert_normalize(raw: string, expected: string) {
     assertEquals(normalize(raw), expected)
 }
 

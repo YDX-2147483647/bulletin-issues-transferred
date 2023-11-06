@@ -13,17 +13,19 @@ const logger = createLogger({
 })
 
 if (process.env.NODE_ENV !== 'production') {
-    logger.add(new transports.Console({
-        level: 'info',
-        format: format.combine(
-            format.colorize({ all: true }),
-            format.simple(),
-            format.printf(info => {
-                const plugin = info.plugin ? `（${info.plugin}）` : ''
-                return `${info.level}: ${info.message}${plugin}`
-            }),
-        ),
-    }))
+    logger.add(
+        new transports.Console({
+            level: 'info',
+            format: format.combine(
+                format.colorize({ all: true }),
+                format.simple(),
+                format.printf((info) => {
+                    const plugin = info.plugin ? `（${info.plugin}）` : ''
+                    return `${info.level}: ${info.message}${plugin}`
+                }),
+            ),
+        }),
+    )
 }
 
 export { logger }

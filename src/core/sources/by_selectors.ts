@@ -15,26 +15,28 @@ import { Notice, Source, type SourceInterface } from '../models.ts'
 
 interface SourceBySelectorsInterface extends SourceInterface {
     selectors: {
-        rows: string,
-        link?: string, title?: string,
+        rows: string
+        link?: string
+        title?: string
         date?: string
     }
 }
 
 class SourceBySelectors extends Source {
     selectors: {
-        rows: string,
-        link: string,
-        title: string,
+        rows: string
+        link: string
+        title: string
         date: string
     }
 
-    constructor (raw: SourceBySelectorsInterface) {
+    constructor(raw: SourceBySelectorsInterface) {
         super(raw)
 
         const {
             rows,
-            link = 'a', title = '',
+            link = 'a',
+            title = '',
             date = 'span',
         } = raw.selectors
 
@@ -44,10 +46,12 @@ class SourceBySelectors extends Source {
     /**
      * @param base_url 页面的 URL（插件可以让实际页面的 URL 与`this.url`不同）
      */
-    private _row_to_notice (row: Element, base_url: string) {
+    private _row_to_notice(row: Element, base_url: string) {
         const link: HTMLAnchorElement = row.querySelector(this.selectors.link)
         const title = row.querySelector(this.selectors.title)
-        const date = this.selectors.date ? row.querySelector(this.selectors.date) : null
+        const date = this.selectors.date
+            ? row.querySelector(this.selectors.date)
+            : null
 
         return new Notice({
             link: (new URL(link.href, base_url)).href,
@@ -57,22 +61,26 @@ class SourceBySelectors extends Source {
         })
     }
 
-    async fetch_notice ({ _hook }: { _hook: HookCollectionType }) {
+    async fetch_notice({ _hook }: { _hook: HookCollectionType }) {
         const response = await hooked_fetch({ url: this.url, _hook })
         const html = await response.text()
         const document = new DOMParser().parseFromString(html, 'text/html')
 
         const rows = document.querySelectorAll(this.selectors.rows)
 
-        return Array.from(rows).map(row => this._row_to_notice(row, response.url))
+        return Array.from(rows).map((row) =>
+            this._row_to_notice(row, response.url)
+        )
     }
 }
 
-export default async function import_sources_by_selectors ({ path }: { path: string }): Promise<Source[]> {
+export default async function import_sources_by_selectors(
+    { path }: { path: string },
+): Promise<Source[]> {
     const file = await readFile(path)
 
     const raw_sources: SourceBySelectorsInterface[] =
         JSON.parse(file.toString()).sources
 
-    return raw_sources.map(s => new SourceBySelectors(s))
+    return raw_sources.map((s) => new SourceBySelectors(s))
 }

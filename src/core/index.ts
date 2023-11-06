@@ -12,7 +12,7 @@ const _hook = new Hook.Collection<HooksType>()
 export const hook = _hook.api
 export type HookCollectionType = typeof hook
 
-export function update_notices () {
+export function update_notices() {
     return _update_notices({
         _hook,
         read_json_path: config.json_path,
