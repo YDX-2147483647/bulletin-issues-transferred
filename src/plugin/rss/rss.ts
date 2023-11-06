@@ -2,15 +2,16 @@ import { writeFile } from 'node:fs/promises'
 import xml from 'xml'
 import type { Notice } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
-import { sort_by_date, format_date } from '../../util/my_date.ts'
+import { format_date, sort_by_date } from '../../util/my_date.ts'
 
 /**
  * @param notice 需要 source，因此请提前{@link Notice.populate}
  */
-function to_feed_item (notice: Notice) {
+function to_feed_item(notice: Notice) {
     let description: string
     if (notice.source.url) {
-        description = `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source_name}</a>。`
+        description =
+            `来自<a href='${notice.source.url}' title='${notice.source.full_name}'>${notice.source_name}</a>。`
     } else if (notice.source) {
         description = `来自${notice.source_name}。`
     } else {
@@ -39,8 +40,11 @@ function to_feed_item (notice: Notice) {
  * @param notices 需要 source，因此请提前{@link Notice.populate}
  * @param options @see `config.schema.json`中的`rss`
  */
-export function build_feed (notices: Notice[], options: {
-    rss_href: string, title: string, link: string, description: string
+export function build_feed(notices: Notice[], options: {
+    rss_href: string
+    title: string
+    link: string
+    description: string
 }) {
     const feed_obj = {
         rss: [
@@ -90,8 +94,12 @@ export function build_feed (notices: Notice[], options: {
  * @param notices 需要 source，因此请提前{@link Notice.populate}
  * @param options
  */
-export async function write_rss (notices: Notice[], path: string, options: {
-    rss_href: string; title: string; link: string; description: string, max_items: number
+export async function write_rss(notices: Notice[], path: string, options: {
+    rss_href: string
+    title: string
+    link: string
+    description: string
+    max_items: number
 }) {
     const { max_items, ...rss_options } = options
 

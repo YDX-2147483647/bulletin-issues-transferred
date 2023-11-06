@@ -34,7 +34,4 @@ type HooksType = {
 
 type HookCollectionType = HookCollection<HooksType>
 
-export type {
-    HooksType,
-    HookCollectionType,
-}
+export type { HookCollectionType, HooksType }

@@ -10,11 +10,12 @@ import { config } from '../../core/index.ts'
 
 import Robot from './bot.ts'
 
-async function load_config () {
+async function load_config() {
     // @ts-ignore
-    const { ding: { secrets_path } }: { ding: { secrets_path: string } } = config
+    const { ding: { secrets_path } }: { ding: { secrets_path: string } } =
+        config
     const file = await readFile(secrets_path)
-    return parse(file.toString()) as { webhook: string, secret: string }
+    return parse(file.toString()) as { webhook: string; secret: string }
 }
 
 const robot = new Robot(await load_config())

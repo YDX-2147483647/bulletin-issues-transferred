@@ -22,13 +22,21 @@ class ChatBot {
      * @param options.webhook 完整的接口地址，含 access token，可用`base_url`和`access_token`替代
      * @param options.base_url 接口地址，不含 access token
      */
-    constructor (options: { webhook?: string, base_url?: string, access_token?: string, secret?: string }) {
+    constructor(
+        options: {
+            webhook?: string
+            base_url?: string
+            access_token?: string
+            secret?: string
+        },
+    ) {
         if (!options.webhook && !(options.access_token && options.base_url)) {
             throw new Error('Lack for arguments!')
         }
         // 优先使用 options.webhook
         // 次之将由 options.baseUrl 和 options.accessToken 组合成一个 webhook 地址
-        this.webhook = options.webhook || `${options.base_url}?access_token=${options.access_token}`
+        this.webhook = options.webhook ||
+            `${options.base_url}?access_token=${options.access_token}`
         this.secret = options.secret
     }
 
@@ -37,11 +45,12 @@ class ChatBot {
      *
      * @param content 发动的消息对象
      */
-    send (content: object): Promise<any> {
+    send(content: object): Promise<any> {
         let signStr = ''
         if (this.secret) {
             const timestamp = Date.now()
-            signStr = '&timestamp=' + timestamp + '&sign=' + sign(this.secret, timestamp + '\n' + this.secret)
+            signStr = '&timestamp=' + timestamp + '&sign=' +
+                sign(this.secret, timestamp + '\n' + this.secret)
         }
         return fetch(this.webhook + signStr, {
             method: 'POST',
@@ -59,7 +68,7 @@ class ChatBot {
      * @param at 群内@成员的手机号
      * @return
      */
-    text (content: string, at?: object): Promise<any> {
+    text(content: string, at?: object): Promise<any> {
         return this.send({
             msgtype: 'text',
             text: {
@@ -78,7 +87,7 @@ class ChatBot {
      * @param {String} link.picUrl 图片的链接
      * @return {Promise}
      */
-    link (link): Promise<any> {
+    link(link): Promise<any> {
         return this.send({
             msgtype: 'link',
             link,
@@ -92,7 +101,7 @@ class ChatBot {
      * @param {String} text 消息内容(支持Markdown)
      * @return {Promise}
      */
-    markdown (title: string, text: string, at?: object): Promise<any> {
+    markdown(title: string, text: string, at?: object): Promise<any> {
         return this.send({
             msgtype: 'markdown',
             markdown: {
@@ -114,7 +123,7 @@ class ChatBot {
      * @param {String} card.btns.actionURL 某个按钮链接
      * @return {Promise}
      */
-    actionCard (card): Promise<any> {
+    actionCard(card): Promise<any> {
         return this.send({
             msgtype: 'actionCard',
             actionCard: {
@@ -136,7 +145,7 @@ class ChatBot {
      * @param {String} link.picURL 图片的链接
      * @return {Promise}
      */
-    feedCard (links): Promise<any> {
+    feedCard(links): Promise<any> {
         return this.send({
             msgtype: 'feedCard',
             feedCard: {

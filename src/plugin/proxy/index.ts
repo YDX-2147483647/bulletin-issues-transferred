@@ -12,22 +12,32 @@ import { parse } from 'yaml'
 import { config as all_config, HookCollectionType } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
 
-async function load_config ({ secrets_path, match: hostnames }: { secrets_path: string, match: string[] }) {
+async function load_config(
+    { secrets_path, match: hostnames }: {
+        secrets_path: string
+        match: string[]
+    },
+) {
     const file = await readFile(secrets_path)
-    const secrets = parse(file.toString()) as { username: string, password: string }
+    const secrets = parse(file.toString()) as {
+        username: string
+        password: string
+    }
     return { secrets, hostnames }
 }
 
 // @ts-ignore
 const config = await load_config(all_config.proxy)
 const proxy = new VirtualBIT(config.secrets)
-await proxy.sign_in(cli.display_captcha_then_ask_from_command_line({ width: '80%' }))
+await proxy.sign_in(
+    cli.display_captcha_then_ask_from_command_line({ width: '80%' }),
+)
 logger.info('Signed in successfully.', { plugin: 'proxy' })
 
 // 下面一行是玄学。有些网站（如 mec）的二级页面需要先用`proxy`访问任意网址，不然会炸。
 await proxy.fetch('http://mec.bit.edu.cn')
 
-export default function add_proxy_hook (hook: HookCollectionType) {
+export default function add_proxy_hook(hook: HookCollectionType) {
     hook.wrap('request', async (original_fetch, options) => {
         if (!config.hostnames.includes((new URL(options.url)).hostname)) {
             return original_fetch(options)

@@ -1,5 +1,11 @@
 {
     "imports": {
         "std/": "https://deno.land/std@0.205.0/"
+    },
+    "fmt": {
+        "singleQuote": true,
+        "semiColons": false,
+        "indentWidth": 4,
+        "proseWrap": "preserve"
     }
 }
