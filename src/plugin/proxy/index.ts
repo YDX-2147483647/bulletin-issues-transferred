@@ -11,7 +11,7 @@ import VirtualBIT, {
     decrypt_URL,
     encrypt_URL,
 } from './virtual-bit-network/index.ts'
-import { parse } from 'yaml'
+import { parse } from 'npm:yaml'
 import { config as all_config, HookCollectionType } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
 

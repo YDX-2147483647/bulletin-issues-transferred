@@ -1,4 +1,4 @@
-import { Hook } from 'before-after-hook'
+import { Hook } from 'npm:before-after-hook'
 import config from './config.ts'
 import type { HooksType } from './hooks_type.ts'
 import { update_notices as _update_notices } from './update_notices.ts'

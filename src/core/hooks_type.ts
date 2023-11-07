@@ -1,4 +1,4 @@
-import type { HookCollection } from 'before-after-hook'
+import type { HookCollection } from 'npm:before-after-hook'
 import type { Notice, Source } from './models.ts'
 
 type HooksType = {

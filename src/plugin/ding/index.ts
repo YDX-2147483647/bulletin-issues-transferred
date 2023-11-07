@@ -4,7 +4,7 @@
  */
 
 import { readFile } from 'node:fs/promises'
-import { parse } from 'yaml'
+import { parse } from 'npm:yaml'
 
 import { config } from '../../core/index.ts'
 

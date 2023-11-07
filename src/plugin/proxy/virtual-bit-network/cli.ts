@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk'
+import chalk from 'npm:chalk'
 import { load } from 'cheerio'
 import inquirer from 'inquirer'
 import VirtualBIT, { cli } from './index.ts'
