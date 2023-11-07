@@ -1,4 +1,4 @@
-import cliProgress from 'cli-progress'
+import cliProgress from 'npm:cli-progress'
 import type { HookCollectionType } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
 import { recent_checker } from '../../util/my_date.ts'

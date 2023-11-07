@@ -1,5 +1,5 @@
 import process from 'node:process'
-import { createLogger, format, transports } from 'winston'
+import { createLogger, format, transports } from 'npm:winston'
 
 const logger = createLogger({
     level: 'silly',

@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import chalk from 'npm:chalk'
 import type { Notice } from '../../core/index.ts'
 
 /**
