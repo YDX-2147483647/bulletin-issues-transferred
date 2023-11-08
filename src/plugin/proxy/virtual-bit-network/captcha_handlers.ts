@@ -3,8 +3,8 @@
  */
 
 import { Buffer } from 'node:buffer'
-import inquirer from 'inquirer'
-import terminalImage from 'terminal-image'
+import inquirer from 'npm:inquirer'
+import terminalImage from 'npm:terminal-image'
 import type { CaptchaHandler } from './webvpn.ts'
 
 export async function ask_from_command_line(

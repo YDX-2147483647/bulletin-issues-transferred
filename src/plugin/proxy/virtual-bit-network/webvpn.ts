@@ -2,7 +2,10 @@
  * 登录网站
  */
 
-import { load as load_html } from 'cheerio'
+import {
+    DOMParser,
+    type HTMLDocument,
+} from 'https://deno.land/x/deno_dom@v0.1.42/deno-dom-wasm.ts'
 import { encryptPassword } from '../lib/encryptPassword.js'
 import { to_form_data } from './util.ts'
 
@@ -20,12 +23,18 @@ export interface Preparation {
 
 export async function prepare(): Promise<Preparation> {
     const response = await fetch(auth_server + 'login')
-    const html = await response.text()
+    const document = new DOMParser().parseFromString(
+        await response.text(),
+        'text/html',
+    ) as HTMLDocument
 
-    const $ = load_html(html)
     return {
-        salt: $('input#pwdEncryptSalt').attr('value') as string,
-        execution: $('input#execution').attr('value') as string,
+        salt: document.querySelector('input#pwdEncryptSalt')?.getAttribute(
+            'value',
+        ) as string,
+        execution: document.querySelector('input#execution')?.getAttribute(
+            'value',
+        ) as string,
         cookie: response.headers.get('Set-Cookie') as string,
     }
 }
@@ -95,9 +104,11 @@ export async function sign_in(
     // 3. Check why failed
 
     if (response.status !== 200) {
-        const html = await response.text()
-        const $ = load_html(html)
-        const reason = $('#showErrorTip')?.prop('innerText') || 'Unknown reason'
+        const document = new DOMParser().parseFromString(
+            await response.text(),
+            'text/html',
+        ) as HTMLDocument
+        const reason = document.querySelector('#showErrorTip')?.innerText ?? 'Unknown reason'
         throw new Error(
             `Sign in failed with ${response.status} ${response.statusText}: ${reason}.`,
         )
