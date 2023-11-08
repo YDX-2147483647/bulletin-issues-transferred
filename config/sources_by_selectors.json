@@ -458,14 +458,16 @@
         {
             "name": "机电",
             "full_name": "机电学院",
-            "url": "https://smen.bit.edu.cn/tzgg1/index.htm",
+            "url": "https://smen.bit.edu.cn/tzgg/index.htm",
             "guide": [
                 "机电学院",
                 "通知公告",
-                "⏩"
+                "更多+"
             ],
             "selectors": {
-                "rows": ".con1_left_con2 > ul > li"
+                "rows": ".sub_004 > ul > li",
+                "date": ".time",
+                "title": ".title"
             }
         },
         {
