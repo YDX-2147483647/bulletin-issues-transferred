@@ -5,7 +5,6 @@
 
 // spell-checker: words webvpn
 
-import { readFile } from 'node:fs/promises'
 import VirtualBIT, {
     cli,
     decrypt_URL,
@@ -21,7 +20,7 @@ async function load_config(
         match: string[]
     },
 ) {
-    const file = await readFile(secrets_path)
+    const file = await Deno.readTextFile(secrets_path)
     const secrets = parse(file.toString()) as {
         username: string
         password: string

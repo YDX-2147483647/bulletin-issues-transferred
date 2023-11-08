@@ -6,7 +6,6 @@
  * @module
  */
 
-import { readFile } from 'node:fs/promises'
 import {
     DOMParser,
     type Element,
@@ -82,7 +81,7 @@ class SourceBySelectors extends Source {
 export default async function import_sources_by_selectors(
     { path }: { path: string },
 ): Promise<Source[]> {
-    const file = await readFile(path)
+    const file = await Deno.readTextFile(path)
 
     const raw_sources: SourceBySelectorsInterface[] =
         JSON.parse(file.toString()).sources
