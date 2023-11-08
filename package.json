@@ -26,7 +26,6 @@
     "before-after-hook": "^2.2.2",
     "chalk": "^5.3.0",
     "check-links": "^2.1.2",
-    "cheerio": "^1.0.0-rc.12",
     "cli-progress": "^3.9.1",
     "inquirer": "^9.2.11",
     "terminal-image": "^2.0.0",

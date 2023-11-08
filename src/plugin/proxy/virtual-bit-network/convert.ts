@@ -10,7 +10,7 @@
  * (This's the 4th version.)
  */
 
-import aesjs from 'aes-js'
+import aesjs from 'npm:aes-js'
 
 const utf8 = aesjs.utils.utf8
 const hex = aesjs.utils.hex
