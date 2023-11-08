@@ -1,4 +1,3 @@
-import process from 'node:process'
 import { createLogger, format, transports } from 'npm:winston'
 
 const logger = createLogger({
@@ -12,7 +11,7 @@ const logger = createLogger({
     ],
 })
 
-if (process.env.NODE_ENV !== 'production') {
+if (Deno.env.get('NODE_ENV') !== 'production') {
     logger.add(
         new transports.Console({
             level: 'info',
