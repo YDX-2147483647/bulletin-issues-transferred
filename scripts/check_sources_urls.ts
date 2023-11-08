@@ -1,12 +1,6 @@
-import { readFile } from 'node:fs/promises'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import checkLinks from 'npm:check-links@^2.1.2'
 
-const file = await readFile(path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '../config/sources_by_selectors.json',
-))
+const file = await Deno.readTextFile('./config/sources_by_selectors.json')
 const sources = JSON.parse(file.toString()).sources as { url: string }[]
 const urls = sources.map((s) => s.url)
 

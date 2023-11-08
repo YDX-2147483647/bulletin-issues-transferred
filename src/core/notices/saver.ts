@@ -2,7 +2,6 @@
  * 读取、写入通知（或者说从文件恢复、保存至文件）
  * @module
  */
-import { readFile, writeFile } from 'node:fs/promises'
 import { logger } from '../../util/logger.ts'
 import { Notice, type NoticeInterface } from '../models.ts'
 
@@ -24,7 +23,7 @@ function json_date_reviver(key: string, value: any) {
  */
 export async function read_json({ path }: { path: string }) {
     try {
-        const json_str = (await readFile(path)).toString()
+        const json_str = (await Deno.readTextFile(path)).toString()
         const json: NoticeInterface[] = JSON.parse(json_str, json_date_reviver)
 
         return json.map((n) => new Notice(n))
@@ -47,5 +46,5 @@ export async function write_json(
     { path }: { path: string },
 ) {
     const json = JSON.stringify(notices.map((n) => n.to_raw()), null, 2)
-    await writeFile(path, json)
+    await Deno.writeTextFile(path, json)
 }

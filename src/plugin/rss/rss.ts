@@ -1,4 +1,3 @@
-import { writeFile } from 'node:fs/promises'
 import xml from 'npm:xml'
 import type { Notice } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
@@ -104,6 +103,6 @@ export async function write_rss(notices: Notice[], path: string, options: {
     const { max_items, ...rss_options } = options
 
     notices.sort(sort_by_date)
-    await writeFile(path, build_feed(notices.slice(0, max_items), rss_options))
+    await Deno.writeTextFile(path, build_feed(notices.slice(0, max_items), rss_options))
     logger.info(`已保存到“${path}”。`, { plugin: 'rss' })
 }

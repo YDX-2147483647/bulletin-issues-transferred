@@ -4,7 +4,6 @@
  * @see `config/config.schema.json`
  */
 
-import { readFile } from 'node:fs/promises'
 import { parse } from 'npm:yaml'
 
 interface Config {
@@ -24,7 +23,7 @@ const defaults: Config = {
 async function _import_config(
     { config_path = 'config/config.yml' } = {},
 ): Promise<Config> {
-    const file = await readFile(config_path)
+    const file = await Deno.readTextFile(config_path)
     const given = parse(file.toString())
     return Object.assign({}, defaults, given) as Config
 }
