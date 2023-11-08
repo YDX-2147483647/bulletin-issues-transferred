@@ -5,10 +5,12 @@
 import { hook, update_notices } from '../core/index.js'
 import { add_hook } from '../plugin/cli/index.js'
 import robot from '../plugin/ding/index.js'
+import add_normalize_hook from '../plugin/normalize/index.js'
 import { logger } from '../util/logger.js'
 
 add_hook.verbose(hook)
 add_hook.progress_bar(hook)
+add_normalize_hook(hook)
 
 const { all_notices, new_notices, change } = await update_notices()
 

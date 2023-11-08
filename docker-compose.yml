@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  bulletin-issues-transferred:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./config:/home/node/app/config:ro
+      - ./output:/home/node/app/output
+    command: npm run update-server
+    # proxy 可能需要输入验证码
+    stdin_open: true
+    tty: true

@@ -458,14 +458,16 @@
         {
             "name": "机电",
             "full_name": "机电学院",
-            "url": "https://smen.bit.edu.cn/tzgg1/index.htm",
+            "url": "https://smen.bit.edu.cn/tzgg/index.htm",
             "guide": [
                 "机电学院",
                 "通知公告",
-                "⏩"
+                "更多+"
             ],
             "selectors": {
-                "rows": ".con1_left_con2 > ul > li"
+                "rows": ".sub_004 > ul > li",
+                "date": ".time",
+                "title": ".title"
             }
         },
         {
@@ -547,6 +549,23 @@
             ],
             "selectors": {
                 "rows": ".list > ul > li"
+            }
+        },
+        {
+            "name": "课程",
+            "full_name": "课表、课程调整、选课",
+            "alt_name": [
+                "教学运行"
+            ],
+            "url": "https://jxzx.bit.edu.cn/jxyx/index.htm",
+            "guide": [
+                "教学中心",
+                "教学运行",
+                "您目前的位置",
+                "教学运行"
+            ],
+            "selectors": {
+                "rows": "div.articleList li"
             }
         },
         {
