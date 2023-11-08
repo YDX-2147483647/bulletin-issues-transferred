@@ -4,12 +4,6 @@
   "description": "汇总BIT各种网站的通知。",
   "main": "dist/core/index.js",
   "scripts": {
-    "build": "run-p lint build-only",
-    "build-only": "tsc",
-    "build-dev": "tsc --sourceMap",
-    "test": "tsc && mocha dist/**/*.test.js",
-    "lint": "eslint \"src/**\" --fix --ignore-path .gitignore",
-    "doc": "typedoc",
     "update": "node dist/examples/cli.js",
     "update-ding": "node dist/examples/ding-cli.js",
     "update-rss": "node dist/examples/rss-cli.js",

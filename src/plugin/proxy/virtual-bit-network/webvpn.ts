@@ -108,7 +108,8 @@ export async function sign_in(
             await response.text(),
             'text/html',
         ) as HTMLDocument
-        const reason = document.querySelector('#showErrorTip')?.innerText ?? 'Unknown reason'
+        const reason = document.querySelector('#showErrorTip')?.innerText ??
+            'Unknown reason'
         throw new Error(
             `Sign in failed with ${response.status} ${response.statusText}: ${reason}.`,
         )
