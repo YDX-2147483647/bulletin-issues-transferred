@@ -1,13 +1,10 @@
 {
-    "cSpell.words": [
-        "typedoc"
-    ],
     "yaml.schemas": {
         "config/config.schema.json": "config/config.yml",
         "config/ding.secrets.schema.json": "config/ding.secrets.yaml"
     },
     "[typescript]": {
-        "editor.defaultFormatter": "denoland.vscode-deno",
+        "editor.defaultFormatter": "denoland.vscode-deno"
     },
     "deno.enable": true,
     "deno.lint": true,
