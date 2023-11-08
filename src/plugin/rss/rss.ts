@@ -1,5 +1,5 @@
 import { writeFile } from 'node:fs/promises'
-import xml from 'xml'
+import xml from 'npm:xml'
 import type { Notice } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
 import { format_date, sort_by_date } from '../../util/my_date.ts'

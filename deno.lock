@@ -22,6 +22,7 @@
       "npm:terminal-image@^2.0.0": "npm:terminal-image@2.0.0",
       "npm:winston": "npm:winston@3.11.0",
       "npm:winston@^3.8.1": "npm:winston@3.11.0",
+      "npm:xml": "npm:xml@1.0.1",
       "npm:xml@^1.0.1": "npm:xml@1.0.1",
       "npm:yaml": "npm:yaml@2.3.4",
       "npm:yaml@^2.2.2": "npm:yaml@2.3.4"
