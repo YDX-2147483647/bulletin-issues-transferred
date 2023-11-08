@@ -15,8 +15,7 @@
     "update-rss": "node dist/examples/rss-cli.js",
     "update-proxy": "node dist/examples/proxy-cli.js",
     "update-server": "node dist/examples/server-cli.js",
-    "update-server-ding": "node dist/examples/server-ding-cli.js",
-    "check-sources-urls": "node scripts/check_sources_urls.js"
+    "update-server-ding": "node dist/examples/server-ding-cli.js"
   },
   "author": "Y.D.X.",
   "license": "MIT",
@@ -25,7 +24,6 @@
     "aes-js": "^3.1.2",
     "before-after-hook": "^2.2.2",
     "chalk": "^5.3.0",
-    "check-links": "^2.1.2",
     "cli-progress": "^3.9.1",
     "inquirer": "^9.2.11",
     "terminal-image": "^2.0.0",
