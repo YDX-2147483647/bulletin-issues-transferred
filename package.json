@@ -3,14 +3,6 @@
   "version": "2.3.0",
   "description": "汇总BIT各种网站的通知。",
   "main": "dist/core/index.js",
-  "scripts": {
-    "update": "node dist/examples/cli.js",
-    "update-ding": "node dist/examples/ding-cli.js",
-    "update-rss": "node dist/examples/rss-cli.js",
-    "update-proxy": "node dist/examples/proxy-cli.js",
-    "update-server": "node dist/examples/server-cli.js",
-    "update-server-ding": "node dist/examples/server-ding-cli.js"
-  },
   "author": "Y.D.X.",
   "license": "MIT",
   "type": "module",
