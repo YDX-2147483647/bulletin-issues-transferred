@@ -278,18 +278,6 @@
             }
         },
         {
-            "name": "第二课堂",
-            "guide": [
-                "第二课堂",
-                "课程信息"
-            ],
-            "url": "http://dekt.bit.edu.cn/portal/CourseList.jsp",
-            "selectors": {
-                "rows": "tbody tr",
-                "date": null
-            }
-        },
-        {
             "name": "光电",
             "full_name": "光电学院",
             "url": "https://opt.bit.edu.cn/tzgg2/tzgg/index.htm",

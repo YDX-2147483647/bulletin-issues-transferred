@@ -92,7 +92,7 @@
                         "type": "string",
                         "format": "hostname",
                         "examples": [
-                            "dekt.bit.edu.cn"
+                            "dzb.bit.edu.cn"
                         ]
                     }
                 }
