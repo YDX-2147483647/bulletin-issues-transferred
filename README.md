@@ -2,8 +2,8 @@
 
 [![best of BITs](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/YDX-2147483647/best-of-bits/main/config/badge/v1.json)](https://github.com/YDX-2147483647/best-of-bits)
 ![version](https://img.shields.io/github/package-json/v/YDX-2147483647/bulletin-issues-transferred)
-[![RSS Valid](https://img.shields.io/badge/RSS-Valid-orange?logo=rss)](https://validator.w3.org/feed/check.cgi?url=https%3A%2F%2Fhaobit.top%2Fdev%2Ffeed.rss)
-[![rssto.email](https://img.shields.io/badge/邮件-rssto.email-pink?logo=maildotru)](https://rssto.email?url=https://haobit.top/dev/feed.rss)
+[![RSS Valid](https://img.shields.io/badge/RSS-Valid-orange?logo=rss)](https://validator.w3.org/feed/check.cgi?url=https%3A%2F%2Fhaobit.top%2Ffeed.rss)
+[![rssto.email](https://img.shields.io/badge/邮件-rssto.email-pink?logo=maildotru)](https://rssto.email?url=https://haobit.top/feed.rss)
 [![QQ群 757113685](https://img.shields.io/badge/QQ群-757113685-0852d6?logo=tencentqq)](https://jq.qq.com/?_wv=1027&k=j13nOAhr)
 ![Updated](https://img.shields.io/endpoint?url=https%3A%2F%2Fhaobit.top%2Fdev%2Fbadge)
 [![haobit.top website](https://img.shields.io/website?label=haobit.top&url=https%3A%2F%2Fhaobit.top)](https://haobit.top/dev/site/notice/)
@@ -74,7 +74,7 @@ npm run update
 
   proxy + rss，可用于服务器上的 crontab。
 
-  我们已部署了一个，可在 [HaoBIT](https://haobit.top/dev/site/notice/) 查看，例如 [RSS](http://haobit.top/dev/feed.rss)。
+  我们已部署了一个，可在 [HaoBIT](https://haobit.top/dev/site/notice/) 查看，例如 [RSS](http://haobit.top/feed.rss)。
 
 - `npm run update-server-ding`
 
