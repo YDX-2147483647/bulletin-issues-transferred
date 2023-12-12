@@ -103,6 +103,9 @@ export async function write_rss(notices: Notice[], path: string, options: {
     const { max_items, ...rss_options } = options
 
     notices.sort(sort_by_date)
-    await Deno.writeTextFile(path, build_feed(notices.slice(0, max_items), rss_options))
+    await Deno.writeTextFile(
+        path,
+        build_feed(notices.slice(0, max_items), rss_options),
+    )
     logger.info(`已保存到“${path}”。`, { plugin: 'rss' })
 }
