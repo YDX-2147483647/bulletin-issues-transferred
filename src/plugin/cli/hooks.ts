@@ -11,6 +11,12 @@ export function verbose(hook: HookCollectionType) {
         const { sources } = options
         logger.info(`发现${sources.length}个通知来源。`, { plugin: 'cli' })
     })
+    hook.before('fetch_each', ({ source }) => {
+        logger.debug(`开始获取“${source.name}”。`, {
+            plugin: 'cli',
+            hook: 'fetch_each.before',
+        })
+    })
     hook.error('fetch_each', (
         err,
         // @ts-ignore If `fetch_each` has an error hook, the after hook may get `undefined`
@@ -39,6 +45,10 @@ export function verbose(hook: HookCollectionType) {
                 plugin: 'cli',
             })
         }
+        logger.debug(`结束获取“${source.name}”。`, {
+            plugin: 'cli',
+            hook: 'fetch_each.after',
+        })
     })
     hook.after('update', (_result, { write_json_path }) => {
         logger.info(`已按需保存到“${write_json_path}”。`, { plugin: 'cli' })
