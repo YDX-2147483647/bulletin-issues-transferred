@@ -2560,6 +2560,8 @@
     "https://deno.land/x/deno_dom@v0.1.42/src/dom/selectors/sizzle.js": "c3aed60c1045a106d8e546ac2f85cc82e65f62d9af2f8f515210b9212286682a",
     "https://deno.land/x/deno_dom@v0.1.42/src/dom/utils-types.ts": "96db30e3e4a75b194201bb9fa30988215da7f91b380fca6a5143e51ece2a8436",
     "https://deno.land/x/deno_dom@v0.1.42/src/dom/utils.ts": "4c6206516fb8f61f37a209c829e812c4f5a183e46d082934dd14c91bde939263",
-    "https://deno.land/x/deno_dom@v0.1.42/src/parser.ts": "e06b2300d693e6ae7564e53dfa5c9a9e97fdb8c044c39c52c8b93b5d60860be3"
+    "https://deno.land/x/deno_dom@v0.1.42/src/parser.ts": "e06b2300d693e6ae7564e53dfa5c9a9e97fdb8c044c39c52c8b93b5d60860be3",
+    "https://esm.sh/ky@1.1.3": "7bc4a737f22591792a42989de03efeace690158962ead46f622b73fc3ddf85b1",
+    "https://esm.sh/v135/ky@1.1.3/denonext/ky.mjs": "6babfbef9debcf3a28dda275c0c477206002c82635f8ef9a3173ae69002f25f6"
   }
 }

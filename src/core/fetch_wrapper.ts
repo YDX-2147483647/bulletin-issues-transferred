@@ -6,11 +6,13 @@
  * @module
  */
 
+import ky from 'ky'
+
 import type { HookCollectionType } from './hooks_type.ts'
 
 function fetch_wrapper(request: RequestInit & { url: string }) {
     const { url, ...init } = request
-    return fetch(url, init)
+    return ky(url, init)
 }
 
 /**
