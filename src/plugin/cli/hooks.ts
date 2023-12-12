@@ -1,4 +1,6 @@
+import { TimeoutError } from 'ky'
 import cliProgress from 'npm:cli-progress'
+
 import type { HookCollectionType } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
 import { recent_checker } from '../../util/my_date.ts'
@@ -19,9 +21,9 @@ export function verbose(hook: HookCollectionType) {
             logger.warn(`未能访问“${source.name}”（NotFound）。将忽略。`, {
                 plugin: 'cli',
             })
-        } else if (err instanceof Deno.errors.TimedOut) {
+        } else if (err instanceof TimeoutError) {
             logger.error(
-                `访问“${source.name}”（TimedOut）超时，可能因为访问太频繁。将忽略。`,
+                `访问“${source.name}”（Timeout）超时，可能因为访问太频繁。将忽略。`,
                 { plugin: 'cli' },
             )
         } else {
