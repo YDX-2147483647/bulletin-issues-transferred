@@ -1,4 +1,6 @@
+import { TimeoutError } from 'ky'
 import cliProgress from 'npm:cli-progress'
+
 import type { HookCollectionType } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
 import { recent_checker } from '../../util/my_date.ts'
@@ -8,6 +10,12 @@ export function verbose(hook: HookCollectionType) {
     hook.before('fetch', (options) => {
         const { sources } = options
         logger.info(`发现${sources.length}个通知来源。`, { plugin: 'cli' })
+    })
+    hook.before('fetch_each', ({ source }) => {
+        logger.debug(`开始获取“${source.name}”。`, {
+            plugin: 'cli',
+            hook: 'fetch_each.before',
+        })
     })
     hook.error('fetch_each', (
         err,
@@ -19,9 +27,9 @@ export function verbose(hook: HookCollectionType) {
             logger.warn(`未能访问“${source.name}”（NotFound）。将忽略。`, {
                 plugin: 'cli',
             })
-        } else if (err instanceof Deno.errors.TimedOut) {
+        } else if (err instanceof TimeoutError) {
             logger.error(
-                `访问“${source.name}”（TimedOut）超时，可能因为访问太频繁。将忽略。`,
+                `访问“${source.name}”（Timeout）超时，可能因为访问太频繁。将忽略。`,
                 { plugin: 'cli' },
             )
         } else {
@@ -37,6 +45,10 @@ export function verbose(hook: HookCollectionType) {
                 plugin: 'cli',
             })
         }
+        logger.debug(`结束获取“${source.name}”。`, {
+            plugin: 'cli',
+            hook: 'fetch_each.after',
+        })
     })
     hook.after('update', (_result, { write_json_path }) => {
         logger.info(`已按需保存到“${write_json_path}”。`, { plugin: 'cli' })

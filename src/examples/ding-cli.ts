@@ -6,10 +6,12 @@ import { hook, update_notices } from '../core/index.ts'
 import { add_hook } from '../plugin/cli/index.ts'
 import robot from '../plugin/ding/index.ts'
 import add_normalize_hook from '../plugin/normalize/index.ts'
+import add_retry_hook from '../plugin/retry/index.ts'
 import { logger } from '../util/logger.ts'
 
 add_hook.verbose(hook)
 add_hook.progress_bar(hook)
+add_retry_hook(hook)
 add_normalize_hook(hook)
 
 const { all_notices, new_notices, change } = await update_notices()
