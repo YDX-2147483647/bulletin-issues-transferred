@@ -623,6 +623,35 @@
                 "rows": "ul.partyUl > li",
                 "date": ".date"
             }
+        },
+        {
+            "name": "招采",
+            "full_name": "招采公告",
+            "url": "https://bit.edu.cn/tzgg17/zcgg/index.htm",
+            "guide": [
+                "主站",
+                "校务公开",
+                "通知公告",
+                "招采公告"
+            ],
+            "selectors": {
+                "rows": ".title_rtcon li"
+            }
+        },
+        {
+            "name": "资实",
+            "full_name": "资产与实验室管理处",
+            "url": "https://zsc.bit.edu.cn/xwgg/tzgg/index.htm",
+            "guide": [
+                "资产与实验室管理处",
+                "通知公告",
+                "MORE"
+            ],
+            "selectors": {
+                "rows": ".pageList > li",
+                "date": ".date",
+                "title": ".title"
+            }
         }
     ]
 }
