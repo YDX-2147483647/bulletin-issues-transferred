@@ -1,4 +1,4 @@
-import { TimeoutError } from 'ky'
+import { HTTPError, TimeoutError } from 'ky'
 import cliProgress from 'npm:cli-progress'
 
 import type { HookCollectionType } from '../../core/index.ts'
@@ -30,6 +30,11 @@ export function verbose(hook: HookCollectionType) {
         } else if (err instanceof TimeoutError) {
             logger.error(
                 `访问“${source.name}”（Timeout）超时，可能因为访问太频繁。将忽略。`,
+                { plugin: 'cli' },
+            )
+        } else if (err instanceof HTTPError) {
+            logger.error(
+                `未能访问“${source.name}”（${err.message}）。将忽略。`,
                 { plugin: 'cli' },
             )
         } else {
