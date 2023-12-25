@@ -36,7 +36,7 @@ export default function add_hook(hook: HookCollectionType) {
     hook.after('update', async ({ all_notices: notices }) => {
         if (sources === null) {
             throw new Error(
-                'Cannot generate RSS because there\'s no known source.',
+                "Cannot generate RSS because there's no known source.",
             )
         }
         notices.forEach((n) => n.populate({ sources } as { sources: Source[] }))

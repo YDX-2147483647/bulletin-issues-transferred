@@ -8,7 +8,7 @@ import terminalImage from 'npm:terminal-image'
 import type { CaptchaHandler } from './webvpn.ts'
 
 export async function ask_from_command_line(
-    message = 'What\'s the captcha? (case-insensitive)',
+    message = "What's the captcha? (case-insensitive)",
 ): Promise<string> {
     const answers = await inquirer.prompt([{
         type: 'input',
@@ -50,7 +50,7 @@ export function display_captcha_then_ask_from_command_line(options: {
         console.log(await terminalImage.buffer(buffer, options))
 
         return await ask_from_command_line(
-            'What\'s the captcha above? (case-insensitive)',
+            "What's the captcha above? (case-insensitive)",
         )
     }
 }
