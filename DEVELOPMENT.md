@@ -7,28 +7,28 @@
 - 分工
   - `core`只涉及核心功能，不考虑命令行界面等，不能引用任何`plugin`。
   - `util`尽量为纯函数，可单独测试，不能引用`core`或`plugin`。
-  
+
 - 配置文件
   - `core`内部模块不引入配置文件，而是把选项设计为参数。
-  
+
   - 在最表层引入配置文件。
-  
+
   - 配置文件（理论上）可被命令行参数替代。
-  
+
   - `plugin`可以向配置文件中添加自己的键，但仍用`core`读取`config`。
-  
+
     ```yaml
     # config.yml
     ding:  # plugin/ding 的配置
       secrets_path: config/ding.secrets.yaml
     ```
-  
+
     配置的具体规定目前只加入`config/config.schema.json`，不加入`src/core/config.ts`。
-  
+
 - `core`中钩子
   - `core`内部模块通过参数`_hook`传入`hook`。
   - 在最表层`new Hook.Collection<HooksType>()`，并向外暴露`hook.api`。
-  
+
 - 尽量模块化
   - 隐藏模块内细节：`core`中每个文件夹都有`index.ts`，外部一律引用它。
 
@@ -163,11 +163,11 @@ type HooksType = {
     }
 }
 
-function _foo (options: FooOptions): FooResult {
+function _foo(options: FooOptions): FooResult {
     // …
 }
 
-export function foo ({ _hook, ...options }: {
+export function foo({ _hook, ...options }: {
     _hook: HookCollection<HooksType>
 } & FooOptions): Promise<FooResult> {
     return _hook('foo', _foo, options)
@@ -184,7 +184,7 @@ _hook.before('fetch', before_hook)
 
 await foo({
     ...options,
-    _hook
+    _hook,
 })
 ```
 

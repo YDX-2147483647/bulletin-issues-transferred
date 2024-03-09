@@ -3,7 +3,7 @@
  * @see https://github.com/x-cold/dingtalk-robot/blob/master/lib/sign.js
  */
 
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 
 export default (secret: string, content: string) => {
     const str = crypto.createHmac('sha256', secret)

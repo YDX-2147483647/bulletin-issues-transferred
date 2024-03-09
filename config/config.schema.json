@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema",
-    "$id": "config.schema.json-v0.3.1",
+    "$id": "config.schema.json-v0.3.2",
     "title": "Bulletin IT 设置",
     "type": "object",
     "properties": {
@@ -76,6 +76,17 @@
                 "rss_href",
                 "output_path"
             ]
+        },
+        "retry": {
+            "title": "超时后重试插件",
+            "type": "object",
+            "properties": {
+                "delay": {
+                    "title": "超时后等待的毫秒数",
+                    "type": "number",
+                    "default": 10000
+                }
+            }
         },
         "proxy": {
             "title": "虚拟校园网插件",

@@ -93,23 +93,23 @@ npm run update
 
 注：如果你不知道怎么提拉取请求（pull request），不妨直接新建[议题（issue）](https://github.com/YDX-2147483647/bulletin-issues-transferred/issues/new/choose)。
 
--   写明名称、网址、同学该如何找到它等等。
+- 写明名称、网址、同学该如何找到它等等。
 
-    这些内容写在`config/sources_by_selectors.json`中，详细规则见同文件夹的`*.schema.json`。
+  这些内容写在`config/sources_by_selectors.json`中，详细规则见同文件夹的`*.schema.json`。
 
-    其实也不用太研究那个 JSON Schema，只要看一下现有的`sources_by_selectors.json`，结合 VS Code 的语法提示，照猫画虎就行了。
+  其实也不用太研究那个 JSON Schema，只要看一下现有的`sources_by_selectors.json`，结合 VS Code 的语法提示，照猫画虎就行了。
 
--   描述如何从这个来源获取通知。
+- 描述如何从这个来源获取通知。
 
-    目前有两类方法：
+  目前有两类方法：
 
-    -   先获取通知列表的静态网页，然后用 CSS 选择器从中提取信息。
+  - 先获取通知列表的静态网页，然后用 CSS 选择器从中提取信息。
 
-        CSS 选择器写在`config/sources_by_selectors.json`中。
+    CSS 选择器写在`config/sources_by_selectors.json`中。
 
-    -   利用学校的 API。
+  - 利用学校的 API。
 
-        在`src/core/sources/special.ts`中的`raw_sources: SourceSpecialInterface[]`里。
+    在`src/core/sources/special.ts`中的`raw_sources: SourceSpecialInterface[]`里。
 
 ### 移植到别的学校
 
@@ -122,22 +122,22 @@ npm run update
 
 ## 这合法吗？
 
--   绝对不涉密
+- 绝对不涉密
 
-    > 上网不涉密，涉密不上网。
+  > 上网不涉密，涉密不上网。
 
-    我们只获取无需登录就能访问到的通知。一般人用搜索引擎都能找到这些页面，只是比较麻烦。
+  我们只获取无需登录就能访问到的通知。一般人用搜索引擎都能找到这些页面，只是比较麻烦。
 
--   不侵犯版权
+- 不侵犯版权
 
-    （且不论通知有没有版权）我们只获取通知的标题，并且会给出原链接。
+  （且不论通知有没有版权）我们只获取通知的标题，并且会给出原链接。
 
--   基本不会给学校服务器造成压力
+- 基本不会给学校服务器造成压力
 
-    如[前](#添加别的通知来源)所述，获取通知不会频繁访问学校网站，一个普通人在学校网上乱点造成的压力可能都比这个项目的大。
+  如[前](#添加别的通知来源)所述，获取通知不会频繁访问学校网站，一个普通人在学校网上乱点造成的压力可能都比这个项目的大。
 
-    另外，这个项目也许会方便一些同学找通知，避免在学校网上乱翻，从而可能减小学校服务器的压力。
+  另外，这个项目也许会方便一些同学找通知，避免在学校网上乱翻，从而可能减小学校服务器的压力。
 
--   原理基于公开内容
+- 原理基于公开内容
 
-    CSS 选择器只是描述学校网页，API 是搜索学校网页源代码得到的。这些内容都在 Web 前端，是公开的。
+  CSS 选择器只是描述学校网页，API 是搜索学校网页源代码得到的。这些内容都在 Web 前端，是公开的。

@@ -1,5 +1,5 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
+    // 使用 IntelliSense 了解相关属性。
     // 悬停以查看现有属性的描述。
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
@@ -7,23 +7,16 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Build and Launch Program",
-            "program": "${file}",
-            "preLaunchTask": "npm: build-dev",
-            "console": "integratedTerminal",
-            "outFiles": [
-                "${workspaceFolder}/dist/**/*.js"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
             "name": "Launch Program",
             "program": "${file}",
-            "console": "integratedTerminal",
-            "outFiles": [
-                "${workspaceFolder}/dist/**/*.js"
-            ]
-        },
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--inspect-wait",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9229
+        }
     ]
 }

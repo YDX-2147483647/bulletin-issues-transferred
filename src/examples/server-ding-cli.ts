@@ -2,17 +2,19 @@
  * 更新通知
  */
 
-import { hook, update_notices } from '../core/index.js'
-import { add_hook } from '../plugin/cli/index.js'
-import robot from '../plugin/ding/index.js'
-import add_proxy_hook from '../plugin/proxy/index.js'
-import add_normalize_hook from '../plugin/normalize/index.js'
-import add_rss_hook from '../plugin/rss/index.js'
-import { logger } from '../util/logger.js'
+import { hook, update_notices } from '../core/index.ts'
+import { add_hook } from '../plugin/cli/index.ts'
+import robot from '../plugin/ding/index.ts'
+import add_normalize_hook from '../plugin/normalize/index.ts'
+import add_proxy_hook from '../plugin/proxy/index.ts'
+import add_retry_hook from '../plugin/retry/index.ts'
+import add_rss_hook from '../plugin/rss/index.ts'
+import { logger } from '../util/logger.ts'
 
 add_hook.verbose(hook)
 add_hook.progress_bar(hook)
 add_proxy_hook(hook)
+add_retry_hook(hook)
 add_normalize_hook(hook)
 add_rss_hook(hook)
 
@@ -27,7 +29,7 @@ if (change.add === 0) {
 } else {
     const message_rows = [
         `发现 ${new_notices.length} 项新通知。`,
-        ...new_notices.slice(0, 20).map(n => '-   ' + n.to_markdown()),
+        ...new_notices.slice(0, 20).map((n) => '-   ' + n.to_markdown()),
         `新增 ${change.add} 项，过期 ${change.drop} 项。`,
     ]
 

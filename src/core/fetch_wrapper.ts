@@ -6,18 +6,21 @@
  * @module
  */
 
-import _fetch, { type RequestInit, type Response } from 'node-fetch'
-import type { HookCollectionType } from './hooks_type.js'
+import ky from 'ky'
 
-function fetch_wrapper (request: RequestInit & { url: string }) {
+import type { HookCollectionType } from './hooks_type.ts'
+
+function fetch_wrapper(request: RequestInit & { url: string }) {
     const { url, ...init } = request
-    return _fetch(url, init)
+    return ky(url, init)
 }
 
 /**
  * @param request._hook (internal usage only) `request`
  */
-export default function hooked_fetch (request: RequestInit & { url: string, _hook: HookCollectionType }): Promise<Response> {
+export default function hooked_fetch(
+    request: RequestInit & { url: string; _hook: HookCollectionType },
+): Promise<Response> {
     const { _hook, ...req } = request
     return _hook('request', fetch_wrapper, req)
 }

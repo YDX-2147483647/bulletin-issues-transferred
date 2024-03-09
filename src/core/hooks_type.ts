@@ -1,6 +1,5 @@
-import type { HookCollection } from 'before-after-hook'
-import type { RequestInit, Response } from 'node-fetch'
-import type { Notice, Source } from './models.js'
+import type { HookCollection } from 'npm:before-after-hook'
+import type { Notice, Source } from './models.ts'
 
 type HooksType = {
     request: {
@@ -21,6 +20,8 @@ type HooksType = {
             read_json_path: string
             write_json_path: string
             sources_by_selectors_path: string
+            save_for: number
+            _hook: HookCollectionType
         }
         Result: {
             all_notices: Notice[]
@@ -35,7 +36,4 @@ type HooksType = {
 
 type HookCollectionType = HookCollection<HooksType>
 
-export type {
-    HooksType,
-    HookCollectionType,
-}
+export type { HookCollectionType, HooksType }
