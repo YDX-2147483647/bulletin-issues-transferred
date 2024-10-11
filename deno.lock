@@ -1,0 +1,36 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@b-fuze/deno-dom@*": "0.1.48",
+    "jsr:@b-fuze/deno-dom@~0.1.48": "0.1.48",
+    "jsr:@std/assert@1": "1.0.6",
+    "jsr:@std/internal@^1.0.4": "1.0.4"
+  },
+  "jsr": {
+    "@b-fuze/deno-dom@0.1.48": {
+      "integrity": "bf5b591aef2e9e9c59adfcbb93a9ecd45bab5b7c8263625beafa5c8f1662e7da"
+    },
+    "@std/assert@1.0.6": {
+      "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/internal@1.0.4": {
+      "integrity": "62e8e4911527e5e4f307741a795c0b0a9e6958d0b3790716ae71ce085f755422"
+    }
+  },
+  "redirects": {
+    "https://esm.sh/ky@^1.7.2": "https://esm.sh/ky@1.7.2"
+  },
+  "remote": {
+    "https://esm.sh/ky@1.7.2": "5238ce1d59e224c5ac583a5d5a77f455d74860cbdc54f09bc170c7469983b7d5",
+    "https://esm.sh/v135/ky@1.7.2/denonext/ky.mjs": "b5a85e5c12a91004096c4acf413d55cbc659139fb95455136aebcb73916ef95c"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@b-fuze/deno-dom@~0.1.48",
+      "jsr:@std/assert@1"
+    ]
+  }
+}
