@@ -177,7 +177,8 @@
             "full_name": "研究生院",
             "url": "https://grd.bit.edu.cn/tzgg1/index.htm",
             "selectors": {
-                "rows": ".wenjianxiazai li"
+                "rows": ".block-list > li",
+                "title": ".gpArticleTitle"
             }
         },
         {
