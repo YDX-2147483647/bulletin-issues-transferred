@@ -3,21 +3,30 @@
  * @module
  */
 
-import type { HookCollectionType } from './hooks_type.js'
-import type { Notice } from './models.js'
-import { fetch_all_sources, merge, read_json, write_json } from './notices/index.js'
-import import_sources from './sources/index.js'
+import type { HookCollectionType } from './hooks_type.ts'
+import type { Notice } from './models.ts'
+import {
+    fetch_all_sources,
+    merge,
+    read_json,
+    write_json,
+} from './notices/index.ts'
+import import_sources from './sources/index.ts'
 
 type UpdateNoticesOptions = {
-    read_json_path: string,
+    read_json_path: string
     write_json_path: string
     sources_by_selectors_path: string
     save_for: number
 }
 
-async function _update_notices ({
-    sources_by_selectors_path, read_json_path, write_json_path, save_for,
-    _hook, ...options
+async function _update_notices({
+    sources_by_selectors_path,
+    read_json_path,
+    write_json_path,
+    save_for,
+    _hook,
+    ...options
 }: { _hook: HookCollectionType } & UpdateNoticesOptions) {
     const sources = await import_sources({ sources_by_selectors_path })
     const { notices: latest_notices } = await fetch_all_sources({
@@ -33,7 +42,7 @@ async function _update_notices ({
     //
     // 这两种情况都设置为当前日期。
     const now = new Date()
-    latest_notices.forEach(n => {
+    latest_notices.forEach((n) => {
         if (!n.date || n.date > now) {
             n.date = new Date()
         }
@@ -41,7 +50,8 @@ async function _update_notices ({
 
     const existed_notices = await read_json({ path: read_json_path })
     const { notices: notices_to_save, new_notices, change } = merge(
-        existed_notices, latest_notices,
+        existed_notices,
+        latest_notices,
         { days_ago: save_for, sort: true },
     )
 
@@ -72,7 +82,9 @@ async function _update_notices ({
  * @param options._hook (internal usage only) `update`
  * @returns
  */
-export function update_notices (options: { _hook: HookCollectionType } & UpdateNoticesOptions): Promise<{
+export function update_notices(
+    options: { _hook: HookCollectionType } & UpdateNoticesOptions,
+): Promise<{
     all_notices: Notice[]
     new_notices: Notice[]
     change: {

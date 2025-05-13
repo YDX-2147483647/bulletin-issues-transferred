@@ -5,20 +5,26 @@
 
 // spell-checker: words webvpn
 
-import { readFile } from 'fs/promises'
-import { Headers } from 'node-fetch'
-import VirtualBIT, { decrypt_URL, encrypt_URL } from 'virtual-bit-network'
-import { parse } from 'yaml'
-import { config as all_config, HookCollectionType } from '../../core/index.js'
-import { logger } from '../../util/logger.js'
+import VirtualBIT, { decrypt_URL, encrypt_URL } from '@ydx/virtual-bit-network'
+import { parse } from 'npm:yaml'
+import { config as all_config, HookCollectionType } from '../../core/index.ts'
+import { logger } from '../../util/logger.ts'
 
-async function load_config ({ secrets_path, match: hostnames }: { secrets_path: string, match: string[] }) {
-    const file = await readFile(secrets_path)
-    const secrets = parse(file.toString()) as { username: string, password: string }
+async function load_config(
+    { secrets_path, match: hostnames }: {
+        secrets_path: string
+        match: string[]
+    },
+) {
+    const file = await Deno.readTextFile(secrets_path)
+    const secrets = parse(file.toString()) as {
+        username: string
+        password: string
+    }
     return { secrets, hostnames }
 }
 
-// @ts-ignore
+// @ts-ignore 允许扩展设置
 const config = await load_config(all_config.proxy)
 const proxy = new VirtualBIT(config.secrets)
 await proxy.sign_in()
@@ -27,8 +33,8 @@ logger.info('Signed in successfully.', { plugin: 'proxy' })
 // 下面一行是玄学。有些网站（如 mec）的二级页面需要先用`proxy`访问任意网址，不然会炸。
 await proxy.fetch('http://mec.bit.edu.cn')
 
-export default function add_proxy_hook (hook: HookCollectionType) {
-    hook.wrap('request', async (original_fetch, options) => {
+export default function add_proxy_hook(hook: HookCollectionType) {
+    hook.wrap('request', (original_fetch, options) => {
         if (!config.hostnames.includes((new URL(options.url)).hostname)) {
             return original_fetch(options)
         }

@@ -6,16 +6,18 @@
  * @module
  */
 
-import { Source } from '../models.js'
+import { Source } from '../models.ts'
 
-import import_sources_by_selectors from './by_selectors.js'
-import import_sources_special from './special.js'
+import import_sources_by_selectors from './by_selectors.ts'
+import import_sources_special from './special.ts'
 
 /**
  * @param param0
  * @param param0.sources_by_selectors_path `sources_by_selectors.json`
  */
-export default async function import_sources ({ sources_by_selectors_path }: { sources_by_selectors_path: string }): Promise<Source[]> {
+export default async function import_sources(
+    { sources_by_selectors_path }: { sources_by_selectors_path: string },
+): Promise<Source[]> {
     const promises = [
         import_sources_by_selectors({ path: sources_by_selectors_path }),
         import_sources_special(),
