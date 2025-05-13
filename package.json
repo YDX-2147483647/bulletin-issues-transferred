@@ -28,7 +28,7 @@
     "cli-progress": "^3.9.1",
     "jsdom": "^19.0.0",
     "node-fetch": "^3.2.10",
-    "virtual-bit-network": "github:YDX-2147483647/virtual-BIT-network",
+    "virtual-bit-network": "^0.3.0",
     "winston": "^3.8.1",
     "xml": "^1.0.1",
     "yaml": "^2.2.2"

@@ -7,7 +7,7 @@
 
 import { readFile } from 'fs/promises'
 import { Headers } from 'node-fetch'
-import VirtualBIT, { cli, decrypt_URL, encrypt_URL } from 'virtual-bit-network'
+import VirtualBIT, { decrypt_URL, encrypt_URL } from 'virtual-bit-network'
 import { parse } from 'yaml'
 import { config as all_config, HookCollectionType } from '../../core/index.js'
 import { logger } from '../../util/logger.js'
@@ -21,7 +21,7 @@ async function load_config ({ secrets_path, match: hostnames }: { secrets_path: 
 // @ts-ignore
 const config = await load_config(all_config.proxy)
 const proxy = new VirtualBIT(config.secrets)
-await proxy.sign_in(cli.display_captcha_then_ask_from_command_line({ width: '80%' }))
+await proxy.sign_in()
 logger.info('Signed in successfully.', { plugin: 'proxy' })
 
 // 下面一行是玄学。有些网站（如 mec）的二级页面需要先用`proxy`访问任意网址，不然会炸。
