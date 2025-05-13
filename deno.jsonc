@@ -3,12 +3,12 @@
         "fmt": "deno fmt --ignore=docs/,output/,package.json,package-lock.json",
         "doc": "deno doc --html --name='Bulletin Issues Transferred' src/core/index.ts",
         "check-sources-urls": "deno run --allow-env --allow-net --allow-read=config/sources_by_selectors.json scripts/check_sources_urls.ts",
-        "update": "deno run --allow-env=NODE_ENV --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/cli.ts",
-        "update-ding": "deno run --allow-env=NODE_ENV --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/ding-cli.ts",
-        "update-rss": "deno run --allow-env=NODE_ENV --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/rss-cli.ts",
-        "update-proxy": "deno run --allow-env=NODE_ENV --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/proxy-cli.ts",
-        "update-server": "deno run --allow-env=NODE_ENV --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/server-cli.ts",
-        "update-server-ding": "deno run --allow-env=NODE_ENV --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/server-ding-cli.ts"
+        "update": "deno run --allow-env --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/cli.ts",
+        "update-ding": "deno run --allow-env --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/ding-cli.ts",
+        "update-rss": "deno run --allow-env --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/rss-cli.ts",
+        "update-proxy": "deno run --allow-env --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/proxy-cli.ts",
+        "update-server": "deno run --allow-env --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/server-cli.ts",
+        "update-server-ding": "deno run --allow-env --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/server-ding-cli.ts"
     },
     "imports": {
         "@ydx/virtual-bit-network": "jsr:@ydx/virtual-bit-network@^0.3.0",
