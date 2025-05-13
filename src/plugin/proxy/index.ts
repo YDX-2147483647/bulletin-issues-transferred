@@ -5,11 +5,7 @@
 
 // spell-checker: words webvpn
 
-import VirtualBIT, {
-    cli,
-    decrypt_URL,
-    encrypt_URL,
-} from './virtual-bit-network/index.ts'
+import VirtualBIT, { decrypt_URL, encrypt_URL } from '@ydx/virtual-bit-network'
 import { parse } from 'npm:yaml'
 import { config as all_config, HookCollectionType } from '../../core/index.ts'
 import { logger } from '../../util/logger.ts'
@@ -31,9 +27,7 @@ async function load_config(
 // @ts-ignore 允许扩展设置
 const config = await load_config(all_config.proxy)
 const proxy = new VirtualBIT(config.secrets)
-await proxy.sign_in(
-    cli.display_captcha_then_ask_from_command_line({ width: '80%' }),
-)
+await proxy.sign_in()
 logger.info('Signed in successfully.', { plugin: 'proxy' })
 
 // 下面一行是玄学。有些网站（如 mec）的二级页面需要先用`proxy`访问任意网址，不然会炸。

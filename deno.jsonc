@@ -11,14 +11,12 @@
         "update-server-ding": "deno run --allow-env=NODE_ENV --allow-net --allow-read --allow-write=output/ --allow-sys=osRelease src/examples/server-ding-cli.ts"
     },
     "imports": {
+        "@ydx/virtual-bit-network": "jsr:@ydx/virtual-bit-network@^0.3.0",
         "std/": "https://deno.land/std@0.205.0/",
         "ky": "https://esm.sh/ky@1.1.3",
-        "npm:aes-js": "npm:aes-js@^3.1.2",
         "npm:before-after-hook": "npm:before-after-hook@^2.2.2",
         "npm:chalk": "npm:chalk@^5.3.0",
         "npm:cli-progress": "npm:cli-progress@^3.9.1",
-        "npm:inquirer": "npm:inquirer@^9.2.11",
-        "npm:terminal-image": "npm:terminal-image@^2.0.0",
         "npm:winston": "npm:winston@^3.8.1",
         "npm:xml": "npm:xml@^1.0.1",
         "npm:yaml": "npm:yaml@^2.2.2"
