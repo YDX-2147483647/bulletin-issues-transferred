@@ -14,22 +14,17 @@ BulletinIT 旨在汇总 BIT 各种网站的通知。
 
 ```shell
 # 第一次使用前需要先安装包
-npm install
-# 然后编译 TypeScript
-npm run build
+deno install
 
 # 日常使用（效果见下）
-npm run update
+deno task update
 ```
 
 ## 能干什么？
 
-日常使用时，`npm run update`会在控制台输出类似这样的内容。
+日常使用时，`deno task update`会在控制台输出类似这样的内容。
 
 ```
-> bulletin-issues-transferred@2.0.0 update
-> node dist/plugin/cli/examples/cli.js
-
 抓取通知 ████████████████████████████████████████ 100% | 25/25 | 已用2s，预计还需0s
 未发现新通知。
  1  留学生｜2022北京理工大学国际学生招生简章
@@ -48,11 +43,11 @@ npm run update
 
 以往信息存储在`output/notices.json`中。
 
-- `npm run update`
+- `deno task update`
 
   更新通知。
 
-- `npm run update-proxy`
+- `deno task update-proxy`
 
   使用代理更新通知。
 
@@ -60,23 +55,23 @@ npm run update
 
   需要配置统一身份认证的秘密信息，请参考`config/proxy.secrets.schema.json`。
 
-- `npm run update-ding`
+- `deno task update-ding`
 
   更新通知，然后向 i 北理群发送新通知。
 
   需要配置钉钉机器人的秘密信息，请参考`config/ding.secrets.schema.json`。
 
-- `npm run update-rss`
+- `deno task update-rss`
 
   更新通知，并生成 RSS。
 
-- `npm run update-server`
+- `deno task update-server`
 
   proxy + rss，可用于服务器上的 crontab。
 
   我们已部署了一个，可在 [HaoBIT](https://haobit.top/notice/) 查看，例如 [RSS](http://haobit.top/feed.rss)。
 
-- `npm run update-server-ding`
+- `deno task update-server-ding`
 
   server + ding，可用于服务器上的 crontab。
 
@@ -118,7 +113,7 @@ npm run update
 
 ### 编程
 
-[DEVELOPMENT.md](./DEVELOPMENT.md) 描述了一些思路、细节。另外`npm run doc`可以生成文档。
+[DEVELOPMENT.md](./DEVELOPMENT.md) 描述了一些思路、细节。另外`deno doc …`可以生成文档。
 
 ## 这合法吗？
 
