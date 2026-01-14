@@ -96,7 +96,7 @@ const raw_sources: SourceSpecialInterface[] = [
             })
             const json = await response.json()
             const rows = Array.from(json.object) as {
-                notifyType: string
+                notifyType: '党委通知' | '行政通知' | '部门通知' | ''
                 articleID: string
                 title: string
             }[]

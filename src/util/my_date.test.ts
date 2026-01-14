@@ -44,6 +44,8 @@ Deno.test('解析日期', () => {
     assert_date(parse_date('1921年7月23日'), new Date(1921, 6, 23))
     // '可以有小时'
     assert_date(parse_date('2021年12月27日21时'), new Date(2021, 11, 27, 21))
+    // 支持 https://cs.bit.edu.cn/tzgg/index.htm 的格式
+    assert_date(parse_date("\n\t\t\t\t\t\t2025\n\t\t\t\t\t\t12.23\n\t\t\t\t\t"), new Date(2025, 11, 23))
 })
 
 Deno.test('排序日期', () => {

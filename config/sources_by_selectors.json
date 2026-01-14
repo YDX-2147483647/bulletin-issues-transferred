@@ -1,6 +1,6 @@
 {
     "$schema": "sources_by_selectors.schema.json",
-    "last_updated": "2021-12-20",
+    "last_updated": "2026-01-14",
     "sources": [
         {
             "name": "睿信",
@@ -68,34 +68,45 @@
             }
         },
         {
-            "name": "经管",
-            "full_name": "经管书院",
+            "name": "管理",
+            "full_name": "管理学院",
+            "obsolete_name": [
+                "经管",
+                "经管书院"
+            ],
             "guide": [
-                "主站",
-                "顶栏",
-                "人才培养",
-                "北理书院",
-                "经管书院",
+                "管理学院",
                 "通知公告",
                 "查看更多"
             ],
-            "url": "https://sme.bit.edu.cn/gbxwzx/tzgg/index.htm",
+            "url": "https://som.bit.edu.cn/gbxwzx/tzgg/index.htm",
             "selectors": {
                 "rows": ".newsList02 li"
             }
         },
         {
-            "name": "知艺",
-            "full_name": "知艺书院",
-            "alt_name": [
-                "设计与艺术学院"
+            "name": "经济",
+            "full_name": "经济学院",
+            "guide": [
+                "经济学院",
+                "通知公告",
+                "更多+"
+            ],
+            "url": "https://soe.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".gp-container ul:first-child > li",
+                "title": "p"
+            }
+        },
+        {
+            "name": "设艺",
+            "full_name": "设计与艺术学院",
+            "obsolete_name": [
+                "知艺",
+                "知艺书院"
             ],
             "guide": [
-                "主站",
-                "顶栏",
-                "人才培养",
-                "北理书院",
-                "知艺书院",
+                "设计与艺术学院",
                 "通知"
             ],
             "url": "https://design.bit.edu.cn/zs/tz2/index.htm",
@@ -222,7 +233,16 @@
         },
         {
             "name": "学工部等",
-            "full_name": "学生工作部、武装部或心理健康教育与咨询中心",
+            "full_name": "学生工作部或党委武装部",
+            "url": "https://xgb.bit.edu.cn/xgdt/tzgg/index.htm",
+            "selectors": {
+                "rows": ".subPage ul:first-child > li",
+                "title": ".gpArticleTitle"
+            }
+        },
+        {
+            "name": "学工部等（旧）",
+            "full_name": "学生工作部、武装部或心理健康教育与咨询中心（旧版）",
             "url": "https://century.bit.edu.cn/tz/index.htm",
             "guide": [
                 "学工部",
@@ -241,20 +261,41 @@
             "full_name": "计算机学院",
             "url": "https://cs.bit.edu.cn/tzgg/index.htm",
             "selectors": {
-                "rows": ".article li"
+                "rows": ".content li",
+                "date": ".time_box",
+                "title": ".title"
             }
         },
         {
-            "name": "学生事务",
-            "full_name": "学生事务中心",
+            "name": "学生服务",
+            "full_name": "学生服务中心",
+            "obsolete_name": [
+                "学生事务",
+                "学生事务中心"
+            ],
             "url": "https://student.bit.edu.cn/tzgg/index.htm",
             "selectors": {
-                "rows": ".page li"
+                "rows": ".page-list35 ul:first-child > li",
+                "title": ".gpArticleTitle",
+                "date": ".gpArticleDate"
             }
         },
         {
-            "name": "创新创业",
+            "name": "大创（旧）",
+            "full_name": "大学生创新创业训练计划管理系统",
+            "url": "http://cxcy.bit.edu.cn/pt/pt/Notice",
+            "selectors": {
+                "rows": "ul.c-ul-notice > li",
+                "date": ".c-date",
+                "link": ".c-text > a"
+            }
+        },
+        {
+            "name": "大创",
             "full_name": "学生创新创业实践中心",
+            "alt_name": [
+                "创新创业"
+            ],
             "url": "https://www.bit.edu.cn/gbxxgk/gbgljg/xscxcysjzx/index.htm",
             "selectors": {
                 "rows": ".subRight li"
@@ -262,20 +303,13 @@
         },
         {
             "name": "资助公示",
-            "full_name": "学生事务中心校内公示",
+            "full_name": "学生服务中心校内公示",
+            "obsolete_name": [
+                "学生事务中心校内公示"
+            ],
             "url": "https://student.bit.edu.cn/xngs/index.blk.htm",
             "selectors": {
                 "rows": ".page li"
-            }
-        },
-        {
-            "name": "大创",
-            "full_name": "大学生创新创业训练计划管理系统",
-            "url": "http://cxcy.bit.edu.cn/pt/pt/Notice",
-            "selectors": {
-                "rows": "ul.c-ul-notice > li",
-                "date": ".c-date",
-                "link": ".c-text > a"
             }
         },
         {
@@ -288,10 +322,28 @@
         },
         {
             "name": "网信",
-            "full_name": "网络信息技术中心",
+            "full_name": "数字化与智算技术中心",
+            "obsolete_name": [
+                "网络信息技术中心"
+            ],
             "url": "https://itc.bit.edu.cn/tzgg/index.htm",
             "selectors": {
                 "rows": ".BTG-list13 li"
+            }
+        },
+        {
+            "name": "智能",
+            "full_name": "人工智能学院",
+            "guide": [
+                "人工智能学院",
+                "通知公告",
+                "查看更多"
+            ],
+            "url": "https://ai.bit.edu.cn/tzgg/index.htm",
+            "selectors": {
+                "rows": ".sub_01 > ul > li",
+                "date": "div.time",
+                "title": "div.title"
             }
         },
         {
@@ -473,8 +525,12 @@
             }
         },
         {
-            "name": "宇航",
-            "full_name": "宇航学院",
+            "name": "空天",
+            "full_name": "空天科学与技术学院",
+            "obsolete_name": [
+                "宇航",
+                "宇航学院"
+            ],
             "url": "https://sae.bit.edu.cn/tzgggb/index.htm",
             "guide": [
                 "宇航学院",
@@ -515,16 +571,22 @@
             }
         },
         {
-            "name": "人文",
-            "full_name": "人文与社会科学学院",
-            "url": "https://rw.bit.edu.cn/tzgg/index.htm",
-            "guide": [
-                "人文与社会科学学院",
-                "通知公告",
-                "more+"
+            "name": "教育",
+            "full_name": "教育学院",
+            "obsolete_name": [
+                "人文",
+                "人文与社会科学学院"
             ],
+            "guide": [
+                "教育学院",
+                "通知公告",
+                "更多>"
+            ],
+            "url": "https://se.bit.edu.cn/tzgg/index.htm",
             "selectors": {
-                "rows": ".list > ul > li"
+                "rows": "ul.block-list > li",
+                "date": "strong.gpArticleDate",
+                "title": "h3"
             }
         },
         {
@@ -567,21 +629,40 @@
                 "更多"
             ],
             "selectors": {
-                "rows": "ul.block-list160 > li",
-                "title": "p"
+                "rows": ".content ul > li",
+                "title": ".title",
+                "date": ".time"
+            }
+        },
+        {
+            "name": "法学·学生",
+            "full_name": "法学院·学生必读",
+            "url": "https://law.bit.edu.cn/tzgg/xsbd2023/index.htm",
+            "guide": [
+                "法学院",
+                "通知公告",
+                "更多",
+                "学生必读"
+            ],
+            "selectors": {
+                "rows": "ul.notic > li",
+                "title": ".notic-info",
+                "date": ".date"
             }
         },
         {
             "name": "法学",
-            "full_name": "法学院学生",
-            "url": "https://law.bit.edu.cn/tzgg/xsbd/index.htm",
+            "full_name": "法学院",
+            "url": "https://law.bit.edu.cn/tzgg/index.htm",
             "guide": [
                 "法学院",
                 "通知公告",
-                "学生必读"
+                "更多"
             ],
             "selectors": {
-                "rows": ".articleList5 > ul > li"
+                "rows": "ul.notic > li",
+                "title": ".notic-info",
+                "date": ".date"
             }
         },
         {
