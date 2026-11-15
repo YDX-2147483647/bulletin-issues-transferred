@@ -148,11 +148,12 @@
                 "北理书院",
                 "北京书院",
                 "通知公告",
-                "MORE+"
+                "查看更多"
             ],
-            "url": "https://bj.bit.edu.cn/tzgg/index.htm",
+            "url": "https://bj.bit.edu.cn/xxfw/tzgg/index.htm",
             "selectors": {
-                "rows": ".articleList li"
+                "rows": ".block-list > li",
+                "title": ".gpArticleTitle"
             }
         },
         {
